@@ -1041,8 +1041,10 @@ export default {
     tooltip: {
         show: false,//隐藏提示框
         trigger: 'axis',
+        // 设置提示线
         // axisPointer: {
         //     type: 'cross',//设置为none时，隐藏提示线
+               // 设置提示线颜色
         //     crossStyle: {
         //         color: '#999'
         //     },
