@@ -143,7 +143,40 @@ let url = "XXXXXXXX/1-switch.svg";
 console.log(url.replace(/(.*\/)*([^.]+).*/ig,"$2"));//1-switch
 ```
 
+## 5、随机生成含特殊字符、数字、字母的密码
 
+```javascript
+/**
+ * 随机密码生成
+ * @param length 随机密码 的长度
+ * @returns {string} 返回随机生成的密码
+ *  /^.*(?=.{10,})(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*?+()]).*$/  这个是验证随机生成的密码   包含数字、字母、特殊字符  至少10位
+ *  参考博客：
+ *  https://blog.csdn.net/kadxls/article/details/90241948
+ *
+ */
+export default function randomPassword(length) {
+    length = Number(length);
+    let passwordArray = ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '1234567890', '!@#$%&*()+'];
+    let password = [];
+    let n = 0;
+    for (let i = 0; i < length; i++) {
+        if (password.length < (length - 4)) {
+            let arrayRandom = Math.floor(Math.random() * 4);
+            let passwordItem = passwordArray[arrayRandom];
+            let item = passwordItem[Math.floor(Math.random() * passwordItem.length)];
+            password.push(item);
+        } else {
+            let newItem = passwordArray[n];
+            let lastItem = newItem[Math.floor(Math.random() * newItem.length)];
+            let spliceIndex = Math.floor(Math.random() * password.length);
+            password.splice(spliceIndex, 0, lastItem);
+            n++;
+        }
+    }
+    return password.join("");
+}
+```
 
 
 
