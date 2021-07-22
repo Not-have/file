@@ -78,7 +78,7 @@ vue3中的基本模板：
 </template>
 
 <script lang="ts">
-// defineComponent函数，目的是定义一个组件，内部可以传入一个配置对象
+// defineComponent函数，目的事定义一个组件，内部可以传入一个配置对象
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -1999,7 +1999,6 @@ export default {
 onBeforeRouteLeave((to, from) => {｝）
 
 onBeforeRouteUpdate(async (to, from) => {})
-
 ## 3、监听路由的变化
 
 ```javascript
@@ -2034,17 +2033,6 @@ router.beforeEach(async (to, from, next) => {
     await 要执行的方法
 })
 ```
-
-
-
-
-
-
-
-
-
-
-
 ## 4、路由模式的切换
 
 hash模式url里面永远带着#号
@@ -2072,13 +2060,6 @@ export default router;
 ```
 
 
-
-
-
-
-
-
-
 # 八、结合Vuex
 
 要在setup中使用store，可以调用该useStore函数。这等效this.$store于使用Option API在组件内进行检索。
@@ -2093,5 +2074,592 @@ const store = useStore();
 
 ## 1、vuex-persistedstate的使用
 
-注：解决页面刷新后，数据丢失的问题
+注：解决页面刷新后，数据丢失的问题。
+
+# 九、引入外部样式
+
+1、src——> 创建style文件
+
+reset.css
+
+```css
+/* 
+https://meyerweb.com/eric/tools/css/reset/
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+html,
+body,
+#app {
+    width: 100%;
+    height: 100%;
+}
+```
+
+2、在页面引入
+
+```vue
+<template>
+    <router-view />
+</template>
+
+<style lang="scss">
+// 方法1
+@import url("./style/reset.css");
+
+// 方法2
+@import "./style/reset.css";
+</style>
+```
+
+# 十、引入svg图
+
+## 1、下载
+
+```txt
+npm i --save svg-sprite-loader
+```
+
+## 2、在src——> 创建vag文件夹
+
+vag文件里面包括  *resources文件夹*  和 *SvgIcon.vue*
+
+1）resources文件夹里面放svg图
+
+2）SvgIcon.vue
+
+```javascript
+<template>
+    <svg :class="svgClass" aria-hidden="true">
+        <use :xlink:href="iconName" />
+    </svg>
+</template>
+
+<script lang="ts">
+import { defineComponent, computed } from "vue";
+export default defineComponent({
+    name: "svg-icon",
+    props: {
+        iconClass: {
+            type: String,
+            required: true,
+        },
+        className: {
+            type: String,
+            default: "",
+        },
+    },
+    setup(props) {
+        const iconName = computed(() => `#icon-${props.iconClass}`);
+        const svgClass = computed(() => {
+            if (props.className) {
+                return "svg-icon " + props.className;
+            } else {
+                return "svg-icon";
+            }
+        });
+        return { iconName, svgClass };
+    },
+});
+</script>
+
+<style scoped>
+.svg-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+</style>
+```
+
+## 3、在vue.config.js里面进项配置
+
+```javascript
+const path = require('path')
+function resolve(dir) {
+    return path.join(__dirname, dir)
+}
+module.exports = {
+    lintOnSave: false,
+    chainWebpack(config) {
+        config.module
+            .rule('svg')
+            .exclude.add(resolve('src/assets/svg'))
+            .end()
+        config.module
+            .rule('icons')
+            .test(/\.svg$/)
+            .include.add(resolve('src/assets/svg'))
+            .end()
+            .use('svg-sprite-loader')
+            .loader('svg-sprite-loader')
+            .options({
+                symbolId: 'icon-[name]'
+            })
+            .end()
+    }
+}
+```
+
+## 4、在min.js里面引入
+
+```javascript
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+
+const app = createApp(App);
+app.use(store);
+app.use(router);
+app.mount('#app');
+
+/**
+ * 导入svg图
+ */
+import SvgIcon from '@/assets/svg/SvgIcon.vue';
+app.component("svg-icon", SvgIcon);
+const requireAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().map(requireContext);
+const req = require.context("./assets/svg/resources", false, /\.svg$/);
+requireAll(req);
+```
+
+## 5、使用
+
+```javascript
+<template>
+    <div class="about">
+        <svg-icon icon-class="user" className="box" />
+    </div>
+</template>
+<style scoped>
+.box{
+    width: 60px;
+    height: 20px;
+    margin-top: 15px;
+}
+</style>
+```
+
+# 十一、在vue3中使用mock数据
+
+<font color=red>注：</font>以下这个写法可以在notWork中显示。
+
+
+
+## 1、下载
+
+```text
+npm install chalk --dev
+npm install mockjs --dev
+```
+
+![image-20210722160245380](https://gitee.com/Green_chicken/picture/raw/master/img/image-20210722160245380.png)
+
+## 2、在根目录下新建mock文件夹
+
+注：在里面创建文件。
+
+```bash
+├── mock                     # 模拟数据
+│   │── index.js             # 
+│   │── mock-server.js       # 
+│   │── utils.js             # 
+└── └── 模拟的数据.js          # 
+```
+
+### 1）index.js
+
+```javascript
+const Mock = require('mockjs');
+const { param2Obj } = require('./utils');
+
+const user = require('./user');
+const table = require('./table');
+const test = require("./test");
+const mocks = [
+    ...user,
+    ...table,
+    ...test
+]
+
+//用于前端模拟
+//请谨慎使用，它会重新定义 XMLHttpRequest，这将导致您的许多第三方库失效（如进度事件）。
+function mockXHR() {
+    // mock patch
+    // https://github.com/nuysoft/Mock/issues/300
+    Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
+    Mock.XHR.prototype.send = function () {
+        if (this.custom.xhr) {
+            this.custom.xhr.withCredentials = this.withCredentials || false
+
+            if (this.responseType) {
+                this.custom.xhr.responseType = this.responseType
+            }
+        }
+        this.proxy_send(...arguments)
+    }
+
+    function XHR2ExpressReqWrap(respond) {
+        return function (options) {
+            let result = null
+            if (respond instanceof Function) {
+                const { body, type, url } = options
+                // https://expressjs.com/en/4x/api.html#req
+                result = respond({
+                    method: type,
+                    body: JSON.parse(body),
+                    query: param2Obj(url)
+                })
+            } else {
+                result = respond
+            }
+            return Mock.mock(result)
+        }
+    }
+
+    for (const i of mocks) {
+        Mock.mock(new RegExp(i.url), i.type || 'get', XHR2ExpressReqWrap(i.response))
+    }
+}
+
+module.exports = {
+    mocks,
+    mockXHR
+}
+```
+
+### 2）mock-server.js
+
+```javascript
+const chokidar = require('chokidar')
+const bodyParser = require('body-parser')
+const chalk = require('chalk')
+const path = require('path')
+const Mock = require('mockjs')
+
+const mockDir = path.join(process.cwd(), 'mock')
+
+function registerRoutes(app) {
+    let mockLastIndex
+    const { mocks } = require('./index.js')
+    const mocksForServer = mocks.map(route => {
+        return responseFake(route.url, route.type, route.response)
+    })
+    for (const mock of mocksForServer) {
+        app[mock.type](mock.url, mock.response)
+        mockLastIndex = app._router.stack.length
+    }
+    const mockRoutesLength = Object.keys(mocksForServer).length
+    return {
+        mockRoutesLength: mockRoutesLength,
+        mockStartIndex: mockLastIndex - mockRoutesLength
+    }
+}
+
+function unregisterRoutes() {
+    Object.keys(require.cache).forEach(i => {
+        if (i.includes(mockDir)) {
+            delete require.cache[require.resolve(i)]
+        }
+    })
+}
+
+// 对于模拟服务器
+const responseFake = (url, type, respond) => {
+    console.log(url, type, respond);
+    return {
+        url: new RegExp(`${process.env.VUE_APP_BASE_API}${url}`),
+        type: type || 'get',
+        response(req, res) {
+            console.log('request invoke:' + req.path)
+            res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
+        }
+    }
+}
+
+module.exports = app => {
+    // 解析 app.body
+    // https://expressjs.com/en/4x/api.html#req.body
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }))
+
+    const mockRoutes = registerRoutes(app)
+    var mockRoutesLength = mockRoutes.mockRoutesLength
+    var mockStartIndex = mockRoutes.mockStartIndex
+
+    // 监视文件，热重载模拟服务器 
+    chokidar.watch(mockDir, {
+        ignored: /mock-server/,
+        ignoreInitial: true
+    }).on('all', (event, path) => {
+        if (event === 'change' || event === 'add') {
+            try {
+                // 删除模拟路由堆栈 
+                app._router.stack.splice(mockStartIndex, mockRoutesLength)
+
+                // 清除路由缓存
+                unregisterRoutes()
+
+                const mockRoutes = registerRoutes(app)
+                mockRoutesLength = mockRoutes.mockRoutesLength
+                mockStartIndex = mockRoutes.mockStartIndex
+
+                console.log(chalk.magentaBright(`\n > Mock Server 热加载成功！改变了  ${path}`))
+            } catch (error) {
+                console.log(chalk.redBright(error))
+            }
+        }
+    })
+}
+```
+
+### 3）utils.js
+
+```javascript
+/**
+ * @param {string} url
+ * @returns {Object}
+ */
+function param2Obj(url) {
+    const search = decodeURIComponent(url.split('?')[1]).replace(/\+/g, ' ')
+    if (!search) {
+        return {}
+    }
+    const obj = {}
+    const searchArr = search.split('&')
+    searchArr.forEach(v => {
+        const index = v.indexOf('=')
+        if (index !== -1) {
+            const name = v.substring(0, index)
+            const val = v.substring(index + 1, v.length)
+            obj[name] = val
+        }
+    })
+    return obj
+}
+
+module.exports = {
+    param2Obj
+}
+```
+
+### 4）list.js(模拟数据)
+
+```javascript
+const Mock = require('mockjs');
+
+const data = Mock.mock({
+    'items|30': [{
+        id: '@id',
+        title: '@sentence(10, 20)',
+        'status|1': ['published', 'draft', 'deleted'],
+        author: 'name',
+        display_time: '@datetime',
+        pageviews: '@integer(300, 5000)'
+    }]
+})
+
+module.exports = [
+    {
+        url: '/list',
+        type: 'get',
+        response: config => {
+            const items = data.items
+            return {
+                code: 20000,
+                data: {
+                    total: items.length,
+                    items: items
+                }
+            }
+        }
+    }
+]
+```
+
+## 3、配置环境
+
+```bash
+├── .env.development         # 开发
+├── .env.production          # 生产
+└── .env.staging             # 测试
+```
+
+| 开发                                                         | 生产                                                         | 测试                                                         |
+| :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| # 开发<br/>ENV = 'development'<br/><br/># base api<br/>VUE_APP_BASE_API = '/dev-api' | # 生产<br/>ENV = 'production'<br/><br/># base api<br/>VUE_APP_BASE_API = '/prod-api' | NODE_ENV = production<br/><br/>#测试<br/>ENV = 'staging'<br/><br/># base api<br/>VUE_APP_BASE_API = '/stage-api' |
+
+## 4、使用
+
+```javascript
+<template>
+    <div class="about">
+        
+    </div>
+</template>
+<script>
+import { onMounted } from '@vue/runtime-core';
+import axios from "axios";
+export default {
+    setup() {
+        onMounted(() => {
+            axios({
+                url: "/dev-api/list",
+                method: "get"
+            }).then(res => {
+                console.log(res);
+            })
+        })
+    }
+}
+</script>
+<style scoped>
+
+</style>
+```
+
+<font color=red> 注：如果要让其不在notWork显示的时候，在main.js写入以下代码：</font> 
+
+```javascript
+// 当为测试环境的时候，不在notWork中显示
+if (process.env.NODE_ENV === 'production') {
+    console.log("走这里");
+    const { mockXHR } = require('../mock')
+    mockXHR()
+}
+```
 
