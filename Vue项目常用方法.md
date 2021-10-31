@@ -115,3 +115,42 @@ new Vue({
 })
 ```
 
+## 2、vue2中重置data中的某个变量
+
+注：该方法 一般用在 搜索处
+
+```html
+<template>
+    <el-form ref="form" :model="form">
+        <el-form-item label="" prop="">
+            <el-select v-model="form.logLevel" placeholder="请选择活动区域" filterable clearable>
+                <el-option label="区域一" value="shanghai"></el-option>
+                <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="">
+            <el-button type="primary" icon="el-icon-refresh" @click="queryClick('reset')"></el-button>
+        </el-form-item>
+    </el-form>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            form: {
+                logLevel: '',
+            }
+        }
+    },
+    methods: {
+        /**
+        * 重置选择框，也就是清空
+        */
+        queryClick(val) {
+            Object.assign(this.form, this.$options.data().form);  
+        }
+    }
+}
+</script>
+```
+
