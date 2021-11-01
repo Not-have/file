@@ -167,3 +167,17 @@ git push --delete origin 旧分支名
 
 https://blog.csdn.net/sinat_26811377/article/details/106226034
 
+# 八、github关联本地
+
+## 1、拉去代码
+
+```bash
+git clone 仓库地址
+```
+
+## 2、每次提交前，先获取最新代码
+
+```bash
+git pull --rebase origin main（分支名）
+```
+
