@@ -1,14 +1,20 @@
-﻿@[TOC]( )
+﻿﻿﻿﻿@[TOC]( )
 注：一些经典文章：
 1、[地图标点](https://juejin.im/post/6844903989427847181)：https://juejin.im/post/6844903989427847181
 2、[地图下钻](https://juejin.im/post/6844904170512891917)：https://juejin.im/post/6844904170512891917
 3、[标点颜色](https://www.cnblogs.com/wlpower/p/6813501.html)：https://www.cnblogs.com/wlpower/p/6813501.html
 4、[w3cschool的详细介绍](https://www.w3cschool.cn/echarts_tutorial/echarts_tutorial-cd232da0.html):https://www.w3cschool.cn/echarts_tutorial/echarts_tutorial-cd232da0.html
+
 # 一、Echarts
 注：[官网](https://echarts.apache.org/zh/index.html)：https://echarts.apache.org/zh/index.html
-		Echarts[社区](https://gallery.echartsjs.com/explore.html#sort=rank~timeframe=all~author=all)：https://gallery.echartsjs.com/explore.html#sort=rank~timeframe=all~author=all
-		自己的作品[地址：](https://www.makeapie.com/explore.html?u=obd-oETw1pgnGaPczqip7gjnQDrcVlyeY4i&type=work#sort=rank~timeframe=all~author=all)https://www.makeapie.com/explore.html?u=obd-oETw1pgnGaPczqip7gjnQDrcVlyeY4i&type=work#sort=rank~timeframe=all~author=all
-		`npm下载：npm install --save echarts`
+
+​       Echarts[社区](https://gallery.echartsjs.com/explore.html#sort=rank~timeframe=all~author=all)：https://www.makeapie.com/explore.html
+
+```bash
+# 下载
+npm install --save echarts
+```
+
 # 二、图表的常用API属性设置
 注：在vue中的使用方法（常用的一种方法）
 ```javascript
@@ -2943,6 +2949,15 @@ export default {
 </style>
 ```
 # 七、一些好看的图
+
+[![image-20210928144017957](https://gitee.com/Green_chicken/picture/raw/master/markdown/image-20210928144017957.png)](https://www.makeapie.com/editor.html?c=x6GXQ8Aw6X)
+
+
+
+
+
+
+
 [
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210102173915198.png)](https://www.makeapie.com/editor.html?c=xBGq7gnHzU)
 [

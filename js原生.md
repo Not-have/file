@@ -178,5 +178,166 @@ export default function randomPassword(length) {
 }
 ```
 
+## 6、计算数组里面相同元素的个数
 
+```javascript
+    var arr = ["apple", "orange", "apple", "orange", "pear", "orange"];
+
+    function getWordCnt() {
+        var obj = {};
+        for (var i = 0, l = arr.length; i < l; i++) {
+            var item = arr[i];
+            obj[item] = (obj[item] + 1) || 1;
+        }
+        return obj;
+    }
+    console.log(getWordCnt());
+```
+
+
+
+## 7、文件流下载
+
+```javascript
+/**
+ * @description: 文件流改成文件
+ * @param {*} obj 文件流
+ * @param {*} name 文件名 
+ * @param {*} suffix 后缀
+ * 调用浏览器的下载
+ */
+export function downloadFile(obj, name, suffix) {
+    const url = window.URL.createObjectURL(new Blob([obj]))
+    const link = document.createElement('a')
+    link.style.display = 'none'
+    link.href = url
+    const fileName = parseTime(new Date()) + '-' + name + '.' + suffix
+    link.setAttribute('download', fileName)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+}
+```
+
+## 8、复制文本到粘贴板
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://not-have.github.io/resources/CSS/input-one.css">
+    <link rel="stylesheet" href="https://not-have.github.io/resources/CSS/button-one.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="group">
+        <input type="text" required id="inputText">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Text</label>
+    </div>
+    <div class="button" onclick="fun()">点击复制文本到粘贴板 </div>
+</body>
+
+</html>
+<script>
+    fun = () => {
+        const str = document.getElementById("inputText").value;
+        if (str === "") {
+            alert("请输入内容！");
+        } else {
+            const copyToClipboard = (text) => navigator.clipboard.writeText(text);
+            copyToClipboard(str);
+        }
+    }
+</script>
+```
+
+## 9、检查日期是否有效
+
+```javascript
+const isDateValid = (...val) => !Number.isNaN(new Date(...val).valueOf());   
+console.log(isDateValid("2a-04-11")); // false
+```
+
+## 10、找出一年中的哪一天
+
+```javascript
+/**
+ * @description: 
+ * @param {*} date Mon Sep 27 2021 14:33:04 GMT+0800 (中国标准时间)v
+ * @return {*} 找出一年中的哪一天
+ */
+const dayOfYear = (date) =>
+Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+
+console.log(dayOfYear(new Date()));
+```
+
+## 11 、找出两日期之间的天数
+
+```javascript
+/**
+ * @description: 找出两日期之间的天数
+ * @param {*} 开始的 中国标准时间
+ * @param {*} 结束的 中国标准时间
+ * @return {*} 两个日期的相差天数
+ */    
+const dayDif = (date1, date2) => Math.ceil(Math.abs(date1.getTime() - date2.getTime()) / 86400000);
+const data = dayDif(new Date("2020-10-21"), new Date("2021-10-22"));
+
+console.log(data,new Date("2021-10-22"));
+```
+
+## 12、清除所有 Cookie
+
+```javascript
+const clearCookies = document.cookie.split(';').forEach(cookie => document.cookie = cookie.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`));
+```
+
+## 13、生成随机十六进制
+
+```javascript
+const randomHex  = () => {
+    return `#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, "0")}`
+}
+console.log(randomHex())
+```
+
+## 14、从数组中删除重复项
+
+```javascript
+const removeDuplicates = (arr) => [...new Set(arr)];
+console.log(removeDuplicates([1, 2, 3, 3, 4, 4, 5, 5, 6]));
+```
+
+## 15、使用以下代码检查用户的设备是否处于暗模式
+
+```javascript
+const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+console.log(isDarkMode)
+```
+
+## 16、将 RGB 转换为十六进制
+
+```javascript
+const rgbToHex = (r, g, b) => 
+  "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+rgbToHex(0, 51, 255); // #0033ff
+```
+
+## 17、使用内置的 getSelectionproperty 获取用户选择的文本
+
+```javascript
+const getSelectedText = () => window.getSelection().toString();
+getSelectedText();
+```
 

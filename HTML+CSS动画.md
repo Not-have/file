@@ -2,8 +2,6 @@ NeumorphismABC：https://neumorphism.io/#e0e0e0
 
 自定义形状分隔线：https://www.shapedivider.app/
 
-交错动画：https://codepen.io/alphardex/pen/XWWWBmQ
-
 JS分割文本：https://codepen.io/alphardex/pen/eYYMYXJ
 
 划过方块展示文字：https://codepen.io/alphardex/pen/jOEOEzZ
@@ -69,3 +67,16 @@ CSS渐变生成工具：https://mdbootstrap.com/docs/standard/tools/design/gradi
 [![anniu](https://gitee.com/Green_chicken/picture/raw/master/img/anniu.gif)](https://codepen.io/alphardex/pen/pooYKVa)
 
 [![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/img/chrome-capture-1626688517150.gif)](https://codepen.io/alphardex/full/ZEYXomW)
+
+[![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/img/chrome-capture-1627294744849.gif)](https://codepen.io/alphardex/pen/XWWWBmQ)
+
+[![gif](https://gitee.com/Green_chicken/picture/raw/master/img/.gif)](https://codepen.io/dissimulate/pen/KrAwx)
+
+
+
+[![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/img/chrome-capture-1628071353584.gif)](https://codepen.io/alphardex/pen/eYBLWOY)
+
+[![chrome-capture](https://i.loli.net/2021/08/20/h5rFpVBAgRZHy3K.gif)](https://codepen.io/MichaelArestad/full/ohLIa)
+
+
+
