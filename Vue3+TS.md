@@ -1775,3 +1775,114 @@ export default {
 
 # 六、动态组件
 
+## 1、基本使用
+
+实现一个tab的案例：
+
+![image-20211102233043902](https://gitee.com/Green_chicken/picture/raw/master/image-20211102233043902.png)
+
+ ![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/chrome-capture.gif)
+
+## 2、传值和传递事件
+
+①父组件
+
+```javascript
+<template>
+    <div>
+        <p>动态组件的使用</p>
+        <button v-for="item in tabs" :key="item.lable" @click="fun(item)" :class="{ active: com === item.lable }">
+            {{ item.value }}
+        </button>
+        <component :is="com" :num="99" @throw="throw"></component>
+    </div>
+</template>
+<script>
+import TabTwo from "./TabTwo.vue"
+import TabOne from "./TabOne.vue"
+export default {
+    name: 'index',
+    components: {
+        TabOne,
+        TabTwo
+    },
+    data() {
+        return {
+            tabs: [{ value: "组件一", lable: "TabOne" }, { value: "组件一", lable: "TabTwo" }],
+            com: "TabOne"
+        }
+    },
+    methods: {
+        fun(obj) {
+            this.com = obj.lable
+        },
+        throw(val) {
+            console.log(val);
+        }
+    }
+}
+</script>
+
+<style scoped>
+.active {
+    border: 1px solid rebeccapurple;
+}
+button {
+    background-color: transparent;
+    border: 0;
+    margin: 0 10px;
+}
+</style>
+```
+
+② 组件一（传值组件）
+
+```javascript
+<template>
+    <div>
+        <p>动态组件一</p>
+        {{num}}
+    </div>
+</template>
+<script>
+
+export default {
+    name: 'index',
+    props: {
+        num: {
+            type: Number,
+            default() {
+                return 0
+            }
+        }
+    }
+}
+</script>
+```
+
+③  组件二（子给夫抛出事件）
+
+```javascript
+<template>
+    <div>
+        <p>动态组件二</p>
+        <button @click="throwAnEvent">抛出事件</button>
+    </div>
+</template>
+<script>
+
+export default {
+    name: 'index',
+    /**
+     * 抛出事件
+     */
+    emits: ["throw"],
+    methods: {
+        throwAnEvent() {
+            this.$emit("throw", 99)
+        }
+    },
+}
+</script>
+```
+
