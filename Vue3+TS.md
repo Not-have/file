@@ -1886,3 +1886,490 @@ export default {
 </script>
 ```
 
+# 七、webpack分包
+
+## 1、默认打包过程
+
+1）默认情况下，在构建整个组件树的过程中，因为组件和组件之间是通过模块化直接依赖的，那么webpack在打包时就会将组 件模块打包到一起（比如一个app.js文件中）；
+
+2）这个时候随着项目的不断庞大，app.js文件的内容过大，会造成首屏的渲染速度变慢。
+
+## 2、打包时，代码的分包
+
+1）对于一些不需要立即使用的组件，我们可以单独对它们进行拆分，拆分成一些小的代码块chunk.js；
+
+2）对于一些不需要立即使用的组件，我们可以单独对它们进行拆分，拆分成一些小的代码块chunk.js。
+
+## 3、wenpack在vue中的分包
+
+注：
+
+<font color=red >通过import函数导入的模块，后续webpack对其进行打包的时候会进行分包操作，分包之后 就不会打进app.js了。</font>
+
+```bash
+/**
+ * 
+ * 分包的使用
+ */
+import("@/utils/subcontract").then(res => {
+    console.log(res.operation(10, 10));
+
+})
+```
+
+ ![image-20211106173750209](https://gitee.com/Green_chicken/picture/raw/master/image-20211106173750209.png)
+
+# 八、vue中实现异步组件（defineAsyncComponent）
+
+在项目中，如果我们 需要异步加载某些组件的时候，就可以使用defineAsyncComponent。
+
+文档：https://v3.cn.vuejs.org/api/global-api.html#definecomponent
+
+## 1、defineAsyncComponent接受两种参数：
+
+### 1）工厂函数，该工厂函数需要返回一个Promise对象
+
+![image-20211106174925721](https://gitee.com/Green_chicken/picture/raw/master/image-20211106174925721.png)
+
+```javascript
+<template>
+    <div>
+        <Home />
+        <About />
+    </div>
+</template>
+<script>
+import { defineAsyncComponent } from "vue";
+import Home from "./views/Home.vue";
+const About = defineAsyncComponent(() => import("./views/About.vue"))
+export default {
+    components:{
+        Home,
+        About
+    }
+}
+</script>
+```
+
+### 2）接受一个对象类型，对异步函数进行配置
+
+```javascript
+<template>
+    <div>
+        <Home />
+        <About />
+    </div>
+</template>
+<script>
+import { defineAsyncComponent } from "vue";
+import Home from "./views/Home.vue";
+import Loading from "@/components/Loading.vue";
+// const About = defineAsyncComponent(() => import("./views/About.vue"))
+const About = defineAsyncComponent({
+    loader: () => import("./views/About.vue"),
+    /**
+     * 他是一个异步的组件：
+     * loadingComponent 配置一个展位组件，也就是loading
+     * errorComponent 当组件加载失败的时候，你展示的组件
+     * delay 延迟组件展示,在现实loadingComponent 组件前的延迟
+     * onError 是监听错误，也就是  异步组件加载失败的监听
+     */
+    loadingComponent: Loading,
+    delay: 200,
+    /**
+     * onError 参数含义
+     * err 错误信息
+     * retry 函数，调用retry 尝试重新加载
+     * fail  一个函数，指示加载程序结束退出
+     * attempts 记录尝试次数
+     */
+    onError: function(err, retry, fail, attempts){
+        console.log(err, retry, attempts);
+    }
+})
+export default {
+    components:{
+        Home,
+        About
+    }
+}
+</script>
+```
+
+## 2、异步组件和Suspense
+
+1）Suspense是一个内置的全局组件，该组件有两个插槽：
+
+① default：如果default可以显示，那么显示default的内容；
+
+② fallback：如果default无法显示，那么会显示fallback插槽的内容。
+
+2）使用方式如下：
+
+![image-20211107211831619](https://gitee.com/Green_chicken/picture/raw/master/image-20211107211831619.png)
+
+# 九、ref的使用
+
+1、获取元素
+
+1）在Vue开发中我们是不推荐进行DOM操作的；
+
+2）给元素或者组件绑定一个ref的attribute属性。
+
+2、组件实例有一个$refs属性
+
+它一个对象Object，持有注册过 ref attribute 的所有 DOM 元素和组件实例。
+
+注：在组件上 定义ref，可以获取组件里面的方法、变量、DOM等。
+
+① 父组件
+
+```javascript
+<template>
+    <div>
+        <p ref="try">父组件</p>
+        <zu-jian ref="zujian" />
+    </div>
+</template>
+<script>
+import ZuJian from './ZuJian.vue';
+
+export default {
+    components: { ZuJian },
+    name: 'index',
+    mounted() {
+        console.log(this.$refs.try);
+        console.log(this.$refs.zujian);
+        console.log(this.$refs.zujian.num);
+        console.log(this.$refs.zujian.fun(1));
+    },
+}
+</script>
+```
+
+② 子组件
+
+```javascript
+<template>
+    <div>
+        组件
+    </div>
+</template>
+<script>
+
+export default {
+    name: 'ZuJian',
+    components:{
+        
+    },
+    data() {
+        return{
+            num: 10
+        }
+    },
+    methods: {
+        fun(val){
+            console.log(val);
+            return val
+        }
+    },
+}
+</script>
+```
+
+# 十、$parent和$root
+
+## 1、通过$parent来访问父元素
+
+① 子组件
+
+```javascript
+<template>
+    <div>
+        组件
+        <button @click="fun1">获取父组件</button>
+    </div>
+</template>
+<script>
+
+export default {
+    name: 'ZuJian',
+    components:{
+        
+    },
+    data() {
+        return{
+            num: 10
+        }
+    },
+    methods: {
+        fun(val){
+            console.log(val);
+            return val
+        },
+        fun1(){
+            console.log(this.$parent.obj);
+        }
+    },
+}
+</script>
+```
+
+② 父组件
+
+```javascript
+<template>
+    <div>
+        <p ref="try">父组件</p>
+        <zu-jian ref="zujian" />
+    </div>
+</template>
+<script>
+import ZuJian from './ZuJian.vue';
+
+export default {
+    components: { ZuJian },
+    name: 'index',
+    data() {
+        return {
+            obj: {
+                name: "小明"
+            }
+        }
+    },
+    mounted() {
+        console.log(this.$refs.try);
+        console.log(this.$refs.zujian);
+        console.log(this.$refs.zujian.num);
+        console.log(this.$refs.zujian.fun(1));
+    },
+}
+</script>
+```
+
+## 2、以通过$root获取跟组件，也就是 App.vue
+
+![image-20211107221101517](https://gitee.com/Green_chicken/picture/raw/master/image-20211107221101517.png)
+
+# 十一、vue的生命周期
+
+<img src="https://v3.cn.vuejs.org/images/lifecycle.svg" alt="https://gitee.com/Green_chicken/picture/raw/master/image-20211107221920301.png"></img>
+
+# 十二、组件的v-model
+
+## 1、API的使用
+
+① 父组件
+
+```javascript
+<template>
+    <div>
+        <p>在元素上使用v-model</p>
+        <input type="text" v-model="text"><br />
+        <!-- 原理 -->
+        <input type="text" :value="text" @input="text = $event.target.value">
+        <hr />
+        <p> 组件上使用v-model </p>
+        {{textComponent}}
+        <test-input v-model="textComponent" />
+        <!-- 原理 -->
+        <!-- <test-input :modelValue="textComponent" @updata:model-value="textComponent = $event" /> -->
+    </div>
+</template>
+<script>
+import TestInput from './TestInput.vue'
+
+export default {
+    name: 'index',
+    components: {
+        TestInput
+
+    },
+    data() {
+        return {
+            text: "",
+            textComponent: "你好！"
+        }
+    },
+}
+</script>
+```
+
+② 子组件
+
+```javascript
+<template>
+    <div>
+        <button @click="fun">按钮</button>
+        {{modelValue}}
+    </div>
+</template>
+<script>
+
+export default {
+    name: 'TestInput',
+    props: {
+        modelValue: String 
+    },
+    emits: ["update:modelValue"],
+    methods: {
+        fun() {
+            this.$emit("update:modelValue", "你好123！")
+        }
+    },
+}
+</script>
+```
+
+## 2、原理的实现
+
+ 计算属性的实现：
+
+① 父组件
+
+```javascript
+<template>
+    <div>
+        <p> 组件上使用v-model </p>
+        {{textComponent}}
+        <!-- 原理 -->
+        <test-input :modelValue="textComponent" @update:model-value="textComponent = $event" />
+    </div>
+</template>
+<script>
+import TestInput from './TestInput.vue'
+
+export default {
+    name: 'index',
+    components: {
+        TestInput
+
+    },
+    data() {
+        return {
+            textComponent: "你好！"
+        }
+    },
+}
+</script>
+```
+
+② 子组件
+
+```javascript
+<template>
+    <div>
+        <!-- <input type="text" :value="text" @input="fun"> -->
+        <!-- 简单的写法 -->
+        <input type="text" :value="text" @input="fun">
+    </div>
+</template>
+<script>
+
+export default {
+    name: 'TestInput',
+    props: {
+        modelValue: String 
+    },
+    emits: ["update:modelValue"],
+    computed: {
+        text:{
+            set(e){
+                this.$emit("update:modelValue", e.target.value)
+            },
+            get(){
+                // 读取props传进来的
+                return this.modelValue
+            }
+        }
+    },
+    methods: {
+        fun(e) {
+            this.$emit("update:modelValue", e.target.value)
+        }
+    },
+}
+</script>
+```
+
+## 3、绑定多个
+
+① 父组件
+
+```javascript
+<template>
+    <div>
+        <p> 组件上使用v-model </p>
+        {{textComponent}}
+        <br />
+        {{title}}
+        <!-- 绑定多个,v-model:名字 -->
+        <test-input v-model="textComponent" v-model:title="title" />
+    </div>
+</template>
+<script>
+import TestInput from './TestInput.vue'
+
+export default {
+    name: 'index',
+    components: {
+        TestInput
+
+    },
+    data() {
+        return {
+            textComponent: "你好！",
+            title: "呵呵呵"
+        }
+    },
+}
+</script>
+```
+
+② 子组件
+
+```javascript
+<template>
+    <div>
+        <!-- 传多个值，不同的展示 -->
+        <input type="text" v-model="text">
+        <input type="text" v-model="title1">
+    </div>
+</template>
+<script>
+export default {
+    name: 'TestInput',
+    props: {
+        modelValue: String,
+        title: String
+    },
+    // 事件
+    emits: ["update:modelValue", "update:title"],
+    computed: {
+        text:{
+            set(e){
+                this.$emit("update:modelValue", e)
+            },
+            get(){
+                // 读取props传进来的
+                return this.modelValue
+            }
+        },
+        // 计算属性 和 props 名字不能重复
+        title1:{
+            set(e){
+                this.$emit("update:title", e)
+            },
+            get(){
+                // 读取props传进来的
+                return this.title
+            }
+        },
+
+    }
+}
+</script>
+```
+
+
+

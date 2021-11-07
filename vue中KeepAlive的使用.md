@@ -144,3 +144,14 @@ export default {
 
 最多可以缓存多少组件实例，一旦达 到这个数字，那么缓存组件中最近没有被访问的实例会被销毁。
 
+# 三、设置了keep-live之后，vue中的生命周期
+
+```javascript
+    activated(){
+        console.log("设置了keep-live之后，每次进入执行的钩子");
+    },
+    deactivated(){
+        console.log("设置了keep-live之后，每次离开执行的钩子");
+    }
+```
+
