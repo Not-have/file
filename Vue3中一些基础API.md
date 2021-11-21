@@ -164,8 +164,6 @@ yarn dev
 
 ![image-20210815165953253](https://gitee.com/Green_chicken/picture/raw/master/master/image-20210815165953253.png)
 
-## 
-
 *<font color=red>注：key的作用：</font>*
 
 ​        key 特殊 attribute 主要用做 Vue 的虚拟 DOM 算法的提示，以在比对新旧节点组时辨识 VNodes。如果不使用 key，Vue 会使用一种算法来最小化元素的移动并且尽可能尝试就地修改/复用相同类型元素。而使用 key 时，它会基于 key 的顺序变化重新排列元素，并且 key 不再存在的元素将始终被移除/销毁。
