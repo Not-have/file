@@ -17,19 +17,19 @@ vue3.0脚手架的创建（根据个人需求而定）：
 
 ③选择创建项目的版本：
 
-![image-20210219003105178](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219003106.png)
+ ![image-20210219003105178](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219003106.png)
 
 ④插件选项 
 
-![image-20210219004415257](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219004416.png)
+ ![image-20210219004415257](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219004416.png)
 
 ⑤选择vue版本
 
-![image-20210219004624017](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219004626.png)
+ ![image-20210219004624017](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219004626.png)
 
 ⑥类样式语法
 
-![image-20210219004737086](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219004738.png)
+ ![image-20210219004737086](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219004738.png)
 
 ⑦使用TypeScript和Babel的形式编译 JSX（我选择no）
 
@@ -45,7 +45,7 @@ vue3.0脚手架的创建（根据个人需求而定）：
 
 ⑩ESLint语法配置，默认选择第一个
 
-![image-20210219010201074](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219010202.png)
+ ![image-20210219010201074](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219010202.png)
 
 ⑪ESlint的特性功能
 
@@ -53,11 +53,11 @@ vue3.0脚手架的创建（根据个人需求而定）：
 
 ⑫ESline配置文件时单独存放，还是直接存放在`package.json`文件里。这里选择放在单独的文件里。
 
-![image-20210219010628215](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219010629.png)
+ ![image-20210219010628215](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219010629.png)
 
 ⑬是否保存配置
 
-![image-20210219010747130](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219010748.png)
+ ![image-20210219010747130](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210219010748.png)
 
 ⑭如果你同时安装了`npm`和`yarn`来个包管理软件，它还会作最后一次询问，让你选择使用什么进行下载，建议npm。
 
