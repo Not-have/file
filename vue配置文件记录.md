@@ -67,7 +67,13 @@ VUE_APP_BASE_API = '地址'
 },
 ```
 
+5、在代码中使用
 
+```javascript
+console.log(process.env.VUE_APP_SECRET)
+// 获取环境
+console.log(process.env.NODE_ENV)
+```
 
 ## 三、vue.config.js配置
 
