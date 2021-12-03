@@ -181,3 +181,11 @@ git clone 仓库地址
 git pull --rebase origin main（分支名）
 ```
 
+# 九、git程序使用失败的解决
+
+https://www.cnblogs.com/tianhengblogs/p/9142691.html
+
+https://zhidao.baidu.com/question/322727885.html
+
+https://blog.csdn.net/TionSu/article/details/99629507 
+
