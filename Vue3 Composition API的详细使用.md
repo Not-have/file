@@ -36,6 +36,8 @@ props非常好理解，它其实就是父组件传递过来的属性会被放到
 
 # 二、setup中API的使用
 
+注：ref、Reactive都是深层的响应式。
+
 ## 1、setup返回值的作用
 
 1）setup的返回值可以在模板template中被使用
@@ -173,6 +175,164 @@ export default {
 具体的，请参考文档：https://v3.cn.vuejs.org/api/refs-api.html#unref
 
 ### 1）unref
+
+如果我们想要获取一个ref引用中的value，那么也可以通过unref方法
+
+如果参数是一个 ref，则返回内部值，否则返回参数本身； 
+
+这是 val = isRef(val) ? val.value : val 的语法糖函数。
+
+### 2）isRef
+
+判断值是否是一个ref对象
+
+### 3）shallowRef
+
+创建一个浅层的ref对象
+
+```javascript
+<template>
+    <p>{{info}}</p>
+    <button @click="changeInfo">点击</button>
+</template>
+
+<script>
+import { ref, shallowRef } from '@vue/reactivity'
+
+export default {
+    name: 'index',
+    components: {
+
+    },
+    setup() {
+        const info = shallowRef({ nmae: "哈哈哈" })
+        const changeInfo = () => {
+            info.value.nmae = "呵呵呵"
+        }
+        return { info, changeInfo }
+    }
+}
+</script>
+```
+
+### 4）triggerRef
+
+手动触发和 shallowRef 相关联的副作用
+
+```javascript
+<template>
+    <p>{{info}}</p>
+    <button @click="changeInfo">点击</button>
+</template>
+
+<script>
+import { ref, shallowRef, triggerRef } from '@vue/reactivity'
+
+export default {
+    name: 'index',
+    components: {
+
+    },
+    setup() {
+        const info = shallowRef({ nmae: "哈哈哈" })
+        const changeInfo = () => {
+            info.value.nmae = "呵呵呵"
+            triggerRef(info)
+        }
+        return { info, changeInfo }
+    }
+}
+</script>
+```
+
+## 9、customRef
+
+创建一个自定义的ref，并对其依赖项跟踪和更新触发进行显示控制
+
+```javascript
+/**
+ * 实现一个防抖的ref
+ * 下面这个一般写在hook里面
+ */
+import { customRef } from "vue"
+/**
+ * 自定义ref
+ * customRef 里面两个参数
+ * track 跟踪（决定什么时候 收集依赖）
+ * trigger 决定什么时候触发所有的依赖,进行更新
+ * 返回一个带有 get 和 set 的对象
+ */
+export default function (value, delay = 200) {
+    let time = null
+    return customRef((track, trigger) => {
+        return {
+            get() {
+                // 收集依赖
+                track()
+                return value
+            },
+            // 设置新的值
+            set(newValue) {
+                // 处理数据
+                clearTimeout(time)
+                time = setTimeout(() => {
+                    value = newValue
+                    trigger()
+                }, delay)
+            }
+        }
+    })
+}
+```
+
+在页面中的使用：
+
+![image-20211212190831716](https://gitee.com/Green_chicken/picture/raw/master/20211212190833.png)
+
+## 10、computed 计算属性
+
+方式一：接收一个getter函数，并为 getter 函数返回的值，返回一个不变的 ref 对象； 
+方式二：接收一个具有 get 和 set 的对象，返回一个可变的（可读写）ref 对象。
+
+```javascript
+<template>
+    <p>{{and}}</p>
+    <button @click="fun">修改</button>
+</template>
+<script>
+import { computed, ref } from "vue"
+export default {
+    name: 'index',
+    setup() {
+        const str1 = ref("lalall111")
+        const str2 = ref("hahaha")
+        /**
+         * 方法一：
+         * 传入一个getter函数
+         * computed 返回的是一个ref对象
+         */
+        // const and = computed(() => str1.value + str2.value)
+        /**
+         * 方法二：
+         * 传入一个对象，包含 etter/setter
+         * computed 返回的是一个ref对象
+         */
+        const and = computed({
+            get: () => str1.value + str2.value,
+            set(newValue) {
+                str1.value = newValue
+            }
+        })
+        const fun = function () {
+            and.value = "哈哈哈"
+        }
+        return { and, fun }
+    }
+}
+</script>
+```
+
+## 11、Watch的使用
 
 
 
