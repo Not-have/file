@@ -66,6 +66,10 @@ props非常好理解，它其实就是父组件传递过来的属性会被放到
 
  ![image-20211204170119254](https://gitee.com/Green_chicken/picture/raw/master/20211204170121.png)
 
+3）使用ref获取DOM元素
+
+![image-20211220221915821](https://gitee.com/Green_chicken/picture/raw/master/20211220221917.png)
+
 ## 4、readonly
 
 readonly会返回原生对象的只读代理（也就是它依然是一个Proxy，这是一个proxy的set方法被劫持，并且不 能对其进行修改）
@@ -332,7 +336,332 @@ export default {
 </script>
 ```
 
-## 11、Watch的使用
+## 11、watchEffect
+
+### 1）watchEffect 自动响应式依赖
+
+注：会立即执行一次，然后改变变量，这里就能监听到
+
+```javascript
+<template>
+    <div>
+        <p>{{name}}</p>
+        <p> {{age}}</p>
+
+        <p><button @click="changeName">点击</button><button @click="changeNameAge">点击</button></p>
+    </div>
+</template>
+
+<script lang='ts'>
+import { defineComponent, ref, watchEffect } from "vue";
+export default defineComponent({
+    name: "index",
+    components: {},
+    setup() {
+        const name = ref("小明");
+        const age = ref(22);
+        const changeName = () => (name.value = "小花");
+        const changeNameAge = () => age.value++;
+        /**
+         * 里面是响应式对象
+         */
+        watchEffect(() => {
+            console.log("name", name.value);
+            console.log("age", age.value);
+        });
+        return { name, age, changeName, changeNameAge };
+    },
+});
+</script>
+```
+
+### 2）watchEffect的停止监听的使用:
+
+```javascript
+<template>
+    <div>
+        <p>{{name}}</p>
+        <p> {{age}}</p>
+
+        <p><button @click="changeName">点击</button><button @click="changeNameAge">点击</button></p>
+    </div>
+</template>
+
+<script lang='ts'>
+import { defineComponent, ref, watchEffect } from "vue";
+export default defineComponent({
+    name: "index",
+    components: {},
+    setup() {
+        const name = ref("小明");
+        const age = ref(22);
+        const changeName = () => (name.value = "小花");
+        const changeNameAge = () => {
+            age.value++;
+            if (age.value > 25) {
+                stop();
+            }
+        };
+        /**
+         * 里面是响应式对象
+         * 返回一个函数，在外面调用，他就会停止监听
+         */
+        const stop = watchEffect(() => {
+            console.log("name", name.value, "age", age.value);
+        });
+        return { name, age, changeName, changeNameAge };
+    },
+});
+</script>
+```
+
+### 3）watchEffect清除副作用
+
+注：在网络请求中，当数据更新了之后，应该使用新数据去请求，停掉之前的那个的时候用。
+
+```javascript
+<template>
+    <div>
+        <h2>{{name}}-{{age}}</h2>
+        <button @click="changeName">修改name</button>
+        <button @click="changeAge">修改age</button>
+    </div>
+</template>
+
+<script>
+import { ref, watchEffect } from 'vue';
+
+export default {
+    setup() {
+        // watchEffect: 自动收集响应式的依赖
+        const name = ref("why");
+        const age = ref(18);
+
+        const stop = watchEffect((onInvalidate) => {
+            const timer = setTimeout(() => {
+                console.log("网络请求成功~");
+            }, 2000)
+
+            // 根据name和age两个变量发送网络请求
+            onInvalidate(() => {
+                // 在这个函数中清除额外的副作用
+                // request.cancel()
+                clearTimeout(timer);
+                console.log("onInvalidate");
+            })
+            console.log("name:", name.value, "age:", age.value);
+        });
+
+        const changeName = () => name.value = "kobe"
+        const changeAge = () => {
+            age.value++;
+            if (age.value > 25) {
+                stop();
+            }
+        }
+
+        return {
+            name,
+            age,
+            changeName,
+            changeAge
+        }
+    }
+}
+</script>
+```
+
+### 4）watchEffect的执行时机
+
+```javascript
+<template>
+    <h2 ref="text">哈哈哈</h2>
+</template>
+
+<script>
+import { ref, watchEffect } from 'vue'
+
+export default {
+    name: 'index',
+    components: {
+
+    },
+    setup() {
+        let text = ref(null)
+        watchEffect(() => {
+            console.log(text.value)
+        }, {
+            /**
+             * pre 默认值 在元素 挂载 或者 更新 之前执行
+             * post 监听DOM时，可修改为这个值
+             * sync 强制效果始终同步触发
+             */
+            flush: "post"
+        })
+        return { text }
+    }
+}
+</script>
+```
+
+## 12、watch
+
+### 1）监听单个数据源
+
+① reactive的监听
+
+```javascript
+<template>
+    <p>{{ info }}</p>
+    <button @click="fun">点</button>
+</template>
+
+<script>
+import { reactive, watch } from 'vue'
+
+export default {
+    name: 'index',
+    setup() {
+        const info = reactive({ name: "哈哈哈", age: 22 })
+        /**
+         * 第一种写法
+         */
+        watch(() => info.age, (newVal, oldVal) => {
+            console.log(newVal, oldVal)
+        })
+        const fun = () => {
+            info.age++
+        }
+        return { info, fun }
+    }
+}
+</script>
+```
+
+② 对reactive对象的监听
+
+```javascript
+<template>
+    <p>{{ info.age }}</p>
+    <button @click="fun">点</button>
+</template>
+
+<script>
+import { reactive, ref, watch } from 'vue'
+
+export default {
+    name: 'index',
+    setup() {
+        const info = reactive({ name: "哈哈哈", age: 22 })
+        /**
+         * 下面这样写 就可以获取成一个 普通的对象
+         */
+        watch(() => ({ ...info }), (newVal, oldVal) => {
+            console.log(newVal, oldVal)
+        })
+
+        const fun = () => {
+            info.age++
+        }
+        return { info, fun }
+    }
+}
+</script>
+```
+
+③ ref的监听
+
+```javascript
+<template>
+    <p>{{ num }}</p>
+    <button @click="fun">点</button>
+</template>
+
+<script>
+import { reactive, ref, watch } from 'vue'
+
+export default {
+    name: 'index',
+    setup() {
+        const num = ref(0)
+        watch(num, (newVal, oldVal) => {
+            console.log(newVal, oldVal)
+        })
+
+        const fun = () => {
+            num.value++
+        }
+        return { num, fun }
+    }
+}
+</script>
+```
+
+### 2）监听多个数据源
+
+```javascript
+<template>
+    <p>{{ info.age }}</p>
+    <p>{{ num }}</p>
+    <button @click="fun">点</button>
+</template>
+
+<script>
+import { reactive, ref, watch } from 'vue'
+
+export default {
+    name: 'index',
+    setup() {
+
+        let info = reactive({ name: "哈哈哈", age: 22 })
+        let num = ref(0)
+        // watch([info, num], (newVal, oldVal) => {
+        //下面可以 挨个打印
+        watch([info, num], ([newInfo, newNum], [oldInfo, oldNum]) => {
+            console.log(newInfo, newNum, oldInfo, oldNum)
+        })
+
+        const fun = () => {
+            info.age++
+            num.value++
+        }
+        return { info, num, fun }
+    }
+}
+</script>
+```
+
+### 3）watch的选项
+
+```javascript
+<template>
+    <p>{{ info }}</p>
+    <button @click="fun">点</button>
+</template>
+
+<script>
+import { reactive, ref, watch } from 'vue'
+
+export default {
+    name: 'index',
+    setup() {
+
+        let info = reactive({ name: "哈哈哈", age: 22, child: { name: "呵呵" } })
+        watch(info, (newVal, oldVal) => {
+            console.log(newVal, oldVal)
+        }, {
+            deep: true, // 深度监听
+            immediate: true // 立即执行（西药第一次 进来就打印）
+        })
+
+        const fun = () => {
+            info.child.name = "啊啊啊啊啊"
+        }
+        return { info, fun }
+    }
+}
+</script>
+```
 
 
 
