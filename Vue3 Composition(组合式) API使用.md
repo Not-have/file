@@ -663,5 +663,89 @@ export default {
 </script>
 ```
 
+## 13、provide
+
+注：修改数据的时候，请尽量做到单向数据流。
+
+![image-20211223113736557](https://gitee.com/Green_chicken/picture/raw/master/20211223113739.png)
+
+## 14、hooks的使用
+
+![image-20211223171341205](https://gitee.com/Green_chicken/picture/raw/master/20211223171342.png)
+
+### 1）封装一个修改title
+
+```javascript
+import { ref, watch } from 'vue'
+export default function (title = "默认值") {
+    const titleRef = ref(title)
+    /**
+     * watch 是惰性的
+     */
+    watch(titleRef, newValue => {
+        document.title = newValue
+    }, { immediate: true })
+    return titleRef
+}
+```
+
+使用：
+
+```javascript
+<template>
+    <p>hooks 的使用</p>
+    <p> <button @click="fun">修改Title</button> </p>
+</template>
+
+<script lang='ts'>
+import { defineComponent } from "vue";
+import userTitle from "./userTitle";
+export default defineComponent({
+    name: "index",
+    components: {},
+    setup() {
+        function fun() {
+            let title = userTitle("你好");
+            setTimeout(() => {
+                title.value = "测试";
+            }, 3000);
+        }
+        return { fun };
+    },
+});
+</script>
+```
+
+### 2）监听界面滚动位置
+
+```javascript
+import { ref } from 'vue'
+export default function () {
+    const scrollX = ref(0);
+    const scrollY = ref(0);
+    document.addEventListener("scroll", () => {
+        scrollX.value = window.scrollX;
+        scrollY.value = window.scrollY;
+    });
+    return { scrollX, scrollY }
+}
+```
+
+### 3）监听鼠标位置
+
+```javascript
+import { ref } from 'vue'
+export default function () {
+    const mouseX = ref(0)
+    const mouseY = ref(0)
+
+    window.addEventListener("mousemove", event => {
+        mouseX.value = event.pageX
+        mouseY.value = event.pageY
+    })
+    return { mouseX, mouseY }
+}
+```
+
 
 
