@@ -747,5 +747,303 @@ export default function () {
 }
 ```
 
+# 三、自定义指令
 
+文档：https://v3.cn.vuejs.org/guide/custom-directive.html
+
+自定义局部指令：组件中通过 directives 选项，只能在当前组件中使用； 
+
+自定义全局指令：app的 directive 方法，可以在任意组件中被使用；
+
+<font color=red>注：对DOM进行一些底层操作的时候，会用到自定义指令。</font>
+
+## 1、局部指令
+
+```javascript
+<template>
+    <div>
+        <input type="text" v-focus>
+    </div>
+</template>
+<script>
+export default {
+    directives: {
+        focus: {
+            mounted(el) {
+                el.focus()
+            }
+        }
+    }
+}
+</script>
+```
+
+## 2、全局指令
+
+1）在main.js中定义
+
+```javascript
+const app = createApp(App);
+/**
+ * 全局指令
+ */
+app.directive("focus", {
+    mounted(el) {
+        el.focus()
+    }
+})
+app.mount('#app');
+```
+
+2）在任意组件中的使用
+
+```javascript
+<template>
+    <div>
+        <input type="text" v-focus>
+    </div>
+</template>
+```
+
+## 3、指令的生命周期
+
+1）created：在绑定元素的 attribute 或事件监听器被应用之前调用
+
+2）beforeMount：当指令第一次绑定到元素并且在挂载父组件之前调用
+
+3）mounted：在绑定元素的父组件被挂载后调用
+
+4）beforeUpdate：在更新包含组件的 VNode 之前调用
+
+5）updated：在包含组件的 VNode 及其子组件的 VNode 更新后调用
+
+6）beforeUnmount：在卸载绑定元素的父组件之前调用
+
+7）unmounted：当指令与元素解除绑定且父组件已卸载时，只调用一次
+
+注：有自定义指令，至少有一个自定义指令。
+
+### 1）执行顺序
+
+① 初次加载的时候，执行的生命周期：
+
+created、beforeMount、mounted
+
+② 修改参数后的
+
+beforeUpdate、updated
+
+③ 销毁后
+
+beforeUnmount、unmounted
+
+### 2）生命周期中的参数
+
+el、binding、vnode、preVnode
+
+## 4、动态指令参数
+
+![image-20211226181354267](https://gitee.com/Green_chicken/picture/raw/master/20211226181356.png)
+
+```javascript
+<template>
+    <div>
+        <h1 v-if="counter < 2" @click="add" v-num.aa.bb="'哈哈哈'">{{counter}}</h1>
+    </div>
+</template>
+<script>
+import { ref } from '@vue/reactivity'
+export default {
+    directives: {
+        num: {
+            created(el, binding) {
+                console.log("created");
+                console.log(el, binding);
+            },
+            beforeMount() {
+                console.log("beforeMount");
+            },
+            mounted() {
+                console.log("mounted");
+            },
+            beforeUpdate() {
+                console.log("beforeUpdate");
+            },
+            updated() {
+                console.log("updated");
+            },
+            beforeUnmount() {
+                console.log("beforeUnmount");
+            },
+            unmounted() {
+                console.log("unmounted");
+            }
+        }
+    },
+    setup() {
+        let counter = ref(0)
+        const add = () => {
+            counter.value++
+        }
+        return { add, counter }
+    }
+}
+</script>
+```
+
+## 5、时间戳转换案例
+
+1）在src目录下创建一个directives文件夹，来存放自定义指令，里面的文件如下：
+
+① 出口文件(index.js)
+
+```javascript
+/**
+ * 总出口
+ */
+import time from "./time.js"
+/**
+* app 是从main.js中传入，而他是createApp的返回值
+*/
+export default function (app) {
+    time(app)
+}
+```
+
+② 自定义指令文件（这个  可以是多个）,以时间戳转换文件为例
+
+```javascript
+/**
+ * 定义的自定义指令
+ * 转换时间戳为普通格式
+ * @param {*} app 
+ */
+export default function time(app) {
+    let format = "" // 在这 定义格式的变量
+    app.directive("conversion-time", {
+        /**
+         * 可以在这设置当前时间格式（如：2022/01/01），也就是使用 binding 参数给这传值
+         */
+        created(el, binding) {
+            console.log(binding)
+        },
+        mounted(el) {
+            const text = el.textContent
+            console.log(text)
+            const timespan = parseInt(text)
+            // 同意格式
+            if (timespan.length === 10) {
+                timespan = timespan * 1000
+            }
+            el.textContent = dateFormat(timespan)
+        }
+    })
+}
+
+function dateFormat(time) {
+    let date = new Date(time);
+    let year = date.getFullYear();
+    /* 在日期格式中，月份是从0开始的，因此要加0
+     * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+     */
+    let month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+    let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    let hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    let minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    let seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    // 拼接
+    return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+}
+```
+
+2）main.js中引入
+
+```javascript
+import { createApp } from 'vue'
+import App from './App.vue'
+// @ts-ignore
+import directives from "./directives/index" // 引入
+
+const app = createApp(App);
+
+directives(app)
+
+app.mount('#app');
+```
+
+3）在组件中的使用
+
+```javascript
+<template>
+    <p v-conversion-time>{{time}}</p>
+</template>
+
+<script>
+import { ref } from '@vue/reactivity'
+export default {
+    name: 'Time',
+    setup() {
+        const time = ref()
+        time.value = new Date().getTime()
+        return { time }
+    }
+}
+</script>
+```
+
+![image-20211226190239132](https://gitee.com/Green_chicken/picture/raw/master/20211226190242.png)
+
+# 四、Teleport
+
+文档：https://v3.cn.vuejs.org/guide/teleport.html
+
+Vue 鼓励我们通过将 UI 和相关行为封装到组件中来构建 UI。我们可以将它们嵌套在另一个内部，以构建一个组成应用程序 UI 的树。
+
+然而，有时组件模板的一部分逻辑上属于该组件，而从技术角度来看，最好将模板的这一部分移动到 DOM 中 Vue app 之外的其他位置。
+
+一个常见的场景是创建一个包含全屏模式的组件。在大多数情况下，你希望模态框的逻辑存在于组件中，但是模态框的快速定位就很难通过 CSS 来解决，或者需要更改组件组合。
+
+1、组件
+
+```javascript
+<template>
+    <div>
+        <teleport to="#box">
+            <p>容移动到的目标元素</p>
+        </teleport>
+    </div>
+</template>
+```
+
+2、要定义id为box的元素，我目前把他定义在public下的index.html里
+
+```javascript
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <noscript>
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+                Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+	<!-- 在这定义了一个box -->
+    <div id="box"></div>
+    <!-- built files will be auto injected -->
+</body>
+
+</html>
+```
+
+![image-20211226192219534](https://gitee.com/Green_chicken/picture/raw/master/20211226192221.png)
 
