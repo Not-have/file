@@ -207,7 +207,7 @@ const router = createRouter({
 export default router
 ```
 
-# 四、动态路由基本匹配
+# 四、带参数的动态路由匹配
 
 ## 1、路由里面的写法
 
@@ -227,7 +227,7 @@ export default router
 
 注：提供一个404图片
 
- <img src="F:\vue3-ts-practise\src\assets\404.gif" alt="404" style="zoom:25%;" />
+ <img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c55371c5a4e44158a3ddbf60cedeeb1~tplv-k3u1fbpfcp-watermark.image?" style="zoom: 33%;" />
 
 ## 1、匹配找不到的路径
 
@@ -410,5 +410,305 @@ export default {
 </script>
 ```
 
+# 八、router-view的v-slot
 
+https://next.router.vuejs.org/zh/api/#router-link-%E7%9A%84-v-slot
+
+# 九、router-view过渡动画的实现
+
+```javascript
+<template>
+    <div>
+    	<!-- 下面使用了对象的结构 -->
+        <router-view v-slot="{ Component }">
+            <transition name="box">
+                <!-- keep-alive 缓存 -->
+                <keep-alive>
+                    <component :is="Component"></component>
+                </keep-alive>
+            </transition>
+        </router-view>
+    </div>
+</template>
+<style scoped>
+a {
+    margin: 0 20px;
+}
+/* 默认 router-link 选中时的class名 */
+.router-link-active {
+    color: red;
+    font-size: 16px;
+}
+.box-enter-from,
+.box-leave-to {
+    opacity: 0;
+}
+.box-enter-active,
+.box-leave-active {
+    transition: opacity 1s ease-in;
+}
+</style>
+```
+
+# 十、动态添加路由
+
+## 1、给一级路由添加
+
+```javascript
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
+
+const routes = [
+    {
+        path: "/",
+        redirect: "/home"
+    },
+    {
+        path: '/home',
+        name: 'Home',
+        component: () => import("../views/Home.vue")
+    },
+    {
+        // 这个使用正则，在找不到的时候，会走 *
+        path: "/:pathMatch(.*)",
+        name: "404",
+        component: () => import("../views/404.vue")
+    }
+]
+
+const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
+    routes
+})
+
+let addList = {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/login/index.vue")
+}
+// 添加了一个路由
+router.addRoute(addList)
+
+export default router
+```
+
+## 2、给二级路由添加
+
+```javascript
+/*
+给二级路由添加
+*/
+router.addRoute("一级路由的名称(也就是 name属性)", {这里放二级路由对象})
+```
+
+```javascript
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
+
+const routes = [
+    {
+        path: "/",
+        redirect: "/home"
+    },
+    {
+        path: '/home',
+        name: 'Home',
+        component: () => import("../views/Home.vue")
+    },
+    {
+        path: "/router",
+        name: "router",
+        // 理由引入
+        component: () => import("../views/Router4的使用/Index.vue"),
+        children: [
+            // 设置二级路由的默认展示界面
+            {
+                path: "",
+                //redirect 是重定向
+                redirect: "/router/one"
+            },
+            {
+                // 二级路由直接写路径，不用写父级路径 和 /
+                path: "one",
+                component: () => import("../views/Router4的使用/son/One.vue")
+            }
+        ]
+    },
+    {
+        // 这个使用正则，在找不到的时候，会走 *
+        path: "/:pathMatch(.*)",
+        name: "404",
+        component: () => import("../views/404.vue")
+    }
+]
+
+const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
+    routes
+})
+
+let addList = {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/login/index.vue")
+}
+// 添加了一个路由
+router.addRoute(addList)
+// 添加一个二级路由
+router.addRoute("router", {
+    path: "two",
+    component: () => import("../views/Router4的使用/son/Two.vue")
+})
+
+export default router
+```
+
+# 十一、动态删除路由
+
+## 1、添加一个相同的路由
+
+ ![image-20220106231310600](https://gitee.com/Green_chicken/picture/raw/master/20220106231312.png)
+
+## 2、通过removeRoute方法，传入路由的名称
+
+```javascript
+router.removeRoute("对应要删除的 name 名称")
+```
+
+## 3、通过addRoute方法的返回值回调
+
+```javascript
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
+
+const routes = [
+    {
+        // 这个使用正则，在找不到的时候，会走 *
+        path: "/:pathMatch(.*)",
+        name: "404",
+        component: () => import("../views/404.vue")
+    }
+]
+
+const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
+    routes
+})
+let addList = {
+	path: '/home',
+	name: 'Home',
+	component: () => import("../views/Home.vue")
+}
+const removeRoute = router.addRoute(addList)
+removeRoute()
+
+export default router
+```
+
+## 4、检测路由是否存在
+
+1）router.hasRoute()：检查路由是否存在
+
+2）router.getRoutes()：获取一个包含所有路由记录的数组（获取当前所有路由）
+
+# 十二、路由导航守卫
+
+<font color=red>注：用来路由跳转 和 取消路由跳转。</font>
+
+## 1、参数说明
+
+```javascript
+/**
+ * 导航守卫
+ * to：即将进入的路由Route对象
+ * from：即将离开的路由Route对象
+ */
+router.beforeEach((to, from) => {
+    console.log(to)
+    console.log(from)
+})
+```
+
+<font color=red>注：vue-router4 中，已经不建议使用 next。</font>
+
+## 2、返回值说明
+
+1）return false（取消当前导航）
+
+```javascript
+/**
+ * 导航守卫
+ * to：即将进入的路由Route对象
+ * from：即将离开的路由Route对象
+ */
+router.beforeEach((to, from) => {
+    console.log(to)
+    console.log(from)
+    /**
+     * 1、取消当前跳转
+     */
+    return false
+})
+```
+
+<font color=red>注：不返回或者undefined：进行默认导航。</font>
+
+2）返回一个路由地址
+
+① 返回一个字符串
+
+```javascript
+router.beforeEach((to, from) => {
+    if (to.path === "/home") {
+        return "/plugins"
+    }
+})
+```
+
+② 返回一个对象
+
+```javascript
+router.beforeEach((to, from) => {
+    if (to.path === "/home") {
+        return {
+            path: "/plugins", query: {
+                name: "你好"
+            }
+        }
+    }
+})
+```
+
+3）next
+
+在Vue3中我们是通过返回值来控制的，不再推荐使用next函数，这是因为开发中很容易调用多次next；
+
+# 十三、完整的导航解析流程
+
+1、导航被触发。
+
+2、在失活的组件里调用  beforeRouteLeave 守卫
+
+3、调用全局的 beforeEach 守卫
+
+4、在重用的组件里调用 beforeRouteUpdate 守卫（组件内）
+
+5、在路由配置里调用 beforeEnter（路由对象中）
+
+6、解析异步路由组件
+
+7、在被激活的组件里调用 beforeRouteEnter
+
+8、调用全局的 beforeResolve 守卫（全局解析守卫，这个时候导航已经确定了）
+
+9、导航被确认
+
+10、调用全局的 afterEach 钩子
+
+11、触发 DOM 更新
+
+12、调用 beforeRouteEnter（这里不能拿到this，也就是不能拿到当前的组件实例）守卫中传给 next 的回调函数（next里面有个参数，它可以获取到组件实例的），创建好的组件实例会作为回调函数的参数传入
+
+
+
+<hr />
+
+文档：https://next.router.vuejs.org/zh/guide/advanced/navigation-guards.html
 
