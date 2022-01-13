@@ -915,7 +915,7 @@ export default function (app) {
  * 可以传入参数 v-conversion-time="哈哈哈"
  */
 export default function time(app) {
-    let format = "" // 在这 定义格式的变量
+    let format = "" // 在这定义的变量，如果你在下面对其，进行修改，那么你修改一次后，之前都会复用这个修改，这是由于闭包产生的，所以不建议在这进行定义变量
     app.directive("conversion-time", {
         /**
          * 可以在这设置当前时间格式（如：2022/01/01），也就是使用 binding 参数给这传值
