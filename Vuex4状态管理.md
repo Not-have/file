@@ -1018,3 +1018,372 @@ export default {
 </script>
 ```
 
+## 14、Module
+
+文档：https://next.vuex.vuejs.org/zh/guide/modules.html#%E5%B8%A6%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E7%BB%91%E5%AE%9A%E5%87%BD%E6%95%B0
+
+由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store 对象就有可能变得相当臃肿。
+
+为了解决以上问题，Vuex 允许我们将 store 分割成 模块（module）。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块——从上至下进行同样方式的分割：
+
+1）在src——> store ——> 创建module文件夹（用来存储模块）
+
+注：① 每个模块他都是一个对象；
+        ② 每个模块里都要state、getters、action、mutation属性；
+
+2）在module下创建你需要的文件（例：one.js）
+
+```javascript
+const one = {
+    state() {
+        return {
+            oneName: "模块一"
+        }
+    },
+    getters: {
+
+    },
+    mutations: {
+
+    },
+    actions: {
+
+    }
+}
+export default one
+```
+
+3）在src——>index.js中引入
+
+```javascript
+const one = {
+    /**
+     * 命名空间（这样设置就代表了 模块化的使用）
+     */
+    namespaced: true,
+    state() {
+        return {
+            oneName: "模块一"
+        }
+    },
+    getters: {
+        /**
+         * 
+         * @param {*} state 当前的state
+         * @param {*} getters 当前的getters
+         * @param {*} rootState 根目录下的state
+         * @param {*} rootGetters 根目录下的getters
+         */
+        fun1(state, getters, rootState, rootGetters) {
+
+        }
+    },
+    mutations: {
+        increment(state) {
+            state.oneName = "哈哈哈"
+        }
+    },
+    actions: {
+        /**
+         * 做了结构
+         */
+        fun2({ commit, dispatch, state, rootCommit, rootDispatch, rootState }) {
+            commit('someMutation', null, { root: true }) // 这个代表修改根目录下的 commit的某一个事件（someMutation），这个事件写在 mutations 里
+            dispatch('someOtherAction', null, { root: true }) // -> 个代表修改根目录下的 dispatch的某一个事件（someOtherAction），这个事件写在 actions 里
+        }
+    }
+}
+export default one
+```
+
+4）使用
+
+```vue
+<template>
+    <p>模块1</p>
+
+    <p>{{name}}</p>
+    <button @click="fun">点</button>
+</template>
+
+<script>
+import { computed } from '@vue/reactivity'
+import { useStore } from "vuex"
+export default {
+    name: 'module1',
+    setup() {
+        const store = useStore()
+        function fun() {
+            // 这块写 / ，是因为在模块里面设置了命名空间
+            store.commit("customize/increment")
+        }
+        const name = computed(() => store.state.customize.oneName)
+        return { name, fun }
+    }
+}
+</script>
+```
+
+## 15、module的辅助函数
+
+1）vuex的数据源
+
+① 模块中的数据（src——>store——>module——>one.js）
+
+```javascript
+const one = {
+    namespaced: true,
+    state() {
+        return {
+            oneCounter: 100
+        }
+    },
+    getters: {
+        doubleOneCounter(state, getters, rootState, rootGetters) {
+            return state.oneCounter * 2
+        }
+    },
+    mutations: {
+        increment(state) {
+            state.oneCounter++
+        }
+    },
+    actions: {
+        // 修改跟目录下的数据
+        incrementAction({ commit, dispatch, state, rootState, getters, rootGetters }) {
+            commit("increment")
+            commit("increment", null, { root: true })
+        }
+    }
+}
+export default one
+
+```
+
+② 根目录下的数据（src——>store——>index.js）
+
+```javascript
+import { createStore } from "vuex"
+import one from "./modules/one.js"
+export default createStore({
+    state: {
+        name: "根模块",
+        rootCounter: 0
+    },
+    /**
+     * 这个里面也可以有： mutations、actions、getters
+     */
+    mutations: {
+        increment(state) {
+            state.rootCounter++
+            console.log(state.rootCounter);
+
+        }
+    },
+    modules: {
+        one
+    }
+})
+```
+
+2）在setup中的使用
+
+```javascript
+<template>
+    <div>
+        <h2>{{ oneCounter }}</h2>
+        <h2>{{ doubleOneCounter }}</h2>
+        <button @click="increment">one + 1</button>
+        <button @click="incrementAction">one + 1</button>
+    </div>
+</template>
+<script>
+import { createNamespacedHelpers } from "vuex"
+// 这个组件见：8、对setup中使用辅助函数进行封装
+import vuexMap from "@/hook/vuexMap.js"
+/**
+ * 获取当前模块的 mapState, mapGetters, mapMutations, mapActions
+ * 可以把createNamespacedHelpers也封装进vuexMap，但是 我感觉这样太麻烦
+ */
+const { mapState, mapGetters, mapMutations, mapActions } = createNamespacedHelpers("one")
+export default {
+    setup() {
+        const state = vuexMap(mapState, ["oneCounter"])
+        const getters = vuexMap(mapGetters, ["doubleOneCounter"])
+        const mutations = mapMutations(["increment"])
+        const actions = mapActions(["incrementAction"])
+
+        return { ...state, ...getters, ...mutations, ...actions }
+    }
+}
+</script>
+```
+
+3）在选项API中的使用
+
+① 方法一
+
+```vue
+<template>
+    <div>
+        <h2>{{ counter }}</h2>
+        <h2>{{ doubleCounter }}</h2>
+        <button @click="increment">one + 1</button>
+        <button @click="incrementAction">one + 1</button>
+    </div>
+</template>
+<script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex"
+export default {
+    computed: {
+        ...mapState({
+            counter: state => state.one.oneCounter
+        }),
+        ...mapGetters({
+            doubleCounter: "one/doubleOneCounter"
+        })
+    },
+    methods: {
+        ...mapMutations({
+            increment: "one/increment"
+        }),
+        ...mapActions({
+            incrementAction: "one/incrementAction"
+        }),
+    }
+}
+</script>
+```
+
+② 方法二
+
+```vue
+<template>
+    <div>
+        <h2>{{ oneCounter }}</h2>
+        <h2>{{ doubleOneCounter }}</h2>
+        <button @click="increment">one + 1</button>
+        <button @click="incrementAction">one + 1</button>
+    </div>
+</template>
+<script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex"
+
+export default {
+    computed: {
+        /**
+         * 第一个参数是映射模块
+         * 第二个是展示的数据
+         */
+        ...mapState("one", ["oneCounter"]),
+        ...mapGetters("one", ["doubleOneCounter"])
+    },
+    methods: {
+        ...mapMutations("one", ["increment"]),
+        ...mapActions("one", ["incrementAction"]),
+    }
+}
+</script>
+```
+
+③ 方法三
+
+```vue
+<template>
+    <div>
+        <h2>{{ oneCounter }}</h2>
+        <h2>{{ doubleOneCounter }}</h2>
+        <button @click="increment">one + 1</button>
+        <button @click="incrementAction">one + 1</button>
+    </div>
+</template>
+<script>
+import { createNamespacedHelpers } from "vuex"
+/**
+ * createNamespacedHelpers 这个是vuex里面的，里面的参数是模块名
+ * 告诉他，你要映射的模块名
+ */
+const { mapState, mapGetters, mapMutations, mapActions } = createNamespacedHelpers("one")
+export default {
+    computed: {
+        ...mapState(["oneCounter"]),
+        ...mapGetters(["doubleOneCounter"])
+    },
+    methods: {
+        ...mapMutations(["increment"]),
+        ...mapActions(["incrementAction"]),
+    }
+}
+</script>
+```
+
+# 四、vuex中数据请求
+
+1、在vuex中（store——>index.js）
+
+```javascript
+import { createStore } from 'vuex'
+import axios from 'axios'
+export default createStore({
+    state: {
+        obj: {}
+    },
+    mutations: {
+        DATA(state, payload) {
+            state.obj = payload
+        }
+    },
+    actions: {
+        request(context, payload) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    url: "https://mock.mengxuegu.com/mock/60434bccf340b05bceda3906/practise-nuxtjs/test",
+                    method: "GET"
+                }).then(res => {
+                    // console.log(res.data)
+                    resolve(res.data)
+                }).catch(err => {
+                    reject(err)
+                    console.error(err)
+                })
+            })
+        }
+    }
+})
+```
+
+2、使用
+
+```vue
+<template>
+    <p>数据请求</p>
+    <h1>{{data.title}}</h1>
+    <p>{{data.content}}</p>
+</template>
+
+<script>
+import { onMounted, reactive, toRefs } from 'vue'
+import { useStore } from "vuex"
+export default {
+    name: 'request',
+    setup() {
+        let obj = reactive({
+            data: {}
+        })
+        const store = useStore()
+        onMounted(() => {
+            store.dispatch("request").then(res => {
+                // console.log(res)
+                obj.data = res.data
+                console.log(obj);
+            }).catch(err => {
+                console.error(err)
+            })
+        })
+
+        return { ...toRefs(obj) }
+    }
+}
+</script>
+```
+

@@ -106,9 +106,7 @@ readonly会返回原生对象的只读代理（也就是它依然是一个Proxy�
 
 创建一个 proxy，使其自身的 property 为只读，但不执行嵌套对象的深度只读转换（深层还是可读、可写的）；
 
-## 6、toRefs
-
-将reactive 将对象中的所有属性都转成ref，并且是一个reactive的响应式的对象，才能作为转换。
+## 6、toRefs（将reactive 将对象中的所有属性都转成ref，并且是一个reactive的响应式的对象，才能作为转换）
 
 ```javascript
 <template>
@@ -140,9 +138,7 @@ export default defineComponent({
 </script>
 ```
 
-## 7、toRef
-
-对其中一个属性进行转换，转成ref属性
+## 7、toRef（对其中一个属性进行转换，转成ref属性）
 
 ```javascript
 <template>
@@ -178,7 +174,7 @@ export default {
 
 具体的，请参考文档：https://v3.cn.vuejs.org/api/refs-api.html#unref
 
-### 1）unref
+### 1）unref（判断是否为ref）
 
 如果我们想要获取一个ref引用中的value，那么也可以通过unref方法
 
@@ -186,13 +182,11 @@ export default {
 
 这是 val = isRef(val) ? val.value : val 的语法糖函数。
 
-### 2）isRef
+### 2）isRef（判断值是否是一个ref对象）
 
 判断值是否是一个ref对象
 
-### 3）shallowRef
-
-创建一个浅层的ref对象
+### 3）shallowRef（创建一个浅层的ref对象）
 
 ```javascript
 <template>
@@ -917,17 +911,24 @@ export default function (app) {
  * 定义的自定义指令
  * 转换时间戳为普通格式
  * @param {*} app 
+ * 使用：v-conversion-time
+ * 可以传入参数 v-conversion-time="哈哈哈"
  */
 export default function time(app) {
     let format = "" // 在这 定义格式的变量
     app.directive("conversion-time", {
         /**
          * 可以在这设置当前时间格式（如：2022/01/01），也就是使用 binding 参数给这传值
+         * binding 是参数
+         * 注：1、同时created、mounted中的binding是同一个值；
+         *    2、如果你在created里面定义变量（或者修改传入的参数），想在mounted里面使用，见下面方法
+         * 初始化一般都放在created里，在别的地方使用，能更好一些
          */
         created(el, binding) {
-            console.log(binding)
+            binding.text = "哈哈哈"
         },
-        mounted(el) {
+        mounted(el, binding) {
+            console.log(binding.text);
             const text = el.textContent
             console.log(text)
             const timespan = parseInt(text)
