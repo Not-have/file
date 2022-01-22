@@ -189,3 +189,10 @@ https://zhidao.baidu.com/question/322727885.html
 
 https://blog.csdn.net/TionSu/article/details/99629507
 
+# 十、使用vsc合并代码时是的选项
+
+Accept Current Change		接受当前更改
+Accept Incoming Change	 接受传入的更改
+Accept Both Change		     接受两种改变
+Compare Change			      比较变化
+
