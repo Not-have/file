@@ -132,7 +132,6 @@ export function $(str) {
  *      =====`-.____`.___ \_____/___.-`___.-'=====
  *                        `=---='
  * 
- *            佛祖保佑       永不宕机     永无BUG
  */
 ```
 
@@ -339,5 +338,25 @@ rgbToHex(0, 51, 255); // #0033ff
 ```javascript
 const getSelectedText = () => window.getSelection().toString();
 getSelectedText();
+```
+
+## 18、判断数据类型
+
+```javascript
+/**
+ * 判断数据类型
+ * 参考文章：https://segmentfault.com/a/1190000018160547
+ * @param {*} obj Number | String | Boolean | Null | Undefined | Function | Array | Object
+ * @returns array | object | number | string | null | undefined | function | date | regexp
+ */
+function _typeof(obj) {
+    let type = Object.prototype.toString.call(obj);
+    return type.match(/\[object (.*?)\]/)[1].toLowerCase();
+}
+
+// 几个特别的示例
+console.log(_typeof(new Date())) // date
+console.log(_typeof(new RegExp())) // regexp
+console.log(_typeof(NaN)) // number
 ```
 

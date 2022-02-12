@@ -1,5 +1,7 @@
 官方地址：https://emscripten.org/
 
+<h1 style="text-align: center;">window下Emscripten环境搭建</h1>
+
 # 一、下载emsdk
 
 ## 1、github地址：
@@ -130,4 +132,12 @@ emcc index.c -s WASM=1 -O3 -o index.js
 注：index.js和index.wasm必须放在同一目录下，把index.js引入html中即可运行。
 
 ![image-20211224202749673](https://gitee.com/Green_chicken/picture/raw/master/20211224202754.png)
+
+<hr />
+
+
+
+<h1 style="text-align: center;">Linux下Emscripten环境搭建</h1>
+
+# 一、
 
