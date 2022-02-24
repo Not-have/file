@@ -1935,15 +1935,3 @@ onBeforeRouteLeave((to, from) => {｝）
 
 onBeforeRouteUpdate(async (to, from) => {})
 
-# 七、结合Vuex
-
-要在setup中使用store，可以调用该useStore函数。这等效this.$store于使用Option API在组件内进行检索。
-
-import { useStore } from 'vuex'
-
-const store = useStore();
-
-为了访问状态和获取方法，需要创建computed引用以保留响应式。这等效于使用Option API创建计算属性。
-
-注：使用方法类似vue2。
-

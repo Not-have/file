@@ -10,6 +10,8 @@ halt --reboot    ### 重启机器
 
 ```bash
 tar -zcvf dist.zip /dist
+tar zxf xxx.tar.gz  ==>解压xxx.tar.gz文件
+tar zcf xxx.tar.gz xxx ==>压缩xxx文件为xxx.tar.gz
 ```
 
 ## 3、切换用户
@@ -19,7 +21,8 @@ tar -zcvf dist.zip /dist
 su root
 # 修改root用户密码
 sudo passwd root
-
+# 切换用户
+sudo su
 ```
 
 ## 4、拷贝文件到指定路径下
@@ -39,6 +42,13 @@ vi 文件名.文件类型后缀
 :q!
 # 创建文件夹
 mkdir 文件名
+# 修改文件名
+mv 原先的名字 要修改的名字
+```
 
+## 6、安装指令
+
+```bash
+./configure
 ```
 
