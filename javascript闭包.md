@@ -195,5 +195,116 @@ myFunc();
 
 ③ 闭包是由两个东西组成，一个可以用来返回的函数，一个外层的自由变量，只有能在返回的这个函数里，访问到外层的这个自由变量，这两个东西结合在一起，就组成了严格意义上的闭包；
 
+```javascript
+function foo(){
+    let name = "哈哈哈"
+    let age = 18
+    function bar (){
+        console.log(name)
+        console.log(age)
+    }
+    return bar
+}
+/**
+ * 1、按理说上面的bar函数是要销毁的，但是在执行的时候，你给了他一个return
+ * 2、这个时候，你在下面定义全局变量的时候，就把他赋值给fn了，这个时候，他就不会被销毁了
+ */
+let fn = foo()
+fn()
+```
 
+# 三、闭包的内存泄露
+
+ ![image-20220205001011667](https://gitee.com/Green_chicken/picture/raw/master/20220205001014.png)
+
+## 1、闭包内存泄露的描述
+
+<font color=red>注</font>：因为有一个父级作用域一直指着，所以才不会销毁，也就是在一个函数里你return了一个函数，但是你在外面又去调用外层函数的时候，这个时候，他会把return里面的那个函数进行赋值，从而导致内存不会进行销毁
+
+## 2、解决内存泄露的方式
+
+<font color=red>把定义的函数，置为null</font>
+
+## 3、闭包内存泄露案例
+
+```javascript
+function fun(){
+    /**
+     * 传入一个长度
+     * 后面使用fill作为填充，填充的内容时1
+     * 一个整数是4个字节
+     * 填充1的个数是 1024 * 1024
+     * @type {any[]}
+     */
+    let arr1 = new Array(1024 * 1034).fill(1)
+    return function (){
+        console.log(arr1.length)
+    }
+}
+
+// const arrFn = fun()
+// arrFn()
+
+let arr2 = []
+for (let i = 0; i < 100; i++){
+    /**
+     * 必须要有一个引用接收，负责他会销毁
+     * 这里面有100 函数对象
+     */
+    arr2.push(fun())
+}
+// 下面是销毁（但是他不是立马销毁的）
+arr2 = null
+```
+
+![image-20220220205558101 alt="闭包内存回收和this的四个绑定规则（1）"](https://gitee.com/Green_chicken/picture/raw/master/20220220205600.png)
+
+## 4、闭包中自由变量是怎么销毁的
+
+​        根据ECMA规范得到，在闭包的父级作用域的自由变量都是保存的，但是js引擎，会帮我们进行优化处理，在定义后的代码里面，如果后面没有指向的话，他在执行的时候，就会帮我们把这个未使用的自由变量销毁掉。
+
+```javascript
+// 请把他引入html中运行
+function fun(){
+    let name = "哈哈哈",
+        age = 22
+    function bar() {
+        debugger
+        console.log(name)
+    }
+    return bar
+}
+
+const fn = fun()
+fn()
+```
+
+![image-20220222235404686](https://gitee.com/Green_chicken/picture/raw/master/20220222235406.png)
+
+# 四、闭包的使用
+
+## 1、闭包实现柯里化
+
+具体的参考阮一峰的函数式编程入门教程：https://www.ruanyifeng.com/blog/2017/02/fp-tutorial.html
+
+```javascript
+// 柯里化之前
+function add(x, y) {
+  return x + y;
+}
+
+
+console.log(add(1, 2));
+// add(1, 2) // 3
+
+// 柯里化之后
+function addX(y) {
+  return function (x) {
+    return x + y;
+  };
+}
+
+console.log(addX(2)(1));
+addX(2)(1) // 3
+```
 
