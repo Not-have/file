@@ -23,9 +23,9 @@ let obj = {
         console.log(this.name + "学习")
     }
 }
-obj.eating()
-obj.running()
-obj.studying()
+obj.eating() // 哈哈哈吃东西
+obj.running() // 哈哈哈运动
+obj.studying() // 哈哈哈学习
 ```
 
 可查看下面这个案例（引用于MDN）：
@@ -76,7 +76,7 @@ obj.foo()
 fun.apply("啊啊啊啊")
 ```
 
-![image-20220227191556344](https://gitee.com/Green_chicken/picture/raw/master/20220227191558.png)
+ ![image-20220227191556344](https://gitee.com/Green_chicken/picture/raw/master/20220227191558.png)
 
 # 三、this的绑定规则
 
@@ -96,7 +96,7 @@ function fun1() {
     console.log("fun1", this)
 }
 
-fun1()
+fun1() // Window
 
 /**
  * 下面都是 独立被调用
@@ -153,16 +153,18 @@ const fun10 = fun9()
 fun10()
 ```
 
+![image-20220303002942614](https://gitee.com/Green_chicken/picture/raw/master/20220303002943.png)
+
 ## 2、隐式绑定
 
 注：通过某个对象，进行的函数调用
 
-![image-20220227224234941](https://gitee.com/Green_chicken/picture/raw/master/20220227224236.png)
+ ![image-20220227224234941](https://gitee.com/Green_chicken/picture/raw/master/20220227224236.png)
 
 ```javascript
 // case1
 function fun1(){
-    console.log(this)
+    console.log(this) 
 }
 let obj1 = {
     age:222,
@@ -179,7 +181,7 @@ let obj2 = {
         console.log(this, this.age + obj2.age)
     }
 }
-obj2.foo()
+obj2.foo() // {age: 22, foo: ƒ} 44
 
 // case3
 let obj3 = {
@@ -193,7 +195,7 @@ let obj4 = {
     // 对象中的属性，指向函数
     foo: obj3.foo
 }
-obj4.foo()
+obj4.foo() // {name: 'obj4', foo: ƒ}
 ```
 
 ## 3、显示绑定
@@ -214,8 +216,8 @@ let obj = { age: 22, name: "小明" }
 function fun(){
     console.log(this, this.name)
 }
-fun.call(obj) // 立即执行
-fun()
+fun.call(obj) // 立即执行 {age: 22, name: '小明'} '小明'
+fun() // Window ""
 ```
 
 ② call有多个参数时需要罗列（也就是按个书写）
@@ -230,7 +232,7 @@ function fun(age, gender){
     console.log(this, this.name)
 }
 
-fun.call(obj, 222, "boy")
+fun.call(obj, 222, "boy") // {name: '小明', age: 222, gender: 'boy'} '小明'
 ```
 
 ![image-20220227230554191](https://gitee.com/Green_chicken/picture/raw/master/20220227230555.png)
@@ -263,11 +265,7 @@ function fun(age, gender){
 fun.apply(obj, [ 222, "boy" ])
 ```
 
-![image-20220227230929616](https://gitee.com/Green_chicken/picture/raw/master/20220227230932.png)
-
-
-
-
+ ![image-20220227230929616](https://gitee.com/Green_chicken/picture/raw/master/20220227230932.png)
 
 ### 3）bind
 
@@ -298,7 +296,7 @@ function fun(age, gender){
 fun.bind(obj, 222, "boy")()
 ```
 
-![image-20220227231141923](https://gitee.com/Green_chicken/picture/raw/master/20220227231143.png)
+ ![image-20220227231141923](https://gitee.com/Green_chicken/picture/raw/master/20220227231143.png)
 
 ```javascript
 function fun(){
@@ -310,7 +308,7 @@ function fun(){
  * 3、传入的参数，就是绑定的this
  */
 let newFun = fun.bind("传入的参数(也就是绑定this)，就是绑定的this")
-newFun()
+newFun() // String {'传入的参数(也就是绑定this)，就是绑定的this'}
 ```
 
 ### 4）call、apply、bind使用场景
@@ -323,7 +321,7 @@ let arr = [ 1, 2, 4, 6, 8, 11, 134, 0 ]
  * 这块只能时apply，因为apply的第二个参数 是数组
  * Math.XXX 的apply只能写在类似于下面的这个位置
  */
-console.log(Math.max.apply(null ,arr))
+console.log(Math.max.apply(null ,arr)) // 134
 ```
 
 ```javascript
@@ -350,7 +348,98 @@ console.log(Math.max.apply(null ,arr))
 </script>
 ```
 
-## 4、自己实现bind方法
+## 4、自己实现call、apply、bind方法
+
+### 1）call的实现
+
+```javascript
+let fun = {
+    getName: function () {
+        return this.name
+    }
+}
+
+let obj = {
+    name: "小明"
+}
+/**
+ * 1、手写call，要使用重新的这个  方法挂载到Function的属性上
+ * 2、这个里面的this时谁？
+ * 谁调用的他，这个this 就指向谁，这块的话，是getName调用的，所以 this就是 getName这个函数
+ */
+Function.prototype.myCall = function (context) {
+    // console.log(arguments)
+    // console.log(this)
+    /**
+     * 判断是否为函数，不是函数的时候，抛出错误
+     */
+    if (Object.prototype.toString.call(this).match(/\[object (.*?)\]/)[1].toLowerCase() !== 'function') {
+        throw new Error("错误")
+    }
+    context = context || window
+    let args = [ ...arguments ].slice(1)
+    // console.log(args)
+    /**
+     * 在这 把 this赋值给context这个参数
+     * 但是要假设 context 上有一个方法
+     */
+    context.fn = this
+    let result = context.fn(...args)
+    // console.log(result)
+    return result
+}
+console.log(fun.getName.myCall(obj)) // 小明
+```
+
+### 2）apply的实现
+
+```javascript
+let fun = {
+    getName: function (a, b) {
+        console.log(a + b)
+        return this.name
+    }
+}
+
+let obj = {
+    name: "小明"
+}
+/**
+ * 1、手写apply，要使用重新的这个  方法挂载到Function的属性上
+ * 2、这个里面的this时谁？
+ * 谁调用的他，这个this 就指向谁，这块的话，是getName调用的，所以 this就是 getName这个函数
+ */
+Function.prototype.myAplly = function (context) {
+    // console.log(arguments)
+    // console.log(this)
+    /**
+     * 判断是否为函数，不是函数的时候，抛出错误
+     */
+    if (typeof this !== 'function') {
+        throw new Error("错误")
+    }
+    context = context || window
+    /**
+     * 在这 把 this赋值给context这个参数
+     * 但是要假设 context 上有一个方法
+     */
+    context.fn = this
+    let result = null
+    // 判断是否有第二个canshu,也就是判断 它是否为空值
+    if (arguments[1]) {
+        result = context.fn(...arguments[1])
+    } else {
+        result = context.fn()
+    }
+    // 删除这个(用完删除)
+    delete context.fn
+    // console.log(result)
+    return result
+}
+console.log(fun.getName.myAplly(obj, [ 1, 2])) // 小明
+```
+
+### 3）bind方法的实现
 
 ```javascript
 function fun() {
@@ -374,6 +463,32 @@ var bar = bind(fun, obj);
 bar(); // obj对象
 ```
 
+```javascript
+let fun = {
+    getName: function () {
+        return this.name
+    }
+}
+
+let obj = {
+    name: "小明"
+}
+Function.prototype.myBind = function (context) {
+    if(typeof this !== "function"){
+        throw new Error("错误")
+    }
+    const that = this
+    const args = [...arguments].slice(1)
+    return function Fn(){
+        if (this instanceof Fn){
+            return new that(...args, ...arguments)
+        }
+        return that.apply(context, args.concat(...arguments))
+    }
+}
+console.log(fun.getName.myBind(obj)()) // 小明
+```
+
 ## 5、new绑定
 
 ```javascript
@@ -381,17 +496,207 @@ bar(); // obj对象
  * new构造函数
  * 1、this = 创建出来的对象
  * 2、这个绑定过程，就是new绑定
+ * 3、添加属性的时候，也就是属性添加进 this = {} 中
  */
 function Person(val1, val2){
     this.val1  = val1
     this.val2  = val2
 }
 let f1 = new Person("呵呵", "哈哈哈")
-console.log(f1.val1, f1.val2)
+console.log(f1.val1, f1.val2) // 呵呵 哈哈哈
 
 let f2 = new Person("age", 25)
-console.log(f2.val1, f2.val2)
+console.log(f2.val1, f2.val2) // age 25
 ```
 
  ![image-20220228231212002](https://gitee.com/Green_chicken/picture/raw/master/20220228231213.png)
+
+## 6、this绑定优先级
+
+1）默认规则的优先级最低
+
+2）显示绑定优先级高于隐式绑定
+
+3）new绑定优先级高于隐式绑定
+
+4）new绑定优先级高于bind（new绑定和call、apply不能一块使用，bind可以和new一块使用）
+
+```javascript
+function fun(){
+    console.log(this) // fun{}
+}
+let fn = fun.bind("哈哈哈")
+let obj = new fun()
+```
+
+<font color=red>总结：</font>
+
+*new绑定 > 显示绑定 > 隐式绑定 > 默认绑定*
+
+# 四、内置函数的绑定
+
+## 1、setTimeout
+
+```javascript
+/**
+ * setTimeout相当于下面的回调函数
+ */
+setTimeout(function (){
+    console.log(this) // window
+}, 2000)
+// 1、函数
+function fun(fn, duration) {
+    fn.call("指定this指向")
+}
+// 2、调用
+fun(function () {
+    console.log(this)
+}, 2000)
+```
+
+## 2、元素中的this指向
+
+```javascript
+const box = document.querySelector("div")
+// 把下面的这个点击传入给这个DOM元素作为属性使用
+box.onclick = function (){
+    console.log(this) // this指向元素对象
+    /**
+     * 这个this的指向，相当于一个隐式绑定
+     * 元素对象.onclick()
+     */
+}
+// 元素事件的监听(这个可以写多个，上面的就不可以写多个)
+box.addEventListener("click", function (){
+    /**
+     * 调用的理解：
+     * 得到当前的函数，使用call改变函数中this的指向，让其指向当前元素
+     * 得到当前的函数.call(当前元素)
+     */
+    console.log(this)
+})
+```
+
+ ![image-20220302230449499](https://gitee.com/Green_chicken/picture/raw/master/20220302230451.png)
+
+## 3、数组方法的this指向
+
+```javascript
+let arr = [ 1, 2, 44, 66, "哈哈哈", "heheh " ]
+/**
+ * forEach、map 入第二个参数的时候，就可改变this指向
+ */
+arr.forEach(function (item){
+    console.log(item, this)
+}, "改变forEach的this的指向")
+arr.map(function (item) {
+    console.log(item, this)
+}, "改变map的this的指向")
+```
+
+ ![image-20220302231111847](https://gitee.com/Green_chicken/picture/raw/master/20220302231113.png)
+
+# 五、this指向的特殊情况
+
+## 1、this的忽略显示绑定
+
+```javascript
+function fun(){
+    console.log(this)
+}
+fun.apply(null) // Window
+fun.apply(undefined) //Window
+
+fun.call(null) // Window
+fun.call(undefined) //Window
+
+fun.bind(null)() // Window
+fun.bind(undefined)() //Window
+let fn1 = fun.bind(null)
+fn1() //Window
+let fn2 = fun.bind(undefined)
+fn2() //Window
+```
+
+## 2、this的间接函数引用
+
+```javascript
+let obj1 = {
+    name: "obj1",
+    fun: function (){
+        console.log(this)
+    }
+}
+let obj2 = {
+    name: "obj2"
+};
+/**
+ * 把obj1的fun赋值给obj2的bar
+ * 打印的是obj2
+ */
+// obj2.bar = obj1.fun
+// obj2.bar() //{name: 'obj2', bar: ƒ}
+/**
+ * 下面把这个赋值写成自运行
+ * (obj2.bar = obj1.fun)() 这样的写 是无法运行的，无法运行的原因如下：
+ * 1、使用小括号括起来的话，你就把他看作为一个整体
+ * 2、无法运行的原因是 在obj2后面没加分号的话，他就会  理解他们是一个整体，类似下面的效果：
+     let obj2 = {
+        name: "obj2"
+     }(obj2.bar = obj1.fun)()
+     所以，你加上分号 就不报错了（具体的原因，请阅读： 你不知道的javascript）
+ * 3、所以在代码中使用小括号、中括号的时候，请查看自己的代码块 是否正确
+ * 4、在写代码的时候，请尽量加分号
+ */
+(obj2.bar = obj1.fun)() // Window
+```
+
+# 六、箭头函数
+
+注：① 箭头函数不会绑定this、arguments属性；
+
+​        ② 箭头函数不能作为构造函数来使用（也就是不能和new 一块使用）
+
+​	    ③ 箭头函数不适用于上面的四种绑定规则（new绑定、显示绑定、隐式绑定、默认绑定）
+
+## 1、箭头函数的this根据外层作用域来决定
+
+## 2、箭头函数中this的指向
+
+```javascript
+let obj1 = {
+    data: "",
+    getData: function (){
+        console.log(this) // {data: '', getData: ƒ}
+        setTimeout(function (){
+            console.log(this) // Window
+        }, 2000)
+    }
+}
+obj1.getData()
+
+let obj2 = {
+    data: "",
+    getData: () => {
+        console.log(this) // Window
+        setTimeout(function () {
+            console.log(this) // Window
+        }, 2000)
+    }
+}
+obj2.getData()
+
+let obj3 = {
+    data: "",
+    getData: () => {
+        console.log(this) // Window
+        setTimeout(() => {
+            console.log(this) // Window
+        }, 2000)
+    }
+}
+obj3.getData()
+```
+
+
 
