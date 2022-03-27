@@ -133,11 +133,5 @@ emcc index.c -s WASM=1 -O3 -o index.js
 
 ![image-20211224202749673](https://gitee.com/Green_chicken/picture/raw/master/20211224202754.png)
 
-<hr />
 
-
-
-<h1 style="text-align: center;">Linux下Emscripten环境搭建</h1>
-
-# 一、
 
