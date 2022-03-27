@@ -284,7 +284,7 @@
 </script>
 ```
 
-![image-20210216222830900](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210216222840.png)
+ ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280032327.png)
 
 ## 6、抛物线
 
@@ -395,7 +395,7 @@
 </html>
 ```
 
-![image-20210216223431255](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210216223432.png)
+![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280033565.png)
 
 ## 7、重力回弹（类似与打皮球）
 
@@ -558,4 +558,5 @@
 </script>
 ```
 
-![image-20210216224251245](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210216224252.png)
+![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280034675.png)
+

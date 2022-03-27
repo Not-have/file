@@ -49,7 +49,7 @@ console.log(window)
 
 2）在node下执行（其实源码里面是call来实现的）
 
-![image-20220224235630762](https://gitee.com/Green_chicken/picture/raw/master/20220224235634.png)
+![image-20220224235630762](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272352288.png)
 
 ## 3、<font color=red>this在函数中的使用</font>
 
@@ -76,7 +76,7 @@ obj.foo()
 fun.apply("啊啊啊啊")
 ```
 
- ![image-20220227191556344](https://gitee.com/Green_chicken/picture/raw/master/20220227191558.png)
+ ![image-20220227191556344](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272353932.png)
 
 # 三、this的绑定规则
 
@@ -153,13 +153,13 @@ const fun10 = fun9()
 fun10()
 ```
 
-![image-20220303002942614](https://gitee.com/Green_chicken/picture/raw/master/20220303002943.png)
+![image-20220303002942614](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272353126.png)
 
 ## 2、隐式绑定
 
 注：通过某个对象，进行的函数调用
 
- ![image-20220227224234941](https://gitee.com/Green_chicken/picture/raw/master/20220227224236.png)
+ ![image-20220227224234941](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280024538.png)
 
 ```javascript
 // case1
@@ -206,7 +206,7 @@ call、apply、bind 改变函数体内的this指向
 
 ### 1）call
 
-![image-20220227225543659](https://gitee.com/Green_chicken/picture/raw/master/20220227225545.png)
+![image-20220227225543659](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280025236.png)
 
 ① call立即执行
 
@@ -235,7 +235,7 @@ function fun(age, gender){
 fun.call(obj, 222, "boy") // {name: '小明', age: 222, gender: 'boy'} '小明'
 ```
 
-![image-20220227230554191](https://gitee.com/Green_chicken/picture/raw/master/20220227230555.png)
+![image-20220227230554191](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280025795.png)
 
 ### 2）apply
 
@@ -265,7 +265,7 @@ function fun(age, gender){
 fun.apply(obj, [ 222, "boy" ])
 ```
 
- ![image-20220227230929616](https://gitee.com/Green_chicken/picture/raw/master/20220227230932.png)
+ ![image-20220227230929616](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280026490.png)
 
 ### 3）bind
 
@@ -296,7 +296,7 @@ function fun(age, gender){
 fun.bind(obj, 222, "boy")()
 ```
 
- ![image-20220227231141923](https://gitee.com/Green_chicken/picture/raw/master/20220227231143.png)
+ ![image-20220227231141923](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280026815.png)
 
 ```javascript
 function fun(){
@@ -509,7 +509,7 @@ let f2 = new Person("age", 25)
 console.log(f2.val1, f2.val2) // age 25
 ```
 
- ![image-20220228231212002](https://gitee.com/Green_chicken/picture/raw/master/20220228231213.png)
+ ![image-20220228231212002](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280027756.png)
 
 ## 6、this绑定优先级
 
@@ -577,7 +577,7 @@ box.addEventListener("click", function (){
 })
 ```
 
- ![image-20220302230449499](https://gitee.com/Green_chicken/picture/raw/master/20220302230451.png)
+ ![image-20220302230449499](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280027287.png)
 
 ## 3、数组方法的this指向
 
@@ -594,7 +594,7 @@ arr.map(function (item) {
 }, "改变map的this的指向")
 ```
 
- ![image-20220302231111847](https://gitee.com/Green_chicken/picture/raw/master/20220302231113.png)
+ ![image-20220302231111847](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280027142.png)
 
 # 五、this指向的特殊情况
 
@@ -697,6 +697,72 @@ let obj3 = {
 }
 obj3.getData()
 ```
+
+# 七、call、apply、bind的实现
+
+注：① 给所有函数上挂载一个方法，需要使用到原型链；
+
+​        ② 他们本质的实现是c++代码，但是 我们可以使用js来模拟；
+
+## 1、给函数上添加一个 自定义的方法
+
+```javascript
+    /**
+     * 自定义的方法
+     * 把方法挂载到 函数上
+     */ 
+    Function.prototype.hello = function(){
+        console.log("自定义的方法");
+    }
+    function fun(){
+        console.log("fun");
+    }
+    // 在这调用
+    fun.hello()
+```
+
+## 2、call的实现
+
+1）基本使用，只传入一个参数(这个参数是对象)
+
+```javascript
+/**
+ * 自定义的方法
+ * 把方法挂载到 函数上
+ */ 
+Function.prototype.myCall = function(thisArg){
+    console.log("自定义的方法")
+    // 1、获取需要被执行的函数
+    let fn = this
+    /**
+     * 2、调用被执行的函数
+     * 给传入的参数（thisArg）上添加一个属性，代表在thisArg这个对象上，有了一个fn的属性
+     * 
+     */
+    thisArg.fn = fn
+    // 这样相当于给调用做了一个隐式绑定
+    thisArg.fn()
+    // 删除
+    delete thisArg
+}
+function fun(){
+    console.log("fun", this);
+}
+/**
+ * 系统的方法:
+ * 1、调用系统的方法，fun可以执行
+ */
+// fun.call()
+/**
+ * 自已的方法：
+ * 1、fun方法没有执行
+ * 2、他其实 是一个隐式的绑定,所以 myCall 里面的this，指向fun这个函数
+ * 
+ */
+fun.myCall({})
+```
+
+2）边界处理
 
 
 

@@ -1,4 +1,4 @@
-﻿﻿﻿﻿@[TOC]( )
+﻿﻿﻿﻿﻿@[TOC]( )
 注：一些经典文章：
 1、[地图标点](https://juejin.im/post/6844903989427847181)：https://juejin.im/post/6844903989427847181
 2、[地图下钻](https://juejin.im/post/6844904170512891917)：https://juejin.im/post/6844904170512891917
@@ -2167,12 +2167,13 @@ export default {
 </style>
 ```
 # 五、Echarts中使用词云
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200722194317731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NjY5MTc4,size_16,color_FFFFFF,t_70 =300x)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200722194317731.png)
 1、下载echarts：
 npm install --save echarts
 2、下载echarts-wordcloud：
 npm install echarts-wordcloud
 3、使用
+
 ```javascript
 <template>
     <div id="cloud" style="height:500px;width:500px">

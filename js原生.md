@@ -83,8 +83,6 @@ console.log(Object.prototype.hasOwnProperty.call(obj, 'a'));//true
 </script>
 ```
 
-![image-20210224114334911](https://gitee.com/Green_chicken/picture/raw/master/img/20210224114337.png)
-
 ## 3、封装$符获取元素
 
 ```javascript
