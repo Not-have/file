@@ -16,7 +16,7 @@
 
 3）如果没有找到JavaScript钩子并且也没有检测到CSS过渡/动画，DOM插入、删除操作将会立即执行。
 
-![image-20211115223944544](https://gitee.com/Green_chicken/picture/raw/master/image-20211115223944544.png)
+![image-20211115223944544](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280037393.png)
 
 # 二、transition 的name属性
 
@@ -24,9 +24,9 @@
 
 注：① <font color=red>v 代表name里面定义的类名</font>；
 
-​        ② enter代表的都是进入时的状态；
-
-​        ③ leave是离开。
+        ② enter代表的都是进入时的状态；
+    
+        ③ leave是离开。
 
 1）v-enter-from：定义进入过渡的开始状态。在元素被插入DOM之前生效，在元素被插入DOM之后的下一帧移除。
 
@@ -42,7 +42,7 @@
 
 6）v-leave-active：定义离开过渡生效时的状态。在整个离开过渡的阶段中应用，在离开过渡被触发时立刻生效，在 过渡/动画完成之后移除。这个类可以被用来定义离开过渡的过程时间，延迟和曲线函数。
 
-<img src="https://v3.cn.vuejs.org/images/transitions.svg" />
+<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/08aac77ffdc1408494966948dee802b6~tplv-k3u1fbpfcp-zoom-1.image" />
 
 vue动画[过渡文档](https://v3.cn.vuejs.org/guide/transitions-enterleave.html#%E5%8D%95%E5%85%83%E7%B4%A0-%E7%BB%84%E4%BB%B6%E7%9A%84%E8%BF%87%E6%B8%A1)：https://v3.cn.vuejs.org/guide/transitions-overview.html
 
@@ -167,11 +167,11 @@ export default {
 </style>
 ```
 
-![image-20211116000137504](https://gitee.com/Green_chicken/picture/raw/master/image-20211116000137504.png)
+![image-20211116000137504](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/56cebdc70f2c416f90fcd44d7a36eb14~tplv-k3u1fbpfcp-zoom-1.image)
 
 ## 4、显示的指定动画时间
 
-![无标题](https://gitee.com/Green_chicken/picture/raw/master/%E6%97%A0%E6%A0%87%E9%A2%98.png)
+![无标题](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e32a2edfec934ea89b6d1012be180a7d~tplv-k3u1fbpfcp-zoom-1.image)
 
 ## 5、过渡的模式mode
 
@@ -179,11 +179,11 @@ export default {
 
 1）in-out：新元素先进行过渡，完成之后当前元素过渡离开
 
- ![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/20211116002207.gif)
+ ![chrome-capture](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/35b473bc54d34ee8bed8919473726cdd~tplv-k3u1fbpfcp-zoom-1.image)
 
 2）out-in：当前元素先进行过渡，完成之后新元素过渡进入
 
- ![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/20211116002552.gif)
+ ![chrome-capture](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/829b2900bb5947c2b00d7243f3f9c24c~tplv-k3u1fbpfcp-zoom-1.image)
 
 3）案例
 
@@ -252,7 +252,7 @@ export default {
 
 ## 6、appear初次渲染
 
- ![image-20211121154751618](https://gitee.com/Green_chicken/picture/raw/master/20211121154755.png)
+ ![image-20211121154751618](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7ac8e7f751e24dad9d8db93e331664e7~tplv-k3u1fbpfcp-zoom-1.image)
 
 # 三、自定义过渡class
 
@@ -432,11 +432,11 @@ export default {
 </style>
 ```
 
-![image-20211121161602159](https://gitee.com/Green_chicken/picture/raw/master/20211121161603.png)
+![image-20211121161602159](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f69f0cfddc9a4c53ae4658fa41c85b6b~tplv-k3u1fbpfcp-zoom-1.image)
 
 ### 2）自定义类名的使用
 
-![image-20211121165219185](https://gitee.com/Green_chicken/picture/raw/master/20211121165220.png)
+![image-20211121165219185](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/05ad94eef5f44bb5bf8dd963b29e3759~tplv-k3u1fbpfcp-zoom-1.image)
 
 ```javascript
 <template>
@@ -579,7 +579,7 @@ export default {
 </script>
 ```
 
- ![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/20211121212511.gif)
+ ![chrome-capture](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/efc85ad41b41494499145122446f88ab~tplv-k3u1fbpfcp-zoom-1.image)
 
 # 七、列表过渡
 
@@ -587,7 +587,7 @@ export default {
 
 ## 1、移动动画
 
- ![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/20211121215926.gif)
+ ![chrome-capture](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c2948269d2d4969990e9de5117d2179~tplv-k3u1fbpfcp-zoom-1.image)
 
 ```javascript
 <template>
@@ -663,7 +663,7 @@ span {
 
 ### 1）css实现
 
- ![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/20211121221617.gif)
+ ![chrome-capture](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/176edf382c65455b8310af5899a59a1a~tplv-k3u1fbpfcp-zoom-1.image)
 
 ```javascript
 <template>
@@ -719,7 +719,7 @@ input {
 
 ### 2）js的实现
 
- ![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/20211121223224.gif)
+ ![chrome-capture](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/581a2168324142f7aef8d253809a8f5b~tplv-k3u1fbpfcp-zoom-1.image)
 
 ```javascript
 <template>
@@ -802,4 +802,3 @@ input {
 }
 </style>
 ```
-

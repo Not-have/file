@@ -52,7 +52,7 @@ module.exports = {
 
 ## 2、下载
 
-![](https://gitee.com/Green_chicken/picture/raw/master/markdown/image-20210830181934898.png)
+![](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260257382.awebp)
 
 *注：把下载的文件解压后放入assets——>icon（自己创建）文件夹里。*
 
@@ -75,7 +75,7 @@ import "@/assets/icon/iconfont.css";
 </style>
 ```
 
-![image-20210830182404804](https://gitee.com/Green_chicken/picture/raw/master/markdown/image-20210830182404804.png)
+ ![image-20210830182404804](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260257650.awebp)
 
 # 三、vue中使用svg图
 

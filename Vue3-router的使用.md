@@ -61,7 +61,7 @@ export default router
     },
 ```
 
-![image-20220102214822798](https://gitee.com/Green_chicken/picture/raw/master/20220102214824.png)
+ ![image-20220102214822798](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260245621.png)
 
 ## 4、引入main.js
 
@@ -211,17 +211,19 @@ export default router
 
 ## 1、路由里面的写法
 
-![image-20220103213629261](https://gitee.com/Green_chicken/picture/raw/master/20220103213633.png)
+ ![image-20220103213629261](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260246286.png)
 
 ## 2、路由跳转处的写法
 
-![image-20220103213808147](https://gitee.com/Green_chicken/picture/raw/master/20220103213809.png)
+ ![image-20220103213808147](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260246256.png)
 
-## 3、在组件里面获取![image-20220103214755757](https://gitee.com/Green_chicken/picture/raw/master/20220103214756.png)
+## 3、在组件里面获取
+
+ ![image-20220103214755757](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260251806.png)
 
 ## 4、一次获取多个值
 
-![image-20220103215302553](https://gitee.com/Green_chicken/picture/raw/master/20220103215304.png)
+![image-20220103215302553](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260251516.png)
 
 # 五、实现一个404找不到路径
 
@@ -274,11 +276,11 @@ export default router
 
 ## 4、加星和不加的区别
 
-![image-20220103221034303](https://gitee.com/Green_chicken/picture/raw/master/20220103221036.png)
+![image-20220103221034303](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260252157.png)
 
 # 六、二级路由
 
-![image-20220103222818068](https://gitee.com/Green_chicken/picture/raw/master/20220103222819.png)
+![image-20220103222818068](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260252893.png)
 
 # 七、JS方式路由跳转
 
@@ -565,7 +567,7 @@ export default router
 
 ## 1、添加一个相同的路由
 
- ![image-20220106231310600](https://gitee.com/Green_chicken/picture/raw/master/20220106231312.png)
+ ![image-20220106231310600](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260253782.png)
 
 ## 2、通过removeRoute方法，传入路由的名称
 

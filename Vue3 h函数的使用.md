@@ -47,7 +47,7 @@ h(
 
 ## 2、简单的使用
 
- ![image-20211225202723505](https://gitee.com/Green_chicken/picture/raw/master/20211225202730.png)
+ ![image-20211225202723505](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280035618.png)
 
 ## 3、实现一个计数器案例
 

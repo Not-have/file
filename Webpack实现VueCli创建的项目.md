@@ -1,4 +1,4 @@
-以下webpack的配置详情请查看以下地址：https://juejin.cn/post/7010284695850057735
+以下webpack的配置详情，请查看以下地址：https://juejin.cn/post/7010284695850057735
 
 # 一、安装
 
@@ -220,11 +220,11 @@ app.mount("#app")
 
 注：
 
- ![image-20210912152121251](https://gitee.com/Green_chicken/picture/raw/master/master/image-20210912152121251.png)
+ ![image-20210912152121251](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272337148.image)
 
 上面这样写，页面视图并不会渲染，并且在控制台还会有一个警告：
 
- ![image-20210912152233469](https://gitee.com/Green_chicken/picture/raw/master/master/image-20210912152233469.png)
+ ![image-20210912152233469](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272338921.image)
 
 因为源代码解析有两个版本，所以我们要选择一个可以解析的版本：
 
@@ -234,7 +234,7 @@ vue版本二： runtime + only  这个是默认的，用他的时候，页面渲
 
 ## 2、目录结构如下：
 
- ![image-20210912153730638](https://gitee.com/Green_chicken/picture/raw/master/master/image-20210912153730638.png)
+ ![image-20210912153730638](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272338394.image)
 
 # 三、编写 App.vue 文件
 
@@ -682,8 +682,9 @@ module.exports = merge(commonConfig, {
 })
 ```
 
-![image-20210921185944336](https://gitee.com/Green_chicken/picture/raw/master/master/image-20210921185944336.png)
+![image-20210921185944336](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272338054.image)
 
 
 
 代码地址：https://www.lanzouw.com/ifYk0ubka2d
+

@@ -114,29 +114,29 @@ export default {
 
 ### 1） 字符串书写的时候，中间使用逗号分隔，分割后 最好不要加空格
 
- ![image-20211103000728064](https://gitee.com/Green_chicken/picture/raw/master/image-20211103000728064.png)
+ ![image-20211103000728064](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260259610.png)
 
 ### 2) 正则的写法
 
- ![image-20211103001020430](https://gitee.com/Green_chicken/picture/raw/master/image-20211103001020430.png)
+ ![image-20211103001020430](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260259898.png)
 
 ### 3）数组的写法
 
- ![image-20211103001107074](https://gitee.com/Green_chicken/picture/raw/master/image-20211103001107074.png)
+ ![image-20211103001107074](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260300943.png)
 
 ## 2、exclude 任何名称匹配的组件都不 会被缓存
 
 ### 1） 字符串书写的时候，中间使用逗号分隔，分割后 最好不要加空格
 
- ![image-20211103001422935](https://gitee.com/Green_chicken/picture/raw/master/image-20211103001422935.png)
+ ![image-20211103001422935](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260300098.png)
 
 ### 2) 正则的写法
 
- ![image-20211103001355427](https://gitee.com/Green_chicken/picture/raw/master/image-20211103001355427.png)
+ ![image-20211103001355427](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260300775.png)
 
 ### 3）数组的写法
 
- ![image-20211103001327015](https://gitee.com/Green_chicken/picture/raw/master/image-20211103001327015.png)
+  ![image-20211103001327015](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260301296.png)
 
 ## 3、max
 

@@ -57,7 +57,7 @@ function $(id){
 </script>
 ```
 
-![image-20210216143758844](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210216143801.png)
+ ![image preview](F:\图片\Morkdown\202203272346198.png)
 
 ## 2、加减乘除计算器
 
@@ -122,7 +122,7 @@ function testf() {
 </script>
 ```
 
-![image-20210216144315128](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210216144316.png)
+ ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272348706.png)
 
 ## 3、随机n位验证码
 
@@ -527,7 +527,7 @@ function $(id){
 </script>
 ```
 
-![image-20210216151242756](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210216151244.png)
+ ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272349519.png)
 
 ## 10、弹出框
 
@@ -605,4 +605,4 @@ class Tan{
 }
 ```
 
-![image-20210216151833768](https://gitee.com/Green_chicken/picture/raw/master/%E7%AC%94%E8%AE%B0%E5%9B%BE%E7%89%87/20210216151835.png)
+![image-202203272350690](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272350690.png)
