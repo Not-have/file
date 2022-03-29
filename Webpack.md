@@ -230,7 +230,7 @@ npm install webpack webpack-cli -D
 
 默认是走: scr—>index.js
 
-![image-20210901000726408](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260310920.awebp)
+![image-20210901000726408](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260310920.png)
 
 3）scr里面的文件
 
@@ -293,7 +293,7 @@ webpack
 <script src="./dist/main.js"></script>
 ```
 
- ![image-20210901001614501](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260314373.awebp)
+ ![image-20210901001614501](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260314373.png)
 
 <font color=red>注：在实际开发中很少使用全局的webpack。</font>
 
