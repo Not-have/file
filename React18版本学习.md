@@ -364,6 +364,8 @@ export default App
 
 ​        函数中除了主作用的，都是副作用（理解成 一个函数只做一件事）
 
+​		useEffect 是在DOM渲染之后执行
+
 1）基本使用
 
 ```javascript
@@ -458,17 +460,116 @@ export default function UseEffectSideEffect() {
 }
 ```
 
+## 3、useRef
 
+1）使用步骤：
 
+导入 useRef 函数
 
+执行 useRef 函数并传入null，返回值为一个对象 内部有一个current属性存放拿到的dom对象（组件实例）
 
+通过ref 绑定 要获取的元素或者组件
 
+useRef 实在DOM渲染之前执行
 
+2）获取页面元素
 
+```javascript
+import { useRef, useEffect } from 'react'
+export default function UseRefDom() {
+	const dom = useRef(null)
+	/**
+	 * 获取元素：
+	 * 变量.current
+	 */
+	useEffect(() => {
+		console.log(dom.current)
+	})
+	return <div ref={dom}>元素</div>
+}
+```
 
+3）获取组件
 
+注：函数组件不可以使用useRef
 
-案例
+​        可调用组件中的方法
+
+```javascript
+import React, { useRef, useEffect } from 'react'
+// 这个Com相当于 一个组件
+class Com extends React.Component {
+	fun = () => {
+		console.log('方法')
+	}
+	render() {
+		return <div>组件</div>
+	}
+}
+export default function UseRefDom() {
+	const dom = useRef(null)
+	const com = useRef(null)
+	/**
+	 * 获取元素：
+	 * 变量.current
+	 */
+
+	useEffect(() => {
+		console.log(dom.current)
+		com.current.fun()
+	})
+	return (
+		<div>
+			<Com ref={com} />
+			<p ref={dom}>元素</p>
+		</div>
+	)
+}
+```
+
+## 4、useContext
+
+```javascript
+import { createContext, useContext } from 'react'
+// 1、创建对象(不在同一个文件的时候，可以使用 export导出，在使用import导入)
+const Context = createContext()
+
+function ComB() {
+    // B组件中也可以使用
+	return (
+		<div>
+			<p>组件B</p>
+			<ComC />
+		</div>
+	)
+}
+function ComC() {
+	// 3、在孙子组件中使用
+	const num = useContext(Context)
+	return (
+		<>
+			<p>组件C</p>
+			{num}
+		</>
+	)
+}
+
+export default function ComA() {
+	return (
+		/**
+		 * 2、在顶层组件传值:
+		 * 使用value传
+		 */
+		<Context.Provider value={33}>
+			<ComB />
+		</Context.Provider>
+	)
+}
+```
+
+注：传入的数据是响应式的。
+
+## 5、案例
 
 1）获取滚动条距离
 
@@ -518,4 +619,172 @@ export default function useLocalStorage(key, defaultValue) {
 ```
 
 ![image-20220505225826737](https://cdn.jsdelivr.net/gh/Not-have/picture/202205052258417.png)
+
+3）页面初次渲染，进行数据请求
+
+```javascript
+import { useEffect } from 'react'
+export default function Axios() {
+	useEffect(() => {
+		console.log(1222)
+		fetch(
+			'https://mock.mengxuegu.com/mock/60434bccf340b05bceda3906/practise-nuxtjs/test'
+		)
+			.then((res) => res.json())
+			.then((res) => {
+				console.log(res)
+			})
+	})
+	return <div>数据请求</div>
+}
+```
+
+# 三、组件间通讯
+
+## 1、父子组件通讯
+
+1）父组件
+
+```javascript
+import FatherAndSonCom from './fatherAndSon-com'
+export default function FatherAndSon() {
+	return (
+		<div>
+			<FatherAndSonCom {...{ name: '李四', age: 22 }} />
+			<FatherAndSonCom name={'lisi'} age={21} />
+		</div>
+	)
+}
+```
+
+2）子组件
+
+```javascript
+export default function FatherAndSonCom(props) {
+	const { name, age } = props
+	return (
+		<div>
+			<p>子组件</p>
+			{name}
+			{age}
+		</div>
+	)
+}
+```
+
+ ![image-20220510233756555](https://cdn.jsdelivr.net/gh/Not-have/picture/202205102337381.png)
+
+数字、字符串、布尔值、数组、对象、函数、JSX（也就是组件）
+
+例：下面函数、JSX（也就是组件）的传递：
+
+父组件:
+
+```javascript
+import FatherAndSonCom from './componentts/fatherAndSon-com'
+export default function FatherAndSon() {
+	const fun = () => {
+		console.log('传入的函数')
+	}
+	return (
+		<div>
+			<FatherAndSonCom
+				{...{ name: '李四', age: 22 }}
+				fun={fun}
+				child={<span>传入的组件</span>}
+			/>
+		</div>
+	)
+}
+```
+
+子组件：
+
+```javascript
+// 可以在参数处 进行结构赋值
+export default function FatherAndSonCom(props) {
+	console.log(props)
+	const { name, age, fun, child } = props
+
+	return (
+		<div>
+			<p>子组件</p>
+			{name}
+			{age}
+			<br />
+			<button onClick={fun}>触发父的函数</button>
+			<br />
+			{child}
+		</div>
+	)
+}
+```
+
+## 2、子传父
+
+1）子组件
+
+```javascript
+export default function ReverseSon({ fun }) {
+	return (
+		<div>
+			<p onClick={() => fun('逆向出传值')}>子组件</p>
+		</div>
+	)
+}
+```
+
+2）父组件（接受）
+
+```javascript
+import ReverseSon from './componentts/reverseSon'
+export default function ReverseFather() {
+	const fun = (val) => {
+		console.log(val)
+	}
+	return (
+		<div>
+			<p>父组件</p>
+			<ReverseSon fun={fun} />
+		</div>
+	)
+}
+```
+
+## 3、兄弟组件通讯
+
+```javascript
+/**
+ * 真实项目中分开书写
+ */
+import { useState } from 'react'
+// a组件
+function A({ str }) {
+	return <div>A组件{str}</div>
+}
+// b组件
+function B({ fun }) {
+	return <div onClick={() => fun('兄弟通讯')}>B组件</div>
+}
+// a、b的父组件
+export default function Brother() {
+	const [str, setStr] = useState('')
+	const fun = (str) => {
+		console.log(str)
+		setStr(str)
+	}
+	return (
+		<>
+			<p>父组件</p>
+			<br />
+			<A str={str} />
+			<B fun={fun} />
+		</>
+	)
+}
+```
+
+
+
+
 
