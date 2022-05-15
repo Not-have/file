@@ -569,6 +569,98 @@ export default function ComA() {
 
 注：传入的数据是响应式的。
 
+## 5、useCallback
+
+防止因为组件重新渲染，导致方法被重新创建 ，起到缓存作用; 只有第二个参数 变化了，才重新声明一次
+
+注：只要方法执行了，他就会 重新创建一遍组件里面的所有内容
+
+```javascript
+import { useCallback } from 'react'
+export default function UseCallback() {
+	/**
+	 * 只有name改变后， 这个函数才会重新声明一次
+	 * 如果传入空数组， 那么就是第一次创建后就被缓存， 如果name后期改变了,拿到的还是老的name。
+	 * 如果不传第二个参数，每次都会重新声明一次，拿到的就是最新的name.
+	 */
+	const fun = useCallback(() => {
+		console.log(name)
+	}, [name])
+	return (
+		<div>
+			<p onClick={fun}>UseCallback {i}</p>
+		</div>
+	)
+}
+```
+
+注：与自己状态无关的时候，还用缓存的函数，与自己有关的时候 就更新函数
+
+## 6、useMemo
+
+注：useMemo 会执行传入的第一个函数
+
+​        类似于vue中的计算属性
+
+```javascript
+import React, { useState, useEffect, useMemo } from 'react'
+import axios from 'axios'
+
+export default function UseMemo() {
+	const [mytext, setmytext] = useState('')
+	const [cinemaList, setcinemaList] = useState([])
+
+	useEffect(() => {
+		console.log(11)
+		axios({
+			url: 'https://m.maizuo.com/gateway?cityId=110100&ticketFlag=1&k=7406159',
+			method: 'get',
+			headers: {
+				'X-Client-Info':
+					'{"a":"3000","ch":"1002","v":"5.0.4","e":"16395416565231270166529","bc":"110100"}',
+
+				'X-Host': 'mall.film-ticket.cinema.list'
+			}
+		}).then((res) => {
+			console.log(res)
+			setcinemaList(res.data.data.cinemas)
+		})
+	}, [])
+	/**
+	 * useMemo 可以把第一个参数（函数） 的执行结果返回给 getCinemaList
+	 */
+	const getCinemaList = useMemo(
+		() =>
+			cinemaList.filter((item) =>
+				item.name.toUpperCase().includes(mytext.toUpperCase())
+			),
+		[cinemaList, mytext]
+	)
+
+	return (
+		<div>
+			<input
+				value={mytext}
+				onChange={(evt) => {
+					setmytext(evt.target.value)
+				}}
+			/>
+			{getCinemaList.map((item) => (
+				<dl key={item.cinemaId}>
+					<dt>{item.name}</dt>
+				</dl>
+			))}
+		</div>
+	)
+}
+```
+
+
+
+
+
+
+
 ## 5、案例
 
 1）获取滚动条距离
@@ -784,7 +876,165 @@ export default function Brother() {
 }
 ```
 
+## 4、跨组件通信（Context）
 
+注：从父组件开始，可以传递到任意的子层级（忽略嵌套深度）
 
+1）创建一个公共文件（context.js），来创建createContext（后面的数据共享，都是基于它）
 
+```javascript
+/**
+ * 2、结构出来(可结构出来下面两个)
+ * Provider 传入（他取消包括需要传入值的子组件）
+ * Consumer 接受（接受的时候 必须是表达式（回调函数））
+ */
+import { createContext } from 'react'
+export default createContext()
+```
+
+2）创建根组件
+
+```javascript
+// 1、导入
+import Context from './context.js'
+import ContextOne from './Context-one'
+export default function ContextTop() {
+	return (
+		<div>
+			父组件（也就是顶层）
+			{/* 3、传值 */}
+			<Context.Provider value={'跨组件通信'}>
+				<ContextOne />
+			</Context.Provider>
+		</div>
+	)
+}
+```
+
+3）在组件中使用（可在深层中使用）
+
+```javascript
+import Context from './context.js'
+export default function ContextOne() {
+	return (
+		<div>
+			第一层子组件
+			<Context.Consumer>
+				{(value) => <span>{value}</span>}
+			</Context.Consumer>
+		</div>
+	)
+}
+```
+
+例：
+
+![image-20220513002704757](https://cdn.jsdelivr.net/gh/Not-have/picture/202205130027020.png)
+
+## 5、 props校验
+
+文档：https://zh-hans.reactjs.org/docs/typechecking-with-proptypes.html
+
+1）安装第三方依赖
+
+```bash
+npm i --save prop-types
+```
+
+2）使用
+
+① 父组件
+
+```javascript
+import PropsSon from './componentts/props-son'
+export default function Props() {
+	return (
+		<div>
+			<p>props校验</p>
+			<PropsSon list={[1, 3, 5, 6]} />
+		</div>
+	)
+}
+```
+
+②子组件
+
+```javascript
+// 1、引入
+import PropTypes from 'prop-types'
+export default function PropsSon({ list }) {
+	console.log(list)
+	return (
+		<div>
+			<p>props校验</p>
+		</div>
+	)
+}
+/**
+ * 2、定义传入参数的类型
+ */
+PropsSon.propTypes = {
+	list: PropTypes.array
+}
+```
+
+3）四种常见结构：
+
+常见类型：array、bool、func、number、object、string
+
+React元素类型：element
+
+必填项：isRequired
+
+ ![image-20220515194251188](https://cdn.jsdelivr.net/gh/Not-have/picture/202205151942987.png)
+
+特定的结构对象：shape({})
+
+```javascript
+// 特定结构的对象
+传入的参数名: PropTypes.shape({
+	color: PropTypes.string,
+	fontSize: PropTypes.number
+})
+```
+
+## 6、props默认值
+
+① defaultProps 
+
+```javascript
+/**
+ * 子组件
+ */
+export default function PropsSon({ num }) {
+	console.log(num)
+	return (
+		<div>
+			<p>{num}</p>
+		</div>
+	)
+}
+/**
+ * 2、定义传入参数的类型
+ * 类型后面加一个 isRequired 就是必填项
+ */
+PropsSon.defaultProps = {
+	num: 22
+}
+```
+
+② 函数参数，默认值（推荐）
+
+```javascript
+export default function PropsSon({ num = 2 }) {
+	console.log(num)
+	return (
+		<div>
+			<p>{num}</p>
+		</div>
+	)
+}
+```
+
+注：当上面两个都使用的时候，以defaultProps 传值为准。
 
