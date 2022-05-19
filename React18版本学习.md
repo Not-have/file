@@ -634,6 +634,8 @@ export default function UseMemo() {
 			cinemaList.filter((item) =>
 				item.name.toUpperCase().includes(mytext.toUpperCase())
 			),
+        
+        // 下面这俩改变，useMemo就会执行
 		[cinemaList, mytext]
 	)
 
@@ -655,13 +657,185 @@ export default function UseMemo() {
 }
 ```
 
+ ![image-20220516001300634](https://cdn.jsdelivr.net/gh/Not-have/picture/202205160013970.png)
+
+## 7、useReducer和useContext(减少组件层级)
+
+1）基础使用
+
+![image-20220520003619623](https://cdn.jsdelivr.net/gh/Not-have/picture/202205200036318.png)
+
+```javascript
+import { useReducer } from 'react'
+/**
+ * dispatch触发的方法
+ * @param {*} prevState 得到一个老值
+ * @param {*} action 下面dispatch传入的值
+ * 一定要有返回值
+ */
+const reducer = (prevState, action) => {
+	// 不能对原状态进行修改(这块也是一个深拷贝)
+	let newPrevState = {...prevState}
+	switch (action.type) {
+		case 'reduce':
+			console.log('reduce');
+			newPrevState.count--
+			return newPrevState
+		case 'add':
+			console.log('add');
+			newPrevState.count++
+			return newPrevState
+			// 没匹配到返回老的状态
+		default:
+			console.error('超出边界')
+			return prevState || newPrevState.count
+	}
+}
+// 起始状态
+const intialState = {
+	count: 0
+}
+export default function ReduceComponentLevel() {
+	/**
+	 * 1、useReducer里面有两个参数
+	 * 函数 ：在外部管理状态
+	 * 函数：初始值
+	 * 返回值：
+	 * 第一个是值（state）
+	 * 第二个是更新值（dispatch）
+	 */
+	const [state, dispatch] = useReducer(reducer, intialState)
+	return (
+		<div>
+			<p>减少组件层级</p>
+			<button onClick={() => {
+				// 他会触发reducer那个方法
+                dispatch({ type: 'reduce' })
+            }}> - </button>
+			<p>{state.count}</p>
+			<button onClick={() =>{
+				dispatch({ type: 'add' })
+			}}> + </button>
+		</div>
+	)
+}
+```
+
+2）跨组件通讯
+
+需求：在组件1中修改组件2、组件3的颜色
+
+① 创建一个createContext对象，方便在不同的文件里面引入（以util.js为例）
+
+```javascript
+import { createContext } from 'react'
+export const Context = createContext()
+
+export const intialState = {
+    a:'#2196f3',
+    b:'#7bcfa4'
+}
+export function reducer(prevState,action){
+    console.log(prevState,action);
+    let newPrevState = {...prevState}
+    switch(action.type){
+        case 'change-two':
+            newPrevState.a = action.value
+            // 注意 这块返回的是对象
+            return newPrevState
+        case 'change-three':
+            newPrevState.b = action.value
+            return newPrevState
+        default:
+            return prevState
+    }
+}
+```
+
+② 父组件
+
+```javascript
+import { useReducer } from 'react'
+// 也可把方法 写在这
+import { Context, intialState, reducer } from './utils'
+import Children1 from './child1'
+import Children2 from './child2'
+import Children3 from './child3'
+export default function ReduceComponentLevel() {
+	/**
+	 * 1、useReducer 只能写一个，然后把变量和方法 给里面穿
+	 * 只能在hooks中使用
+	 */
+	const [state, dispatch] = useReducer(reducer, intialState)
+	return (
+		<div>
+			<p>父组件</p>
+			<hr />
+			{/* 使用createContext给组件传方法和变量 */}
+			<Context.Provider value={{ state, dispatch }}>
+				<Children1 />
+				<Children2 />
+				<Children3 />
+			</Context.Provider>
+		</div>
+	)
+}
+```
+
+③ 组件一
+
+```javascript
+import { useContext } from 'react'
+import { Context } from './utils'
+export default function Children1(){
+    const { dispatch } = useContext(Context)
+    return (
+        <div style={{border: '1px solid red', padding: '10px'}}>
+            <p>子组件一</p>
+            <button onClick={() => { dispatch({ type: 'change-two', value: '#d3db22' }) }}>改变组件二</button>
+            <button onClick={() => { dispatch({ type: 'change-three', value: "#22dbcf" }) }}>改变组件三</button>
+        </div>
+    )
+}
+```
+
+④ 组件二
+
+```javascript
+import { useContext } from 'react'
+import { Context } from './utils'
+export default function Children2(){
+    const { state } = useContext(Context)
+    return (
+        <div>
+            <p style={{backgroundColor: state.a}}>子组件二 {state.a}</p>
+        </div>
+    )
+}
+```
+
+⑤ 组件三
+
+```javascript
+import { useContext } from 'react'
+import { Context } from './utils'
+export default function Children3(){
+    const { state } = useContext(Context)
+    return (
+        <div>
+            <p style={{backgroundColor: state.b}}>子组件三</p>
+        </div>
+    )
+}
+```
+
+![202205200125933](https://cdn.jsdelivr.net/gh/Not-have/picture/202205200125933.gif)
+
+## 8、自定义hooks
 
 
 
-
-
-
-## 5、案例
+## 9、案例
 
 1）获取滚动条距离
 
