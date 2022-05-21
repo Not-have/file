@@ -831,11 +831,7 @@ export default function Children3(){
 
 ![202205200125933](https://cdn.jsdelivr.net/gh/Not-have/picture/202205200125933.gif)
 
-## 8、自定义hooks
-
-
-
-## 9、案例
+## 8、案例
 
 1）获取滚动条距离
 
