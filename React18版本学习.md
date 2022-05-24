@@ -1208,3 +1208,292 @@ export default function PropsSon({ num = 2 }) {
 
 注：当上面两个都使用的时候，以defaultProps 传值为准。
 
+# 四、Redux
+
+注：他是js的状态管理，可以用于任何框架
+
+文档：http://cn.redux.js.org/ (推荐)
+
+​            http://www.codebaoku.com/it-js/it-js-246663.html
+​            https://www.redux.org.cn/
+
+​            https://github.com/camsong/redux-in-chinese
+
+## 1、下载
+
+```bash
+npm install --save redux react-redux redux-devtools-extension redux-thunk
+```
+
+redux  状态管理
+
+react-redux  就是redux将组件分为了ui组件和容器组件两类，自然我们平常写方法，页面啥的就叫ui组件，redux提供的叫容器组件，这俩组件构成了父子组件，大家记住我这说的话，下面会用到
+
+redux-devtools-extension这个特别长的是redux官方提供的可以查看状态的ui插件，让我们在很多组件的情况下，也能知道每个组件的数据情况，非常贴心
+
+redux-thunk这个插件可以让redux拥有使用异步操作的能力，本身redux是不支持异步操作的0
+
+## 2、基础使用
+
+1）创建一个状态管理文件（src——> redux ——> index.js）
+
+```javascript
+/**
+ * 1、引入redux
+ */
+ import { createStore } from 'redux'
+/**
+ * 在这定义初始值
+ */
+const reducer = (prevState = { count: 0 }, action) => {
+    let nweCount = {...prevState}
+    switch (action.type) {
+        case 'add':
+            nweCount.count++
+            return nweCount
+        case 'remove':
+            nweCount.count--
+            return nweCount
+        default:
+            return nweCount
+    }
+}
+
+const store = createStore(reducer)
+
+export default store
+```
+
+2）在页面中使用
+
+注： 下面的方法 可以在不同的页面中进行操作或取值
+
+```javascript
+import { useState } from 'react'
+import store  from "../../redux/index.js"
+export default function ReduxTest1(){
+    const [num, setNum] = useState(store.getState().count || 0 )
+    const add = () => {
+        store.dispatch({
+            type: 'add'
+        })
+    }
+    const reduce = () => {
+        store.dispatch({
+            type: 'remove'
+        })
+        
+    }
+    // 通知
+    store.subscribe(()=>{
+        console.log("更新了 就会触发", store.getState().count);
+        setNum(store.getState().count);
+    })
+    return (
+        <div>
+            <p>计算器</p>
+            <button onClick={add}>加</button>
+            <p>{ num }</p>
+            <button onClick={reduce}>减</button>        
+        </div>
+    )
+}
+```
+
+![image-20220522163347055](https://cdn.jsdelivr.net/gh/Not-have/picture/202205221633092.png)
+
+## 3、reducer的使用
+
+注：也即是 redux模块化
+
+1）在src下创建redux文件夹：
+
+ ![image-20220522230451476](https://cdn.jsdelivr.net/gh/Not-have/picture/202205222304022.png)
+
+2）模块下的内容redux ——> reducers ——> one.js
+
+```javascript
+/**
+ * 在这定义初始值
+ */
+ const OneReducer = (prevState = { count: 0 }, action) => {
+    let nweCount = {...prevState}
+    switch (action.type) {
+        case 'add':
+            nweCount.count++
+            return nweCount
+        case 'remove':
+            nweCount.count--
+            return nweCount
+        default:
+            return nweCount
+    }
+}
+export default OneReducer
+```
+
+3）redux下index.js的内容
+
+```javascript
+/**
+ * 1、引入redux
+ * combineReducers 是合并reducers 下的内容
+ * 可合并多个
+ */
+ import { createStore, combineReducers } from 'redux'
+import OneReducer from './reducers/one.js'
+const reducer = combineReducers({
+    //获取的时候，要根据这边的命名获取
+    OneReducer
+})
+
+const store = createStore(reducer)
+
+export default store
+```
+
+4）在页面中使用
+
+```javascript
+import { useState } from 'react'
+import store  from "@/redux/index.js"
+export default function ReduxTest1(){
+    const [num, setNum] = useState(store.getState().OneReducer.count || 0 )
+    const add = () => {
+        store.dispatch({
+            type: 'add'
+        })
+    }
+    const reduce = () => {
+        // dispatch 之后，所有的 Redux 都会执行一次
+        store.dispatch({
+            type: 'remove'
+        })
+        
+    }
+    store.subscribe(()=>{
+        console.log("更新了 就会触发", store.getState().OneReducer.count);
+        setNum(store.getState().OneReducer.count);
+    })
+    return (
+        <div>
+            <p>计算器</p>
+            <button onClick={add}>加</button>
+            <p>{ num }</p>
+            <button onClick={reduce}>减</button>        
+        </div> 
+    )
+}
+```
+
+## 4、redux-thunk(中间键的使用)
+
+注：下面的写法是错的，因为异步了
+
+![image-20220523235328036](https://cdn.jsdelivr.net/gh/Not-have/picture/202205232353658.png)
+
+1）给redux中加入中间键
+
+```javascript
+/**
+ * 1、引入redux
+ * combineReducers 是合并reducer 的
+ * applyMiddleware 使用中间件
+ */
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+// 2、引入redux-thunk
+import reduxThunk from 'redux-thunk'
+import OneReducer from './reducers/one.js'
+import ListReducer from './reducers/list.js'
+const reducer = combineReducers({
+    //获取的时候，要根据这边的命名获取
+    OneReducer,
+    ListReducer
+})
+// 3、创建store
+const store = createStore(reducer, applyMiddleware(reduxThunk))
+
+export default store
+```
+
+2）创建action,在redux——> action ——> request-list.js
+
+注：这块也可以使用 npm i redux-promise --save
+
+```javascript
+import axios from 'axios'
+export default function requestList(){
+    // 这个里面 需要返回一个函数(因为外面会传递进来)
+    // redux-thunk 会自己执行 一个方法
+    return (dispatch) => {
+        axios.get('https://mock.mengxuegu.com/mock/60434bccf340b05bceda3906/practise-nuxtjs/list').then(res => {
+            console.log(res);
+            dispatch({
+                type: 'changeList',
+                payload: res.data.list
+            })
+        })
+    }
+}
+```
+
+3）使用
+
+```javascript
+import { useEffect, useState } from 'react'
+import store from '@/redux/index.js'
+import requestList from "@/redux/action/request-list.js"
+export default function ReduxTest1Details() {
+	const [list, setList] = useState(store.getState().ListReducer.list)
+	useEffect(() => {
+		if(store.getState().ListReducer.list.length === 0) {
+			// 4、调用action
+			store.dispatch(requestList())
+		}else {
+			console.log("store.getState().ListReducer.list 缓存");
+		}
+		// 5、订阅（订阅 每次 都会走）subscribe会返回一个函数
+		const  stopSubscribe = store.subscribe(() => {
+			console.log(store.getState().ListReducer.list);
+			setList(store.getState().ListReducer.list)
+		})
+		// 6、在离开的时候，取消订阅
+		return () => {
+			stopSubscribe()
+		}
+    }, [])
+	return (
+		<div>
+			<p>列表</p>
+			{
+				list.map((item, index) => {
+					return <div key={index}>{item.title}</div>
+				})
+			}
+		</div>
+	)
+}
+```
+
+## 5、插件安装
+
+https://github.com/zalmoxisus/redux-devtools-extension
+
+```javascript
+import { compose } from 'redux'
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+/**
+ * 如果使用了 redux-promise，写法如下：
+ * const store = createStore(reducer,composeEnhancers(applyMiddleware(reduxThunk,reduxPromise)));
+ */
+const store = createStore(reducer, composeEnhancers(applyMiddleware(reduxThunk)));
+```
+
+ ![image-20220525004808513](https://cdn.jsdelivr.net/gh/Not-have/picture/202205250048501.png)
+
+# 五、 react-redux
+
+https://github.com/reduxjs/react-redux
+
+https://react-redux.js.org/
+
