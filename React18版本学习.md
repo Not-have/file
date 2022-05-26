@@ -1390,7 +1390,7 @@ export default function ReduxTest1(){
 
 注：下面的写法是错的，因为异步了
 
-![image-20220523235328036](https://cdn.jsdelivr.net/gh/Not-have/picture/202205232353658.png)
+![image-20220523235328036](https://not-have.github.io/picture/202205232353658.png)
 
 1）给redux中加入中间键
 
@@ -1479,6 +1479,10 @@ export default function ReduxTest1Details() {
 
 https://github.com/zalmoxisus/redux-devtools-extension
 
+插件安装：
+
+Redux DevTools：https://github.com/reduxjs/react-redux
+
 ```javascript
 import { compose } from 'redux'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -1489,11 +1493,134 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(reduxThunk)));
 ```
 
- ![image-20220525004808513](https://cdn.jsdelivr.net/gh/Not-have/picture/202205250048501.png)
+ ![image-20220525004808513](https://not-have.github.io/picture/202205250048501.png)
 
 # 五、 react-redux
 
 https://github.com/reduxjs/react-redux
 
 https://react-redux.js.org/
+
+## 1、下载
+
+```bash
+npm i react-redux --save
+```
+
+## 2、使用
+
+注：这样使用 不存在异步 和 取消订阅
+
+1）在src——> index.js中引入
+
+```javascript
+import React from 'react'
+/**
+ * 1、使用 Provider 来包裹页面入口文件
+ */
+import { Provider } from 'react-redux'
+import { createRoot } from 'react-dom/client'
+// 2、在这 引入redux，因为 react-redux 是基于 redux 使用的
+import store from '@/redux/index'
+import './index.css'
+import App from './App'
+createRoot(document.getElementById('root')).render(
+    // 3、包裹加 传入
+    <Provider store={store} >
+        <App />
+    </Provider>
+)
+```
+
+注：@/redux 下的文件：
+
+![image-20220527004024257](https://not-have.github.io/picture/202205270040521.png)
+
+2）在界面或者 组件中使用
+
+```javascript
+// 4、引入connect函数
+import { connect } from 'react-redux'
+function ReactRedux(props) {
+    console.log(props)
+    return (
+        <div>
+            <p>react-redux</p>
+        </div>
+    )
+}
+
+/**
+ * connect 的第一个参数，必须是有返回值的函数，这 函数 有个形参，可以获取到redux里面定义的内容
+ *
+ */
+export default connect((state) => {
+    return {
+        a:1,
+        b:2,
+        state
+    }
+})(ReactRedux)
+```
+
+3）修改值
+
+```javascript
+// 4、引入connect函数
+import { connect } from 'react-redux'
+import { add, remove } from '@/redux/action/calculation'
+function ReactRedux(props) {
+    const plus = () => {
+        props.add()
+    }
+    const reduce = () => {
+        props.remove()
+    }
+    return (
+        <div>
+            <p>react-redux</p>
+            <div>
+            <p>计算器</p>
+            <button onClick={plus}>加</button>
+            <p>{ props.state.OneReducer.count }</p>
+            <button onClick={reduce}>减</button>
+        </div> 
+        </div>
+    )
+}
+
+/**
+ * connect 的第一个参数，必须是有返回值的函数，这 函数 有个形参，可以获取到redux里面定义的内容
+ * connect 的第er个参数:
+ * 是给孩子（ReactRedux）用的回调函数
+ *
+ */
+export default connect((state) => {
+    return {
+        a:1,
+        b:2,
+        state
+    }
+},{ add, remove })(ReactRedux)
+```
+
+ ![image-20220527010638814](https://not-have.github.io/picture/202205270106281.png)
+
+4）传参
+
+![image-20220527012148226](https://not-have.github.io/picture/202205270121344.png)
+
+注：@/redux/action/calculation.js里面的写法： ![image-20220527012545330](https://not-have.github.io/picture/202205270125208.png)
+
+
+
+## 3、 Redux 持久化
+
+文档：https://github.com/rt2zz/redux-persist
+
+```bash
+npm i redux-persist
+```
+
+![image-20220527015259986](https://cdn.jsdelivr.net/gh/Not-have/picture/202205270153174.png)
 
