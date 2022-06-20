@@ -125,6 +125,12 @@ git branch -a
 git push origin --delete 分支名
 ```
 
+## 5、清理远程仓库在本地的分支记录
+
+```
+git remote prune origin
+```bash
+
 # 六、修改分支名
 
 ## 1、先把远端的分支拉到本地
