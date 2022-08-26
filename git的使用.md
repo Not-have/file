@@ -85,7 +85,7 @@ ssh-keygen -t ed25519 -C "邮箱"
 
 把生成的 <font color=red>.pub</font>> 文件放入github中
 
-
+![image](https://user-images.githubusercontent.com/57132948/186974136-58323630-62b0-4dec-8c0c-aab8b596b452.png)
 
 ## 2、让信任本机
 
@@ -94,8 +94,7 @@ ssh-keygen -t ed25519 -C "邮箱"
  ssh -T git@github.com
 ```
 
-![image](https://user-images.githubusercontent.com/57132948/186974136-58323630-62b0-4dec-8c0c-aab8b596b452.png)
-
+![image](https://user-images.githubusercontent.com/57132948/186974281-a384149b-5971-4b66-a4a2-f03737de76a6.png)
 
 # 五、常用指令
 
