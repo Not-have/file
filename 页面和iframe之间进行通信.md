@@ -60,8 +60,6 @@ https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html
 </script>
 ```
 
-![image-20210707172939321](https://gitee.com/Green_chicken/picture/raw/master/img/image-20210707172939321.png)
-
 # 2、子给父传值
 
 ①子页面
