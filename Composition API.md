@@ -1,4 +1,4 @@
-[vue3文档](https://v3.cn.vuejs.org/)：https://v3.cn.vuejs.org/
+[vue3文档](https://v3.cn.vuejs.org/)：https://v3.cn.vuejs.org
 
 Composition API字面意思是组合API，它是为了实现基于函数的逻辑复用机制而产生的。主要思想是，我们将它们定义为从新的 setup 函数返回的JavaScript变量，而不是将组件的功能（例如state、methods、computed等）定义为对象属性。
 
