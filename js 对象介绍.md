@@ -1,4 +1,8 @@
+注：对象的操作可查看：https://juejin.cn/post/7175524754894356540
+
 [new 运算符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new)：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new
+
+# 一、构造函数
 
 ## 1、认识构造函数
 
@@ -165,7 +169,7 @@ fun.prototype = {
 
 // 这就和 没有全 prototype 时一样了
 Object.defineProperty(foo.prototype, 'constructor', {
-    enumerable: false,
+    enumerable: false, // 是否可枚举
     constructor: true,
     writable: true,
     value: fun
@@ -182,14 +186,117 @@ function Fun(name, age, sex){
     this.sex = sex
 }
 
-// 这样写，就不会在每次 new 的时候，都去堆内存中去创建对象了（推荐）
-Fun.prototype.eating = function () {
+// 这样写，就不会在每次 new 的时候，都去堆内存中去创建对象了（推荐），因为 你在外面的使用的时候，他的查找顺序为 对象——> 原型
+Fun.prototype.eating = function () { // 这个可以写多个
     // 这里的 this 不会存在问题，因为他是动态绑定的
     console.log(this.name + '吃 💩')
 }
 
-let p = new Fun('里斯', 25, '男');
+Fun.prototype.runing = function () { // 这个可以写多个
+    // 这里的 this 不会存在问题，因为他是动态绑定的
+    console.log(this.name + '打飞机')
+}
+
+let p = new Fun('里斯', 25, '男'); // new 函数名 他构造出来的是对象
 
 p.eating()
 ```
+
+# 二、面向对象
+
+面向对象的三大特性：<font color=red>封装、继承、多态</font>。
+
+[文档](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object-oriented_programming)：https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object-oriented_programming
+
+## 1、原型链
+
+1）概念
+
+注：在对象中去获取属性的时候，如果当前对象中不存在，就去原型对象上找，并且会沿着原型链一直去查找，直到最顶层。
+
+ ![image-20221214000551013](https://not-have.github.io/picture/202212140005202.png)
+
+2）原型链的顶层是什么？来自什么地方？
+
+` [Object: null prototype] {} ` 就是最顶层的原型。
+
+<font color=red>注：</font>
+
+① Data、函数等类型都是 Object 的子类；
+
+② Object.prototype 是最顶层的原型，可参考下面的例子：
+
+![image-20221220234048311](https://not-have.github.io/picture/202212202343749.png)
+
+③ Object 是一个构造函数；
+
+④ Object.prototype 不是一个空对象，二叔里面的属性默认值为不可枚举的状态；
+
+![image-20221221234213171](https://not-have.github.io/picture/image-20221221234213171.png)
+
+⑤ 对象的原型是：__ proto __ ，函数的原型是：prototype；
+
+⑥ 当原型指向 null 的时候，就代表他为最顶层的原型；
+
+3）构造函数原型
+
+```javascript
+function Fun(){
+
+}
+
+/**
+ * __proto__ 不一定有
+ * __proto__ 指向的 就是顶层原型
+ */
+console.log(Fun.prototype) // {}
+console.log(Fun.prototype.__proto__) // [Object: null prototype] {} 指向 Object 的原型对象
+```
+
+## 2、继承
+
+1）使用原型链实现继承
+
+```javascript
+// 父类 公共的 属性 和 方法
+
+function Person(){
+    this.name = '里斯'
+}
+Person.prototype.eating = function (){
+    console.log(this.name + '吃 💩')
+}
+
+// 子类 特有的 属性 和 方法
+function Student(){
+    this.age = 22
+}
+
+const p = new Person();
+
+// 创建完 Student 之后，就给他的原型上加了 Person 这个类（不随写在别的地方）
+// 现在 Student.prototype 指定 p 对象的原型
+Student.prototype = p; // 简化：Student.prototype = new Person();
+
+Student.prototype.studying = function (){
+    console.log(this.age + '学习吃💩')
+}
+
+const stu = new Student()
+
+console.log(stu.name)
+console.log(stu.eating())
+```
+
+缺点：
+
+① 打印 stu 对象，某些属性是看不到的，例上面的 stu 只能打印出来 console.log(stu) // Person { age: 22 }，他打印不出来原型上的东西；
+
+② 创建两个对象
+
+![image-20221227000056950](https://not-have.github.io/picture/image-20221227000056950.png)
+
+a、直接修改对象上的属性，是给本对象添加了一个新属性；
+
+b、获取引用，修改引用中的值，会相互影响；
 
