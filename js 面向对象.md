@@ -294,7 +294,7 @@ console.log(stu.eating())
 
 ② 创建两个对象
 
-![image-20221227000056950](https://not-have.github.io/picture/image-20221227000056950.png)
+![image-20221227000056950](http://not-have.github.io/picture/image-20221227000056950.png)
 
 a、直接修改对象上的属性，是给本对象添加了一个新属性；
 
