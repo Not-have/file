@@ -112,7 +112,7 @@ console.log(newAddress) // 水星
 
 ## 3、解构的使用
 
-```javascript
+```typescript
 interface Obj {
     age: number, name: string, sex: string
 }
@@ -137,4 +137,33 @@ function arr(){
 const [, b, c] = arr()
 console.log(b, c)
 ```
+
+# 三、var、let、const
+
+## 1、const
+
+```javascript
+// const 本质上是传递的值不可修改
+// 但是如果传递的是一个引用类型（内存地址），但是可以通过引用找到对应的对象，区修改对象内部的属性，这个是可以的
+const obj = {
+    name: '哈哈'
+}
+
+// obj = {} //  Assignment to constant variable.
+obj.name = '呵呵'
+```
+
+![image-20230426232421825](https://not-have.github.io/picture/image-20230426232421825.png)
+
+## 2、let / const 作用域
+
+1）let
+
+![image-20230426234648342](https://not-have.github.io/picture/image-20230426234648342.png)
+
+a 变量不是在代码执行到第 6 行的时候，别创建出来的；而是在执行上下文的词法环境中被创建的，只是 js 引擎规定，他在第 5 行时，是不可以别访问的。（也就是说在第 5 行时已经创建，只是不能访问）
+
+注：执行上下文中会创建词法环境。
+
+![image-20230426235258409](https://not-have.github.io/picture/image-20230426235258409.png)
 
