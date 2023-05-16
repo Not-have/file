@@ -138,7 +138,7 @@ const [, b, c] = arr()
 console.log(b, c)
 ```
 
-# 三、var、let、const
+# 三、var、let、const 的区别
 
 ## 1、const
 
@@ -166,4 +166,142 @@ a 变量不是在代码执行到第 6 行的时候，别创建出来的；而是
 注：执行上下文中会创建词法环境。
 
 ![image-20230426235258409](https://not-have.github.io/picture/image-20230426235258409.png)
+
+作用域提升：在声明变量的作用域中，如果这个变量可以在声明之前被访问，那么我们可以称之为作用域提升，在这里，它虽然被创建出来了，但是不能被访问，我认为不能称之为作用域提升。
+
+注：let、const 没有作用域提升，但是在执行上下文的时候，已经被创建出来了。
+
+## 3、let、const 和 window 的关系
+
+1）var 与 window 的关系
+
+<font color=red>在全局通过var来声明一个变量，事实上会在window上添加一个属性，但是let、const是不会给window上添加任何属性的。</font>
+
+```javascript
+var a = 1
+
+// var 定义的这个 a 会放到 window 里面
+console.log(window.a)
+```
+
+注：下面这样写是可以修改 var 定义的变量，所以在日常开发中，使用 *var* 声明变量往往会成为 bug 的温床。
+
+用 var 定义的变量 和 window.Xx 定义的变量，其实并不是在一个对象中，而修改他们中的一个时，另一个也修改，只是 为了保持他们之间的相等性。
+
+```javascript
+var a = 1
+
+window.a = 2
+
+console.log(window.a)
+```
+
+## 4、块级作用域
+
+![image-20230516235703833](https://not-have.github.io/picture/image-20230516235703833.png)
+
+### 1）ES5 作用域
+
+```javascript
+// // 声明对象中的字面量 （对象里面时键值对）
+// var obj = {
+//     name: '老王'
+// }
+//
+
+/**
+ * 代码块（block code）
+ * 按理来说，你在代码块中定义了变量，他就 只能在当前代码块中使用
+ * ES5 你使用了 var 定义了变量之后，你在代码块之前还能使用
+ * ES5 中只有两个东西会形成作用域：全局作用域 / 函数作用域
+ */
+{
+    // 表达式
+    var foo = '哈哈哈'
+}
+console.log(foo)
+```
+
+### 2）ES6 作用域
+
+```javascript
+/**
+ * 代码块（block code）
+ * ES6 的代码块级作用域
+ * let / const / function / class 声明的类型是有效
+ *
+ */
+{
+    // 表达式
+    let foo = '哈哈哈'
+    function fun() {
+        return '老王'
+    }
+}
+// console.log(foo) // foo is not defined
+// 不同的浏览器有不同的实现，大部分浏览器为了兼容之前的代码，是让 function 没有代码块级作用域，如果你在一个纯的 ES6 浏览器上跑，他是提示 fun is not defined
+console.log(fun()) // 老王
+```
+
+注：<font color=red>if、switch、for 都是代码块级作用域。</font>
+
+### 3）应用场景
+
+![image-20230517002753990](https://not-have.github.io/picture/image-20230517002753990.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <button>按钮一</button>
+    <button>按钮二</button>
+    <button>按钮三</button>
+    <button>按钮四</button>
+    <script>
+        const buts = document.getElementsByTagName('button')
+
+        for (var i = 0; i < buts.length; i++) {
+            // buts[i].onclick = function (){
+            //     console.log(`点击第 ${i} 个按钮`) // 这样子定义下来，你不管点击那个按钮的时候，他都会显示 点击第 4 个按钮
+            // }
+            // 解决方案 如下：
+            (function (n) { // 因为 function 是有块级作用域的
+                buts[i].onclick = function () {
+                    console.log(`点击第 ${n} 个按钮`) // 这样子定义下来，你不管点击那个按钮的时候，他都会显示 点击第 4 个按钮
+                }
+            })(i)
+        }
+    </script>
+</body>
+</html>
+```
+
+直接使用块级作用域解决：
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <button>按钮一</button>
+    <button>按钮二</button>
+    <button>按钮三</button>
+    <button>按钮四</button>
+<script>
+    for (let i = 0; i < buts.length; i++) {
+        buts[i].onclick = function (){
+            console.log(`点击第 ${i} 个按钮`) // 这样子定义下来，你不管点击那个按钮的时候，他都会显示 点击第 4 个按钮
+        }
+    }
+</script>
+</body>
+</html>
+```
 
