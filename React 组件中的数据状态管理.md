@@ -191,7 +191,7 @@ export default function ReducerDemo(): JSX.Element {
 
 ① 给需要传入的组件中定义一个 Context 文件
 
- ![image-20230722223626055](E:\图片\Markdown 文件\image-20230722223626055.png)
+ ![image-20230722223626055](./images/image-20230722223626055.png)
 
 ```tsx
 import {
@@ -204,7 +204,7 @@ export default createContext<any>(null);
 
 ② 在组件中的根文件中引入
 
- ![image-20230722223721384](E:\图片\Markdown 文件\image-20230722223721384.png)
+ ![image-20230722223721384](./images/image-20230722223721384.png)
 
 ```tsx
 import React, {useState} from "react";
@@ -223,7 +223,7 @@ export default function (): JSX.Element {
 
 注：只要你在根目录下包括了你需要传递的组件，不管多少层，你都可以进行参数的使用
 
- ![image-20230722223922608](E:\图片\Markdown 文件\image-20230722223922608.png)
+ ![image-20230722223922608](./images/image-20230722223922608.png)
 
 ```ts
 import React, {
@@ -240,7 +240,19 @@ export default function Ui(): JSX.Element{
 
 注：这样使用可以让取值的时候，进行统一的抛出，不会导致各种各样的取值方式的产生，而且 方便后期维护。
 
-![image-20230723004304899](E:\图片\Markdown 文件\image-20230723004304899.png)
+![image-20230723004304899](./images/image-20230723004304899.png)
 
 代码地址：https://github.com/Not-have/practise/tree/main/react-demo/src/pages/create-context-demo
+
+# 4、封装一个组合使用的案例
+
+## 1）前景
+
+createContext 作为组件内的数据共享
+
+useReduce  作为默认数据源 和 修改数据的 状态
+
+## 2）案例
+
+实现一个 输入框 和 标签过滤的组件，该组件中有自己的状态管理机制，可以在纯组件时运行，也可以使用外部传值来运行。
 
