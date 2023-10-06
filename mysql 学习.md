@@ -20,7 +20,7 @@ net start MySQL80
 
 启动成功：
 
- ![image-20231004155703114](images/image-20231004155703114.png)
+ ![image-20231004155703114](https://not-have.github.io/file/images/image-20231004155703114.png)
 
 ### 2）将 mysql 加入 path 环境变量
 
