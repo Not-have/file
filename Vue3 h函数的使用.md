@@ -47,7 +47,7 @@ h(
 
 ## 2、简单的使用
 
- ![image-20211225202723505](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280035618.png)
+ ![image-20211225202723505](https://not-have.github.io/file/images/202203280035618.png)
 
 ## 3、实现一个计数器案例
 

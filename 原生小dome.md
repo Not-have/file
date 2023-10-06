@@ -122,7 +122,7 @@ function testf() {
 </script>
 ```
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272348706.png)
+ ![image preview](https://not-have.github.io/file/images/202203272348706.png)
 
 ## 3、随机n位验证码
 
@@ -527,7 +527,7 @@ function $(id){
 </script>
 ```
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272349519.png)
+ ![image preview](https://not-have.github.io/file/images/202203272349519.png)
 
 ## 10、弹出框
 
@@ -605,4 +605,4 @@ class Tan{
 }
 ```
 
-![image-202203272350690](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272350690.png)
+![image-202203272350690](https://not-have.github.io/file/images/202203272350690.png)

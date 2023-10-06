@@ -729,7 +729,7 @@ export default {
 
 b、另一种提交风格
 
-![image-20220109220528508](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260304138.png)
+![image-20220109220528508](https://not-have.github.io/file/images/202203260304138.png)
 
 2）将Mutation中方法封装成常量
 

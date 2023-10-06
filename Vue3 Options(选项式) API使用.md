@@ -639,9 +639,9 @@ export default {
 
 ### 2）对象的用法
 
- ![image-20211020002003424](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260137368.png)
+ ![image-20211020002003424](https://not-have.github.io/file/images/202203260137368.png)
 
- ![image-20211020002347543](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260146138.png)
+ ![image-20211020002347543](https://not-have.github.io/file/images/202203260146138.png)
 
 ① 父组件
 
@@ -838,7 +838,7 @@ export default {
 </script>
 ```
 
- ![image-20211020005207084](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260147630.png)
+ ![image-20211020005207084](https://not-have.github.io/file/images/202203260147630.png)
 
 ## 2、非 Prop 的 Attribute
 
@@ -856,7 +856,7 @@ https://v3.cn.vuejs.org/guide/component-attrs.html
 
 ① 你也可以禁用子组件继承父组件的样式，写法如下：
 
- ![image-20211024135937497](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260147207.png)
+ ![image-20211024135937497](https://not-have.github.io/file/images/202203260147207.png)
 
 ② 你也可以指定位置继承样式，写法如下：
 
@@ -990,7 +990,7 @@ export default {
 
 ![image-20211024141733760](https://i.loli.net/2021/10/24/agsuDTLbk9KpzyJ.png)
 
-![image-20211024141920529](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260148777.png)
+![image-20211024141920529](https://not-have.github.io/file/images/202203260148777.png)
 
 ## 3、子组件给父组件传值
 
@@ -1421,7 +1421,7 @@ const emitter = mitt();
 export default emitter;
 ```
 
-![image-20211030170906608](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260148971.png)
+![image-20211030170906608](https://not-have.github.io/file/images/202203260148971.png)
 
 # 五、slot的使用
 
@@ -1469,7 +1469,7 @@ export default {
 </script>
 ```
 
- ![image-20211031144613603](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260149956.png)
+ ![image-20211031144613603](https://not-have.github.io/file/images/202203260149956.png)
 
 ## 2、具名插槽
 
@@ -1551,7 +1551,7 @@ export default {
 </script>
 ```
 
-![image-20211031150422170](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260149741.png)
+![image-20211031150422170](https://not-have.github.io/file/images/202203260149741.png)
 
 ## 3、动态插槽名
 
@@ -1625,17 +1625,17 @@ export default {
 </script>
 ```
 
-![image-20211031152402708](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260150030.png)
+![image-20211031152402708](https://not-have.github.io/file/images/202203260150030.png)
 
 ## 4、插槽的缩写
 
- ![image-20211031152612040](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260150236.png)
+ ![image-20211031152612040](https://not-have.github.io/file/images/202203260150236.png)
 
 ## 5、作用域插槽
 
 注：也就是 在父组件中使用子组件的变量。
 
-![image-20211031234417575](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260241710.png)
+![image-20211031234417575](https://not-have.github.io/file/images/202203260241710.png)
 
 1）不指定插槽名字：
 
@@ -1777,7 +1777,7 @@ export default {
 
 实现一个tab的案例：
 
-![image-20211102233043902](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260242560.png)
+![image-20211102233043902](https://not-have.github.io/file/images/202203260242560.png)
 
  ![chrome-capture](https://gitee.com/Green_chicken/picture/raw/master/chrome-capture.gif)
 
@@ -1915,7 +1915,7 @@ import("@/utils/subcontract").then(res => {
 })
 ```
 
- ![image-20211106173750209](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260243795.png)
+ ![image-20211106173750209](https://not-have.github.io/file/images/202203260243795.png)
 
 # 八、vue中实现异步组件（defineAsyncComponent）
 
@@ -1927,7 +1927,7 @@ import("@/utils/subcontract").then(res => {
 
 ### 1）工厂函数，该工厂函数需要返回一个Promise对象
 
-![image-20211106174925721](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260243459.png)
+![image-20211106174925721](https://not-have.github.io/file/images/202203260243459.png)
 
 ```javascript
 <template>
@@ -2004,7 +2004,7 @@ export default {
 
 2）使用方式如下：
 
-![image-20211107211831619](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260243382.png)
+![image-20211107211831619](https://not-have.github.io/file/images/202203260243382.png)
 
 # 九、ref的使用
 
@@ -2147,7 +2147,7 @@ export default {
 
 ## 2、以通过$root获取跟组件，也就是 App.vue
 
- ![image-20211107221101517](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260244164.png)
+ ![image-20211107221101517](https://not-have.github.io/file/images/202203260244164.png)
 
 # 十一、vue的生命周期
 

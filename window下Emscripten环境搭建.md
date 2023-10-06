@@ -39,11 +39,11 @@ https://wwe.lanzouw.com/i8Lwbxxxttc
 
 示例安装版本下载地址：https://pan.baidu.com/s/1TdEq85MOctLDvq99cHtu_A
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272341679.png)
+ ![image preview](https://not-have.github.io/file/images/202203272341679.png)
 
 ## 3、测试是否安装成功
 
- ![image-20211224205142538](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272341107.png)
+ ![image-20211224205142538](https://not-have.github.io/file/images/202203272341107.png)
 
 # 三、运行指令（cmd）
 
@@ -73,7 +73,7 @@ emsdk activate latest
 emcc -v
 ```
 
- ![image-20211224184722663](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272343188.png)
+ ![image-20211224184722663](https://not-have.github.io/file/images/202203272343188.png)
 
 注：这个测试只能在当前目录下成功，所以要设置系统环境变量
 
@@ -85,19 +85,19 @@ emcc -v
 
 双击运行 emcmdprompt.bat 获取要设置的环境变量
 
- ![image-20211224185342792](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272343155.png)
+ ![image-20211224185342792](https://not-have.github.io/file/images/202203272343155.png)
 
 ## 2、添加
 
 1）电脑 -> 属性 -> 高级系统设置 -> 环境变量，在系统变量的Path值中添加：
 
- ![image-20211224200531141](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272343367.png)
+ ![image-20211224200531141](https://not-have.github.io/file/images/202203272343367.png)
 
 2）电脑 -> 属性 -> 高级系统设置 -> 环境变量，在系统变量中新增如下内容：
 
- ![image-20211224200754878](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272343878.png)
+ ![image-20211224200754878](https://not-have.github.io/file/images/202203272343878.png)
 
- ![image-20211224200847110](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272343796.png)
+ ![image-20211224200847110](https://not-have.github.io/file/images/202203272343796.png)
 
 ## 3、在全局下在进行测试
 
@@ -125,11 +125,11 @@ emcc index.c -s WASM=1 -O3 -o index.js
 
 注：编译后生成下面两个文件
 
- ![image-20211224202501978](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272344159.png)
+ ![image-20211224202501978](https://not-have.github.io/file/images/202203272344159.png)
 
 ## 3、运行编译后的文件
 
 注：index.js和index.wasm必须放在同一目录下，把index.js引入html中即可运行。
 
-![image-20211224202749673](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272344985.png)
+![image-20211224202749673](https://not-have.github.io/file/images/202203272344985.png)
 

@@ -215,7 +215,7 @@ fn()
 
 # 三、闭包的内存泄露
 
- ![image-20220205001011667](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272351916.png)
+ ![image-20220205001011667](https://not-have.github.io/file/images/202203272351916.png)
 
 ## 1、闭包内存泄露的描述
 
@@ -257,7 +257,7 @@ for (let i = 0; i < 100; i++){
 arr2 = null
 ```
 
-![image-20220220205558101](https://cdn.jsdelivr.net/gh/Not-have/picture/202203272352303.png)
+![image-20220220205558101](https://not-have.github.io/file/images/202203272352303.png)
 
 ## 4、闭包中自由变量是怎么销毁的
 

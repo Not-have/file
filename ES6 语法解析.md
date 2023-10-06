@@ -153,19 +153,19 @@ const obj = {
 obj.name = '呵呵'
 ```
 
-![image-20230426232421825](https://not-have.github.io/picture/image-20230426232421825.png)
+![image-20230426232421825](https://not-have.github.io/file/images/image-20230426232421825.png)
 
 ## 2、let / const 作用域
 
 1）let
 
-![image-20230426234648342](https://not-have.github.io/picture/image-20230426234648342.png)
+![image-20230426234648342](https://not-have.github.io/file/images/image-20230426234648342.png)
 
 a 变量不是在代码执行到第 6 行的时候，别创建出来的；而是在执行上下文的词法环境中被创建的，只是 js 引擎规定，他在第 5 行时，是不可以别访问的。（也就是说在第 5 行时已经创建，只是不能访问）
 
 注：执行上下文中会创建词法环境。
 
-![image-20230426235258409](https://not-have.github.io/picture/image-20230426235258409.png)
+![image-20230426235258409](https://not-have.github.io/file/images/image-20230426235258409.png)
 
 作用域提升：在声明变量的作用域中，如果这个变量可以在声明之前被访问，那么我们可以称之为作用域提升，在这里，它虽然被创建出来了，但是不能被访问，我认为不能称之为作用域提升。
 
@@ -198,7 +198,7 @@ console.log(window.a)
 
 ## 4、块级作用域
 
-![image-20230516235703833](https://not-have.github.io/picture/image-20230516235703833.png)
+![image-20230516235703833](https://not-have.github.io/file/images/image-20230516235703833.png)
 
 ### 1）ES5 作用域
 
@@ -247,7 +247,7 @@ console.log(fun()) // 老王
 
 ### 3）应用场景
 
-![image-20230517002753990](https://not-have.github.io/picture/image-20230517002753990.png)
+![image-20230517002753990](https://not-have.github.io/file/images/image-20230517002753990.png)
 
 ```html
 <!DOCTYPE html>

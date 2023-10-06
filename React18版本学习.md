@@ -47,7 +47,7 @@ export default App
 
 ### 1）路由的两种模式（HashRouter、BrowserRouter）
 
-![image-20220411234853146](https://cdn.jsdelivr.net/gh/Not-have/picture/202204112349384.png)
+![image-20220411234853146](https://not-have.github.io/file/images/202204112349384.png)
 
 ① HashRouter（哈希模式） 带 # 号
 
@@ -59,13 +59,13 @@ export default App
 
 语法说明： 组件通过to属性指定路由地址，最终会渲染为a链接元素
 
- ![image-20220419185102653](https://cdn.jsdelivr.net/gh/Not-have/picture/202204191851428.png)
+ ![image-20220419185102653](https://not-have.github.io/file/images/202204191851428.png)
 
 ### 3）Routes
 
 提供一个路由出口，满足条件的路由组件会渲染到组件内部，定义path和组件的对应关系
 
- ![image-202204191852013](https://cdn.jsdelivr.net/gh/Not-have/picture/202204191852013.png)
+ ![image-202204191852013](https://not-have.github.io/file/images/202204191852013.png)
 
 ### 4）Route
 
@@ -73,13 +73,13 @@ export default App
 
 语法说明： path属性指定匹配的路径地址，element属性指定要渲染的组件
 
-![image-20220419190009913](https://cdn.jsdelivr.net/gh/Not-have/picture/202204191900358.png)
+![image-20220419190009913](https://not-have.github.io/file/images/202204191900358.png)
 
 ## 4、编程式导航
 
 ### 1）在App.js中引入组件并定义url
 
-![image-20220419221921461](https://cdn.jsdelivr.net/gh/Not-have/picture/202204192219245.png)
+![image-20220419221921461](https://not-have.github.io/file/images/202204192219245.png)
 
 ### 2）在组件 或 页面中使用
 
@@ -103,7 +103,7 @@ export default function Home(){
 }
 ```
 
- ![image-20220419222348370](https://cdn.jsdelivr.net/gh/Not-have/picture/202204192223088.png)
+ ![image-20220419222348370](https://not-have.github.io/file/images/202204192223088.png)
 
 ### 3）传参
 
@@ -158,7 +158,7 @@ export default function Mine(){
 
 a、在路由url中加入参数键
 
-![image-20220423211732929](https://cdn.jsdelivr.net/gh/Not-have/picture/202204232117567.png)
+![image-20220423211732929](https://not-have.github.io/file/images/202204232117567.png)
 
 b、在A页面传参
 
@@ -259,11 +259,11 @@ function HomeOne() {
 export default HomeOne
 ```
 
- ![image-20220423233734397](https://cdn.jsdelivr.net/gh/Not-have/picture/202204232337473.png)
+ ![image-20220423233734397](https://not-have.github.io/file/images/202204232337473.png)
 
 ### 4）默认选中的二级路由
 
-![image-20220423233952333](https://cdn.jsdelivr.net/gh/Not-have/picture/202204232339128.png)
+![image-20220423233952333](https://not-have.github.io/file/images/202204232339128.png)
 
 ## 6、404页面配置
 
@@ -282,11 +282,11 @@ export default NoFound
 
 2）在路由配置文件中的写法
 
-![image-20220423234458883](https://cdn.jsdelivr.net/gh/Not-have/picture/202204232345670.png)
+![image-20220423234458883](https://not-have.github.io/file/images/202204232345670.png)
 
 ## 7、匹配当前选中项，要把Link替换成 NavLink
 
-![image-20220424001054792](https://cdn.jsdelivr.net/gh/Not-have/picture/202204240010623.png)
+![image-20220424001054792](https://not-have.github.io/file/images/202204240010623.png)
 
 # 二、hook的学习
 
@@ -327,7 +327,7 @@ export default App
 
 ③ 第二次渲染之后，得到的num值，就是1了，模板会重新渲染，因为react会有一个数据状态记录
 
- ![image-20220427002349021](https://cdn.jsdelivr.net/gh/Not-have/picture/202204270023287.png)
+ ![image-20220427002349021](https://not-have.github.io/file/images/202204270023287.png)
 
 3）使用规则
 
@@ -356,7 +356,7 @@ export default App
 
 4）回调函数的参数
 
-![image-20220505231210870](https://cdn.jsdelivr.net/gh/Not-have/picture/202205052312902.png)
+![image-20220505231210870](https://not-have.github.io/file/images/202205052312902.png)
 
 ## 2、useEffect
 
@@ -657,13 +657,13 @@ export default function UseMemo() {
 }
 ```
 
- ![image-20220516001300634](https://cdn.jsdelivr.net/gh/Not-have/picture/202205160013970.png)
+ ![image-20220516001300634](https://not-have.github.io/file/images/202205160013970.png)
 
 ## 7、useReducer和useContext(减少组件层级)
 
 1）基础使用
 
-![image-20220520003619623](https://cdn.jsdelivr.net/gh/Not-have/picture/202205200036318.png)
+![image-20220520003619623](https://not-have.github.io/file/images/202205200036318.png)
 
 ```javascript
 import { useReducer } from 'react'
@@ -829,7 +829,7 @@ export default function Children3(){
 }
 ```
 
-![202205200125933](https://cdn.jsdelivr.net/gh/Not-have/picture/202205200125933.gif)
+![202205200125933](https://not-have.github.io/file/images/202205200125933.gif)
 
 ## 8、案例
 
@@ -880,7 +880,7 @@ export default function useLocalStorage(key, defaultValue) {
 }
 ```
 
-![image-20220505225826737](https://cdn.jsdelivr.net/gh/Not-have/picture/202205052258417.png)
+![image-20220505225826737](https://not-have.github.io/file/images/202205052258417.png)
 
 3）页面初次渲染，进行数据请求
 
@@ -934,7 +934,7 @@ export default function FatherAndSonCom(props) {
 }
 ```
 
- ![image-20220510233756555](https://cdn.jsdelivr.net/gh/Not-have/picture/202205102337381.png)
+ ![image-20220510233756555](https://not-have.github.io/file/images/202205102337381.png)
 
 数字、字符串、布尔值、数组、对象、函数、JSX（也就是组件）
 
@@ -1099,7 +1099,7 @@ export default function ContextOne() {
 
 例：
 
-![image-20220513002704757](https://cdn.jsdelivr.net/gh/Not-have/picture/202205130027020.png)
+![image-20220513002704757](https://not-have.github.io/file/images/202205130027020.png)
 
 ## 5、 props校验
 
@@ -1156,7 +1156,7 @@ React元素类型：element
 
 必填项：isRequired
 
- ![image-20220515194251188](https://cdn.jsdelivr.net/gh/Not-have/picture/202205151942987.png)
+ ![image-20220515194251188](https://not-have.github.io/file/images/202205151942987.png)
 
 特定的结构对象：shape({})
 
@@ -1300,7 +1300,7 @@ export default function ReduxTest1(){
 }
 ```
 
-![image-20220522163347055](https://cdn.jsdelivr.net/gh/Not-have/picture/202205221633092.png)
+![image-20220522163347055](https://not-have.github.io/file/images/202205221633092.png)
 
 ## 3、reducer的使用
 
@@ -1308,7 +1308,7 @@ export default function ReduxTest1(){
 
 1）在src下创建redux文件夹：
 
- ![image-20220522230451476](https://cdn.jsdelivr.net/gh/Not-have/picture/202205222304022.png)
+ ![image-20220522230451476](https://not-have.github.io/file/images/202205222304022.png)
 
 2）模块下的内容redux ——> reducers ——> one.js
 
@@ -1390,7 +1390,7 @@ export default function ReduxTest1(){
 
 注：下面的写法是错的，因为异步了
 
-![image-20220523235328036](https://not-have.github.io/picture/202205232353658.png)
+![image-20220523235328036](https://not-have.github.io/file/images/202205232353658.png)
 
 1）给redux中加入中间键
 
@@ -1493,7 +1493,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(reduxThunk)));
 ```
 
- ![image-20220525004808513](https://not-have.github.io/picture/202205250048501.png)
+ ![image-20220525004808513](https://not-have.github.io/file/images/202205250048501.png)
 
 # 五、 react-redux
 
@@ -1534,7 +1534,7 @@ createRoot(document.getElementById('root')).render(
 
 注：@/redux 下的文件：
 
-![image-20220527004024257](https://not-have.github.io/picture/202205270040521.png)
+![image-20220527004024257](https://not-have.github.io/file/images/202205270040521.png)
 
 2）在界面或者 组件中使用
 
@@ -1604,13 +1604,13 @@ export default connect((state) => {
 },{ add, remove })(ReactRedux)
 ```
 
- ![image-20220527010638814](https://not-have.github.io/picture/202205270106281.png)
+ ![image-20220527010638814](https://not-have.github.io/file/images/202205270106281.png)
 
 4）传参
 
-![image-20220527012148226](https://not-have.github.io/picture/202205270121344.png)
+![image-20220527012148226](https://not-have.github.io/file/images/202205270121344.png)
 
-注：@/redux/action/calculation.js里面的写法： ![image-20220527012545330](https://not-have.github.io/picture/202205270125208.png)
+注：@/redux/action/calculation.js里面的写法： ![image-20220527012545330](https://not-have.github.io/file/images/202205270125208.png)
 
 
 
@@ -1622,5 +1622,5 @@ export default connect((state) => {
 npm i redux-persist
 ```
 
-![image-20220527015259986](https://cdn.jsdelivr.net/gh/Not-have/picture/202205270153174.png)
+![image-20220527015259986](https://not-have.github.io/file/images/202205270153174.png)
 

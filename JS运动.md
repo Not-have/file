@@ -284,7 +284,7 @@
 </script>
 ```
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280032327.png)
+ ![image preview](https://not-have.github.io/file/images/202203280032327.png)
 
 ## 6、抛物线
 
@@ -395,7 +395,7 @@
 </html>
 ```
 
-![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280033565.png)
+![image preview](https://not-have.github.io/file/images/202203280033565.png)
 
 ## 7、重力回弹（类似与打皮球）
 
@@ -558,7 +558,7 @@
 </script>
 ```
 
-![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280034675.png)
+![image preview](https://not-have.github.io/file/images/202203280034675.png)
 
 =======
 运动原理：JavaScript 实现运动的原理，就是通过定时器不断改变元素的位置，直至到达目标点后停止运动。通常，要让元素动起来，我们会通过改变元素的 left 和 top 值来改变元素的相对位置。
@@ -847,7 +847,7 @@
 </script>
 ```
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280032327.png)
+ ![image preview](https://not-have.github.io/file/images/202203280032327.png)
 
 ## 6、抛物线
 
@@ -958,7 +958,7 @@
 </html>
 ```
 
-![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280033565.png)
+![image preview](https://not-have.github.io/file/images/202203280033565.png)
 
 ## 7、重力回弹（类似与打皮球）
 
@@ -1121,4 +1121,4 @@
 </script>
 ```
 
-![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280034675.png)
+![image preview](https://not-have.github.io/file/images/202203280034675.png)

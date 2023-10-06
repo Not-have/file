@@ -38,7 +38,7 @@ console.log(p.__proto__ === fun.prototype) // true
 
 5）如果构造函数没有返回非空对象，则返回创建出来的新对象（自己会 return 返回）。
 
-![image-20221211000200454](https://not-have.github.io/picture/202212110002357.png)
+![image-20221211000200454](https://not-have.github.io/file/images/202212110002357.png)
 
 ## 2、构造函数初步认识
 
@@ -150,7 +150,7 @@ const  p = new fun();
 console.log(p.name, p.eat())
 ```
 
- ![image-20221211223219009](https://not-have.github.io/picture/202212112232305.png)
+ ![image-20221211223219009](https://not-have.github.io/file/images/202212112232305.png)
 
 2）直接修改 prototype 整个对象
 
@@ -214,7 +214,7 @@ p.eating()
 
 注：在对象中去获取属性的时候，如果当前对象中不存在，就去原型对象上找，并且会沿着原型链一直去查找，直到最顶层。
 
- ![image-20221214000551013](https://not-have.github.io/picture/202212140005202.png)
+ ![image-20221214000551013](https://not-have.github.io/file/images/202212140005202.png)
 
 2）原型链的顶层是什么？来自什么地方？
 
@@ -226,13 +226,13 @@ p.eating()
 
 ② Object.prototype 是最顶层的原型，可参考下面的例子：
 
-![image-20221220234048311](https://not-have.github.io/picture/202212202343749.png)
+![image-20221220234048311](https://not-have.github.io/file/images/202212202343749.png)
 
 ③ Object 是一个构造函数；
 
 ④ Object.prototype 不是一个空对象，二叔里面的属性默认值为不可枚举的状态；
 
-![image-20221221234213171](https://not-have.github.io/picture/image-20221221234213171.png)
+![image-20221221234213171](https://not-have.github.io/file/images/image-20221221234213171.png)
 
 ⑤ 对象的原型是：__ proto __ ，函数的原型是：prototype；
 
@@ -294,7 +294,7 @@ console.log(stu.eating())
 
 ② 创建两个对象
 
-![image-20221227000056950](https://not-have.github.io/picture/image-20221227000056950.png)
+![image-20221227000056950](https://not-have.github.io/file/images/image-20221227000056950.png)
 
 a、直接修改对象上的属性，是给本对象添加了一个新属性；
 

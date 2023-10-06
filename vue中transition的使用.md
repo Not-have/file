@@ -16,7 +16,7 @@
 
 3）如果没有找到JavaScript钩子并且也没有检测到CSS过渡/动画，DOM插入、删除操作将会立即执行。
 
-![image-20211115223944544](https://cdn.jsdelivr.net/gh/Not-have/picture/202203280037393.png)
+![image-20211115223944544](https://not-have.github.io/file/images/202203280037393.png)
 
 # 二、transition 的name属性
 

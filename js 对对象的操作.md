@@ -21,7 +21,7 @@ Object.defineProperty(obj, 'sex', {
 console.log(obj)
 ```
 
- <img src="https://not-have.github.io/picture/image-20221209000143154.png" alt="image-20221209000143154" style="zoom: 33%;" />
+ <img src="https://not-have.github.io/file/images/image-20221209000143154.png" alt="image-20221209000143154" style="zoom: 33%;" />
 
 ## 2、属性描述符 的分类
 
@@ -164,7 +164,7 @@ obj.age = 25;
 console.log(obj.age)
 ```
 
-![image-20221210215915976](https://not-have.github.io/picture/202212102159658.png)
+![image-20221210215915976](https://not-have.github.io/file/images/202212102159658.png)
 
 ## 5、获取属性描述符
 

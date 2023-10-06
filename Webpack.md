@@ -230,7 +230,7 @@ npm install webpack webpack-cli -D
 
 默认是走: scr—>index.js
 
-![image-20210901000726408](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260310920.png)
+![image-20210901000726408](https://not-have.github.io/file/images/202203260310920.png)
 
 3）scr里面的文件
 
@@ -293,7 +293,7 @@ webpack
 <script src="./dist/main.js"></script>
 ```
 
- ![image-20210901001614501](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260314373.png)
+ ![image-20210901001614501](https://not-have.github.io/file/images/202203260314373.png)
 
 <font color=red>注：在实际开发中很少使用全局的webpack。</font>
 
@@ -333,7 +333,7 @@ npx webpack --entry 入口文件的相对路径 --output-path 出口文件的相
 
 在package.json中创建scripts脚本，执行脚本打包即可
 
- ![aq43t-mxki3](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260317121.png)
+ ![aq43t-mxki3](https://not-have.github.io/file/images/202203260317121.png)
 
 这个时候，你只要执行  `npm run build` 就好
 
@@ -389,7 +389,7 @@ module.exports = {
 
 ![image preview](F:\图片\Morkdown\acrsm-ad585.png)一般不建议改配置文件名。
 
- ![aadfv-g39nl](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260320423.png)
+ ![aadfv-g39nl](https://not-have.github.io/file/images/202203260320423.png)
 
 # 三、webpack对CSS资源进行打包
 
@@ -416,17 +416,17 @@ import "./js/element"
 
 4）进行打包，然后在index.html中引入，就可以使用
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260323952.jpg)
+ ![image preview](https://not-have.github.io/file/images/202203260323952.jpg)
 
 ## 2、对css文件，进行打包
 
 <font color=red>CSS也要引入入口文件，使用import引入，引入方法，有下面两种（引入位置 *一般是在使用的地方*）。</font>
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260323611.png)
+ ![image preview](https://not-have.github.io/file/images/202203260323611.png)
 
 注：当webopack要编译css的时候，你需要下载webpack编译的依赖，否则他会报以下的这个错误：
 
-![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260324005.png)
+![image preview](https://not-have.github.io/file/images/202203260324005.png)
 
 ### 1）下载依赖
 
@@ -512,7 +512,7 @@ module.exports = {
 
 注：当loader加载顺序错误会报以下错误：
 
-![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260325916.png)
+![image preview](https://not-have.github.io/file/images/202203260325916.png)
 
 # 四、处理less文件
 
@@ -529,7 +529,7 @@ npm install less-loader -D
 
 ## 2、要在打包的js文件里面引入less
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260326356.png)
+ ![image preview](https://not-have.github.io/file/images/202203260326356.png)
 
 ## 3、在webpacjk.config.js里面进行配置
 
@@ -794,7 +794,7 @@ module.exports = {
 
 webpack.config.js里面的内容不改变。
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260327755.png)
+ ![image preview](https://not-have.github.io/file/images/202203260327755.png)
 
 
 
@@ -1034,7 +1034,7 @@ module.exports = {
 
 <font color=red>注：</font> ① DefinePlugin是和 HtmlWebpackPlugin 配合使用的；
 
-​         ② 有时候模块中会有一个BASE_URL的常量，但是 因为我们并没有设置过该值的时候，就会报以下的错误：![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260328390.png)
+​         ② 有时候模块中会有一个BASE_URL的常量，但是 因为我们并没有设置过该值的时候，就会报以下的错误：![image preview](https://not-have.github.io/file/images/202203260328390.png)
 
 ​          所以这个时候，就要使用DefinePlugin插件。
 
@@ -1349,7 +1349,7 @@ C --> D(代码生成)
 D --> E(目标源码)
 ```
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260330027.png)
+ ![image preview](https://not-have.github.io/file/images/202203260330027.png)
 
 ## 2、Babel在webpack中的使用（babel-loader）
 
@@ -1482,7 +1482,7 @@ module.exports = {
 
 ② webpack.config.js中的写法:
 
-![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260331423.png)
+![image preview](https://not-have.github.io/file/images/202203260331423.png)
 
 # 九、webpack自动编译
 
@@ -1637,7 +1637,7 @@ webpack serve后面可以跟 配置文件地址，写法：webpack serve --confi
 npm run serve
 ```
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260332729.png)
+ ![image preview](https://not-have.github.io/file/images/202203260332729.png)
 
 这个时候的打包生成的文件夹里面是空的，他会放在内存中。
 
@@ -1762,7 +1762,7 @@ if(module.hot){
 
 ③ 执行的效果：
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260333605.png)
+ ![image preview](https://not-have.github.io/file/images/202203260333605.png)
 
 ### 2）host配置
 
@@ -1796,7 +1796,7 @@ f、们监听 0.0.0.0时，在同一个网段下的主机中，通过ip地址是
 
 ### 3）port设置监听的端口，默认情况下是8080
 
-![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260333587.png)
+![image preview](https://not-have.github.io/file/images/202203260333587.png)
 
 ### 4）compress是否为静态文件开启gzip 
 
@@ -1804,7 +1804,7 @@ f、们监听 0.0.0.0时，在同一个网段下的主机中，通过ip地址是
 
 当你设置了这个之后，浏览器每次的请求资源就会变成，下面的这个样子：
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260335635.png)
+ ![image preview](https://not-have.github.io/file/images/202203260335635.png)
 
 ```javascript
     devServer:{
@@ -1816,7 +1816,7 @@ f、们监听 0.0.0.0时，在同一个网段下的主机中，通过ip地址是
     },
 ```
 
- ![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260336403.png)
+ ![image preview](https://not-have.github.io/file/images/202203260336403.png)
 
 ## 4、跨域代理（Proxy）
 
@@ -1871,7 +1871,7 @@ webpack 使用 enhanced-resolve 来解析文件路径
 
 在 resolve.modules中指定的所有目录检索模块， 默认值是 ['node_modules']，所以默认会从node_modules中查找文件。
 
-![image preview](https://cdn.jsdelivr.net/gh/Not-have/picture/202203260336299.png)
+![image preview](https://not-have.github.io/file/images/202203260336299.png)
 
 ### 3）使用
 
