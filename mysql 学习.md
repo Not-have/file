@@ -8,7 +8,7 @@
 
 ## 1、navicat 报 2059的解决
 
-![image-20231004154653759](images/image-20231004154653759.png)
+![image-20231004154653759](https://not-have.github.io/file/images/image-20231004154653759.png)
 
 ### 1）启动 mysql 
 
