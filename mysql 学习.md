@@ -22,43 +22,41 @@ net start MySQL80
 
  ![image-20231004155703114](https://not-have.github.io/file/images/image-20231004155703114.png)
 
-### 2）将 mysql 加入 path 环境变量
-
-mysql -hlocalhost -uroot -p 报 'mysql' 不是内部或外部命令，也不是可运行的程序 或批处理文件
-
-![image-20231006211644370](images/image-20231006211644370.png)
-
-注：默认安装地址
-
-```
-C:\Program Files\MySQL\MySQL Server 8.0\bin
-```
-
-### 3）执行指令
+### 2）执行指令
 
 ```bash
 mysql -hlocalhost -uroot -p
 ```
 
-![image-20231006211754398](images/image-20231006211754398.png)
+![image-20231006211754398](https://not-have.github.io/file/images/image-20231006211754398.png)
 
 ```bash
 alter user 'root'@'localhost' identified by 'root' password expire never;
 ```
 
-![image-20231006212256472](images/image-20231006212256472.png)
+![image-20231006212256472](https://not-have.github.io/file/images/image-20231006212256472.png)
 
 ```bash
 alter user 'root'@'localhost' identified with mysql_native_password by 'root';
 ```
 
-![image-20231006212315263](images/image-20231006212315263.png)
+![image-20231006212315263](https://not-have.github.io/file/images/image-20231006212315263.png)
 
-![image-20231006212431164](images/image-20231006212431164.png)
+![image-20231006212431164](https://not-have.github.io/file/images/image-20231006212431164.png)
 
 进行以上的操作，你就链接成功了。
 
+## 2、mysql 不是内部或外部命令
 
+mysql -hlocalhost -uroot -p 报 'mysql' 不是内部或外部命令，也不是可运行的程序 或批处理文件
+
+![image-20231006211644370](https://not-have.github.io/file/images/image-20231006211644370.png)
+
+```
+C:\Program Files\MySQL\MySQL Server 8.0\bin
+```
+
+注：默认安装地址
 
 # 三、mysql
 
@@ -74,8 +72,11 @@ create table t_book(
 );
 ```
 
-![image-20231006215222347](images/image-20231006215222347.png)
+![image-20231006215222347](https://not-have.github.io/file/images/image-20231006215222347.png)
 
 ## 2、增删改查
 
-![image-20231006220601208](images/image-20231006220601208.png)
+![image-20231006220601208](https://not-have.github.io/file/images/image-20231006220601208.png)
+
+# 四、java 链接数据库
+
