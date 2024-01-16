@@ -375,7 +375,7 @@ obj.age = 18;
 console.log(info.age);
 ```
 
-## 3、数值的表示
+
 
 
 
