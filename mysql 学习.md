@@ -80,3 +80,78 @@ create table t_book(
 
 # 四、java 链接数据库
 
+## 1、下载 JBDC 驱动
+
+地址：https://dev.mysql.com/downloads/connector/j/?os=26
+
+![image-20231119220940508](https://not-have.github.io/file/images/image-20231119220940508.png)
+
+## 2、插入数据
+
+```java
+package com.mysql.test01;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Test01 {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        // 1、加载驱动
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        /**
+         * 2、获取链接
+         * riverManager.getConnection 要三个参数
+         */
+        Connection conn = DriverManager.getConnection("jdbc:mysql://本机IP（127.0.0.1）:端口号（3306）/数据库名称?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true", "root", "root");
+        // 3、创建会话
+        Statement sta = conn.createStatement();
+        // 4、发送 sql （也就是这里写 sql 语句）
+        long i = sta.executeLargeUpdate("insert into t_book(id, name, author, price) values (1, '测试一', 'test', 22)");
+        // 5、处理结果
+
+        if (i > 0) {
+            System.out.println("插入成gong");
+        } else {
+            System.out.println("插入 error");
+        }
+        // 6、关闭资源
+        sta.close();
+        conn.close();
+    }
+}
+```
+
+## 3、查询
+
+```java
+package com.mysql.test01;
+
+import java.sql.*;
+
+public class Test02 {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        // 1、加载驱动
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        /**
+         * 2、获取链接
+         * riverManager.getConnection 要三个参数
+         */
+        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test1?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true", "root", "root");
+        // 3、创建会话
+        Statement sta = conn.createStatement();
+        // 4、发送 sql （也就是这里写 sql 语句）
+        // ResultSet 理解为结果集合
+        ResultSet resultSet = sta.executeQuery("select * from t_book");
+        // 5、判断是否有记录
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString("name"));
+        }
+        // 6、关闭资源
+        sta.close();
+        conn.close();
+    }
+}
+```
+

@@ -305,3 +305,77 @@ console.log(fun()) // 老王
 </html>
 ```
 
+### 5）暂时性死区
+
+![image-20240116155145401](https://not-have.github.io/file/images/image-20240116155145401.png)
+
+# 四、其他 ES6 语法
+
+## 1、模板字符串 - 标签模板字符串
+
+```javascript
+/**
+ * 标签模板字符串
+ * @param m 第一个参数依然是模块字符串中整个字符串，只是被切成多块,放到了一个数组中
+ * @param n 第二个参数是模块字符串中，第一个
+ * @param x 第三个参数是模块字符串中，第二个
+ * 模板中传入了多少，就会有多少个参数，依次去获取值
+ */
+function fun(m, n, x) {
+    console.log(m, n, x); // [ '你好', '拉拉', '。' ] 第一个参数 第二个参数
+}
+
+const one = "第一个参数";
+const two = "第二个参数";
+fun`你好${one}拉拉${two}。`;
+```
+
+注：React 中 style-components 就是使用了`标签模板字符串`。
+
+## 2、展开运算符
+
+```javascript
+const names = ["哈哈", "啊啊啊", "呵呵"];
+const name = "哦哦哦";
+const info = {name: "小明", age: 16};
+
+/**
+ * 1、函数调用
+ */
+// 方法一
+function fun1(...args) {
+    console.log(args);
+}
+
+// fun1.apply(null, names);
+fun1(...names);
+fun1(name);
+
+// 方法二
+function fun2(x, y, z) {
+    console.log(x, y, z);
+}
+
+fun2(...names);
+fun2(...name);
+
+/**
+ * 2、构造数组
+ */
+const newNames = [...names, ...name];
+console.log(newNames);
+
+/**
+ * 3、构建对象字面量
+ * 后面添加的覆盖前面的
+ */
+const obj = {...info, address: "中国"};
+console.log(obj);
+obj.age = 18;
+console.log(info.age);
+```
+
+## 3、数值的表示
+
+
+
