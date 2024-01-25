@@ -309,9 +309,9 @@ console.log(fun()) // 老王
 
 ![image-20240116155145401](https://not-have.github.io/file/images/image-20240116155145401.png)
 
-# 四、其他 ES6 语法
+# 四、模板字符串 - 标签模板字符串
 
-## 1、模板字符串 - 标签模板字符串
+
 
 ```javascript
 /**
@@ -332,7 +332,7 @@ fun`你好${one}拉拉${two}。`;
 
 注：React 中 style-components 就是使用了`标签模板字符串`。
 
-## 2、展开运算符
+# 五、展开运算符
 
 ```javascript
 const names = ["哈哈", "啊啊啊", "呵呵"];
@@ -375,7 +375,301 @@ obj.age = 18;
 console.log(info.age);
 ```
 
+# 六、Symbol
 
+注：使用 Symbol 生成一个独一无二的值，来解决对象中属性名的冲突问题。
+
+```javascript
+/**
+ * Symbol 是一个函数
+ * 他会生成一个唯一的值
+ * 使用 Symbol("test").description 可以获取到描述（也就是 Symbol() 中传入的内容）
+ */
+const sl1 = Symbol();
+const sl2 = Symbol();
+const sl3 = Symbol("test");
+
+console.log(sl3.description); // test
+
+const obj = {
+    [sl1]: '哈哈哈'
+};
+
+obj[sl2] = "啊啊啊";
+
+Object.defineProperty(obj, sl3, {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: "呵呵呵"
+});
+
+/**
+ * 获取
+ * 不能使用 . 语法
+ */
+console.log(obj[sl2]);
+
+/**
+ * 使用 Symbol 作为 key 的属性名，在遍历 Object.keys 等中是获取不到这些 Symbol 值的
+ */
+console.log(Object.keys(obj)); // 获取不到的
+console.log(Object.getOwnPropertyNames(obj)); // 获取不到的
+
+/**
+ * 真实的获取 和 遍历
+ */
+console.log(Object.getOwnPropertySymbols(obj));
+
+const slKeys = Object.getOwnPropertySymbols(obj);
+
+for (const key of slKeys) {
+    console.log(obj[key]);
+}
+
+/**
+ * Symbol 创建一个相同的 key
+ * Symbol.for(key)
+ */
+
+const sl4 = Symbol.for("same");
+const sl5 = Symbol.for("same");
+console.log(sl4 === sl5);
+// 获取key
+const sameKey = Symbol.keyFor(sl4);
+console.log(sameKey);
+```
+
+# 七、Set 的基本使用
+
+注：类似于数组，但是里面的数据是不能重复的（他是新增的数据结构）。
+
+## 1、基本使用
+
+```javascript
+/**
+ *  set类似于数组，但是里面的数据是不能重复的
+ */
+const arr = new Set();
+
+arr.add(10);
+arr.add(10); // 这个 10 在 Set 中是不存在的
+arr.add(20);
+arr.add(30);
+arr.add(40);
+arr.add(60);
+
+// 他是存在两份的，因为 对象不是一个（分别是两个内存地址）
+arr.add({age: 10});
+arr.add({age: 10});
+//但是下面这样写，就会只存在一个了，因为指向了同一个内存地址
+const obj = {age: 16};
+arr.add(obj)
+arr.add(obj)
+
+console.log(arr);
+```
+
+## 2、使用 Set 去重
+
+```javascript
+const obj = {age: 16};
+
+/**
+ * 使用 Set 的特性进行去重
+ */
+const arr = [11, 22, 33, 44, 55, 55, {age: 18}, {age: 18}, obj, obj];
+
+const removeDuplicates = new Set(arr);
+const newArr = [...removeDuplicates]; // 修改输出
+console.log(newArr); // [ 11, 22, 33, 44, 55, { age: 18 }, { age: 18 }, { age: 16 } ]
+```
+
+## 3、size 属性
+
+```javascript
+const arr = [11, 22, 33, 44, 55, 55];
+
+const setArr = new Set(arr);
+
+// size 属性
+console.log(setArr.size); // 6
+```
+
+## 4、delete 删除元素
+
+数组.delete(要删除的元素);
+
+注：他没有索引，所以无法传入索引。
+
+```javascript
+const arr = [11, 22, 33, 44, 55, 55];
+
+const setArr = new Set(arr);
+
+setArr2.delete(11)
+
+console.log(arr);
+```
+
+## 5、has 是否存在
+
+```javascript
+const arr = [11, 22, 33, 44, 55, 55];
+
+const setArr = new Set(arr);
+
+/**
+ * has 是否存在，存在返回 true，不存在返回 false
+ */
+console.log(setArr.has(22));
+```
+
+## 6、clear 清除 Set
+
+```javascript
+const arr = [11, 22, 33, 44, 55, 55];
+
+const setArr = new Set(arr);
+
+setArr.clear();
+```
+
+# 八、WeakSet
+
+注：
+
+① WeakSet 只能存放对象；
+
+② 对对象是个弱引用;
+
+```javascript
+const arr1 = new WeakSet();
+
+const obj1 = {
+    age: 16
+};
+const obj2 = {
+    age: 18
+};
+const obj3 = {
+    age: 20
+};
+
+/**
+ * add 添加元素
+ */
+arr1.add(obj1);
+arr1.add(obj2);
+arr1.add(obj3);
+
+/**
+ * delete 删除元素
+ */
+arr1.delete(obj1);
+
+/**
+ * has 是否包含
+ */
+console.log(arr1.has(obj2));
+
+console.log(arr1);
+
+/**
+ * 应用场景
+ */
+const personSet = new WeakSet();
+
+class Person {
+    constructor() {
+        personSet.add(this);
+    }
+
+    running() {
+        if (!personSet.has(this)) {
+            throw new Error("不能通过非构造方法创建出来的对象调用 running 方法");
+        }
+        console.log("跑步", this);
+    }
+}
+
+const p = new Person();
+p.running();
+
+// 这里等于 null 的话 const personSet = new WeakSet(); 会直接销毁掉
+// p = null;
+
+p.running.call({name: "小明"});
+```
+
+# 九、Map 的使用
+
+注：用来存储映射关系的（也就是键值对）。
+
+```javascript
+const obj1 = {
+    name: "里斯"
+};
+
+const obj2 = {
+    age: 18
+};
+
+/**
+ * js 中不允许对象为 key
+ */
+const info = {
+    [obj1]: "啊啊啊",
+    [obj2]: "哈哈哈"
+};
+
+console.log(info); // { '[object Object]': '哈哈哈' }
+
+/**
+ * Map 允许 key 为对象
+ */
+const mapTest1 = new Map();
+mapTest1.set(obj1, "啊啊啊");
+mapTest1.set(obj2, "哈哈哈");
+mapTest1.set(1, "呵呵呵");
+
+console.log(mapTest1);
+
+// 也可使用下面的方式创建
+const mapTest2 = new Map();
+mapTest2.set(obj1, "啊啊啊");
+mapTest2.set(obj2, "哈哈哈");
+mapTest2.set(2, "呵呵呵");
+
+console.log(mapTest2);
+
+/**
+ * Map 的属性
+ * set
+ * get 传入 key 获取对应的 value
+ * has 判断某个 key 是否存在
+ * delete 删除指定 key 的元素
+ * clear 清除
+ */
+console.log(mapTest2.get(2));
+console.log(mapTest2.has(2));
+mapTest2.delete(2);
+console.log(mapTest2);
+mapTest2.clear();
+console.log(mapTest2);
+
+/**
+ * 遍历
+ */
+mapTest1.forEach((item, index) => {
+    console.log(item, index);
+})
+
+for (const item of mapTest1) {
+    const [key, value] = item;
+    console.log(item, key, value);
+}
+```
 
 
 
