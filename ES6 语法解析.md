@@ -671,5 +671,347 @@ for (const item of mapTest1) {
 }
 ```
 
+# 十、WeakMap 的使用
+
+和Map类型相似的另外一个数据结构称之为WeakMap，也是以键值对的形式存在的。
+
+那么和Map有什么区别呢 ?
+
+① WeakMap的key只能使用对象，不接受其他的类型作为key
+② WeakMap的key对对象想的引用是弱引用如果没有其他引用引用这个对象那/GC可以回收该对象;
+
+注：<font color=red>`<items unknown>`出现这个的原因是不能遍历的。</font>
+
+```javascript
+const obj = {
+    name: "里斯"
+};
+
+const testWeakMap = new WeakMap();
+
+/**
+ * set （key 不能使用基础数据类型）
+ * get 获取指定 key 的value
+ * has 是否包含某个 key
+ * delete 删除指定 key 的元素
+ */
+
+testWeakMap.set(obj, "哈哈哈");
+console.log(testWeakMap.get(obj));
+console.log(testWeakMap.has(obj));
+console.log(testWeakMap.delete(obj));
+
+console.log(testWeakMap);
+```
+
+# 十一、数组 - includes
+
+```javascript
+const arr = [11, 22, 33, 44, 55, 66, 77];
+
+/**
+ * 第一个参数 判断数组中是否包含
+ * 第二个参数 从下标几开始判断是否包含
+ * 返回值 包含返回 true，不包含返回 false
+ * 注：indexOf 无法判断是否包含 NaN
+ */
+if (arr.includes(11, 2)) {
+    console.log("包含");
+}
+```
+
+# 十二、指数运算
+
+```javascript
+/**
+ * 获取 3 的 3 次方
+ */
+const result1 = Math.pow(3, 3);
+
+const result2 = 3 ** 3;
+
+console.log(result1, result2); // 27 27
+```
+
+# 十三、获取 Object 属性
+
+## 1、获取 Object中的 keys、values
+
+```javascript
+const obj = {
+    name: "里斯",
+    age: 16
+};
+
+console.log(Object.keys(obj)); // [ 'name', 'age' ]
+console.log(Object.values(obj)); // [ '里斯', 16 ]
+
+/**
+ * 了解的知识点
+ */
+console.log(Object.values(["aa", "bb", "cc"])); // [ 'aa', 'bb', 'cc' ]
+console.log(Object.values("abc")); // [ 'a', 'b', 'c' ]
+```
+
+## 2、Object.entries
+
+```javascript
+const obj = {
+    name: "里斯",
+    age: 16
+};
+
+console.log(Object.entries(obj));
+
+console.log(Object.entries(["aa", "bb", "cc"])); // [ [ '0', 'aa' ], [ '1', 'bb' ], [ '2', 'cc' ] ]
+```
+
+## 3、Object.fromEntries
+
+```javascript
+const obj = {
+    name: "里斯",
+    age: 16
+};
+
+const newObject1 = Object.entries(obj);
+console.log(newObject1);
+
+const newObject2 = Object.fromEntries(newObject1);
+console.log(newObject2);
+```
+
+# 十四、字符串
+
+## 1、首尾填充
+
+```javascript
+const message = "你好";
+
+/**
+ * 第一个参数 新字符串的长度
+ * 第二个参数 填充的内容
+ * 返回值：一个新的字符串
+ */
+const newMessage = message.padStart(5, "世界，").padEnd(6, "!");
+
+console.log(newMessage);
+```
+
+## 2、trimStart 和 trimEnd
+
+```javascript
+const message = "    你好！   ";
+// 去除首尾空格
+console.log(message.trim());
+// 去除头部空格
+console.log(message.trimStart());
+// 去除尾部空格
+console.log(message.trimEnd());
+```
+
+ ![image-20240129164739194](https://not-have.github.io/file/images/image-20240129164739194.png)
+
+# 十五、flat 和 flatMap 的使用
+
+```javascript
+const nums1 = [10, 20, [1, 2], [[22, 33], [55, 66]], 66];
+/**
+ * 平铺成一维数组
+ */
+const flatNums1 = nums1.flat();
+console.log(flatNums1); // [ 10, 20, 1, 2, [ 22, 33 ], [ 55, 66 ], 66 ]
+
+const flatNums2 = nums1.flat(2);
+console.log(flatNums2); // [10, 20,  1,  2, 22, 33, 55, 66, 66]
+
+/**
+ * flatMap
+ */
+const nums2 = [10, 20, 30];
+const nums3 = nums2.flatMap(item => {
+    console.log(item);
+    return item + 1;
+});
+
+console.log(nums3);
+
+// flatMap 的应用场景
+const messages = ["a a", "b b", "c c", "哈哈哈"];
+
+const strs = messages.flatMap(item => {
+    console.log(item);
+
+    return item.split(" ");
+});
+
+console.log(strs);
+```
+
+# 十六、大数字（BigInt）
+
+```javascript
+// 计算机最大的数字展示
+const maxInt = Number.MAX_SAFE_INTEGER;
+console.log(maxInt); // 9007199254740991
+
+/**
+ * 新增了一个数据类型 bigInt
+ * 你必须在数字后加个 n
+ * BigInt() 进行大数字的转换
+ */
+const bigInt = 9007199254740991011212n;
+// console.log(bigInt + 10); // 直接 + 10 是不允许的
+// 加 10 的写法
+console.log(bigInt + 10n);
+// 也可通过 BigInt() 进行转化
+console.log(bigInt + BigInt(10));
+```
+
+# 十七、Nullish Coalescing Operator（空值合并运算）
+
+```javascript
+const str1 = undefined; // 定义未赋值的时候，就是 undefined
+/**
+ * 逻辑 或
+ * 缺点：当 str1 为 “” 或 0 时，他就会展示逻辑或后面的，但是我其实是有值的
+ * console.log(0 || "你好"); // 你好
+ */
+const str2 = str1 || "你好";
+console.log(str2); // undefined
+
+/**
+ * 空置合并运算 ??
+ * 只要不为 undefined 或 null 时，都会为真，不影响 “” 或 0 的展示
+ */
+const str3 = "" ?? "你好";
+console.log(str3); // undefined
+```
+
+# 十八、Optional Chaining（可选链）
+
+注：可选链也是 ES11 中新增一个特性，主要作用是让我们的代码在进行 null 和 undefined 判断时更加清晰和简洁。
+
+![image-20240129172345881](https://not-have.github.io/file/images/image-20240129172345881.png)
+
+```javascript
+const info = {
+    name: "里斯",
+    // friend: {
+    //     name: "啦啦啦",
+    //     girlFriend: {
+    //         name: "哈哈哈"
+    //     }
+    // }
+}
+
+console.log(info?.friend?.girlFriend?.name); // 这样写就不会报错了
+```
+
+# 十九、globalThis 获取全局对象
+
+```javascript
+/**
+* 在 Node 下会报错
+*/
+console.log(window);
+/**
+* globalThis 在 chrome 和 node 下都可以
+*/
+console.log(globalThis);
+```
+
+# 二十、FinalizationRegistry
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /**
+     * ES12
+     * FinalizationRegistry 监听对象何时被销毁
+     * 但是在 chrome 中，需要等待一会
+     * 在强引用中不会被销毁，在弱引用中会被销毁
+     */
+    const finalizationRegistry = new FinalizationRegistry((value) => {
+        console.log("注册在 FinalizationRegistry 中的对象被销毁" + value);
+    });
 
 
+    let obj1 = {
+        name: "哈哈哈",
+        age: 16
+    }
+    let obj2 = {
+        name: "哈哈哈",
+        age: 16
+    }
+
+    /**
+     * 可以在绑定一个销毁时的 key
+     */
+    finalizationRegistry.register(obj1, "obj1");
+    finalizationRegistry.register(obj2, "obj2");
+
+    obj1 = null
+    obj2 = null
+</script>
+```
+
+# 二十一、WeakRef
+
+注：WeakRef 是弱引用。
+
+![image-20240129182016093](https://not-have.github.io/file/images/image-20240129182016093.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /**
+     * WeakRef
+     * 结合 FinalizationRegistry 实现一个案例
+     * WeakRef 获取的原对象，如果被销毁了，那么 obj2.deref() 获取到的就是 undefined
+     */
+    const finalizationRegistry = new FinalizationRegistry((value) => {
+        console.log("注册在 FinalizationRegistry 中的对象被销毁" + value);
+    });
+
+    let obj1 = {
+        name: "哈哈哈",
+        age: 16
+    }
+
+    let obj2 = new WeakRef(obj1);
+
+    /**
+     * 可以在绑定一个销毁时的 key
+     */
+    finalizationRegistry.register(obj1, "obj1");
+
+    /**
+     * 获取的时候 obj2.deref() 获取对象，他不会被销毁
+     */
+    console.log(obj2.deref().name);
+
+    obj1 = null
+</script>
+```
+
+注：`WeakRef` 是 JavaScript 的一个特殊类型，它用于创建对象的弱引用。弱引用是指如果没有其他引用指向对象，则这个对象可以被垃圾回收。
