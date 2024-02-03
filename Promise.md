@@ -9,9 +9,9 @@ Promise  对象用于表示一个异步操作的最终完成 (或失败)及其�
 ## 1、使用回调函数 完成Promise
 
 ```javascript
-function requestData(url, successCallback, failtureCallback){
+function requestData(code, successCallback, failtureCallback){
     setTimeout(() =>{
-        if(url === "你好"){
+        if(code === "你好"){
             console.log("成功")
             successCallback("成功的回调函数")
         }else {
@@ -44,7 +44,7 @@ requestData("你好", (res) => {
 
 注：① 他是ES6新增的；
 
-​        ② Promise是一个类；
+​        ② Promise是一个类（是类就要 new 类名）；
 
 ​        ③ <font color=red>Promise状态一旦确定下来，那么就是不可更改的</font>；
 
@@ -140,9 +140,7 @@ new Promise((resolve, reject) => {
 })
 ```
 
-## 3）传入一个对象（并且这个对象实现了thenable）
-
-传入一个对象，并且这个对象有实现then方法，那么也会执行该then方法，并且该then方法决定后续状态
+3）传入一个对象（并且这个对象实现了thenable）传入一个对象，并且这个对象有实现 then 方法，那么也会执行该 then 方法，并且该 then 方法决定后续状态
 
 ```javascript
 new Promise((resolve, reject) => {
