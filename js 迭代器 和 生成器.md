@@ -249,3 +249,231 @@ for (const item of p1) {
 
 生成器是 ES6 中新增的一种函数控制、使用的方案，它可以让我们更加灵活的控制函数什么时候继续执行、暂停执行等。
 
+## 2、生成器函数和普通的函数的区别
+
+注：生成器函数也是一个函数
+
+首先，生成器函数需要在 function 的后面加一个符号
+
+```javascript
+function* fun() { //  建议把 * 放到 function 后，好阅读，如果没有 function 时，把 * 写到函数名前面，例如：*fun
+    
+}
+```
+
+其次，生成器函数可以通过 yield 关键字来控制函数的执行流程
+
+```javascript
+function* fun() {
+    console.log("函数开始");
+
+    console.log(100);
+    yield;
+
+    console.log(200);
+    yield;
+
+    console.log(300);
+    yield;
+
+    console.log("函数结束");
+}
+```
+
+最后，生成器函数的返回值是一个 Generator（生成器），生成器事实上是一种特殊的迭代器
+
+```javascript
+function* fun() {
+
+}
+
+// 调用生成器函数（fun）时，会给我们返回一个生成器对象
+const generator = fun();
+console.log(generator);
+```
+
+![image-20240203181200223](https://not-have.github.io/file/images/image-20240203181200223.png)
+
+## 3、执行流程
+
+```javascript
+/**
+ * yield 是暂停执行
+ * return 是停止执行，后面在执行 next，也不会给下面走了
+ */
+function* fun() {
+    console.log("函数开始");
+
+    console.log(100);
+    // 这里不能写 return，这里写了后，后面的全部不执行了
+    // return 100;
+    // 需要返回值的话，给 yield 后面写，不写时，返回的是：{ value: undefined, done: false }
+    yield 100;
+
+    console.log(200);
+    yield 200;
+
+    console.log(300);
+    yield 300;
+
+    console.log("函数结束");
+    return "函数结束";
+}
+
+// 调用生成器函数（fun）时，会给我们返回一个生成器对象
+const generator = fun();
+console.log(generator.next());
+generator.next();
+generator.next();
+console.log(generator.next());
+```
+
+![image-20240203182658640](https://not-have.github.io/file/images/image-20240203182658640.png)
+
+## 4、生成器的其他方法
+
+### 1）next 中传入参数
+
+```javascript
+function* fun() {
+    console.log("函数开始");
+
+    console.log(100);
+    // 这里不能写 return，这里写了后，后面的全部不执行了
+    // return 100;
+    // 需要返回值的话，给 yield 后面写，不写时，返回的是：{ value: undefined, done: false }
+    const parame1 = yield 100;
+
+    console.log(200, parame1);
+    const parame2 = yield 200;
+
+    console.log(300, "parame2", parame2);
+    const parame3 = yield 300;
+
+    console.log("函数结束", parame3);
+    return "函数结束";
+}
+
+// 调用生成器函数（fun）时，会给我们返回一个生成器对象
+const generator = fun();
+generator.next(); // 第一段代码，比较特赦，无法传递参数
+generator.next(10); // 在这传入参数，可以在上面，进行参数的接受，如：const parame1 = yield 100; parame1 就是这块传入的 10
+generator.next(20);
+generator.next(30);
+```
+
+### 2）调用函数时掺入参数
+
+```javascript
+function* fun(value) {
+    console.log(value, "函数开始");
+
+    console.log(100);
+    // 这里不能写 return，这里写了后，后面的全部不执行了
+    // return 100;
+    // 需要返回值的话，给 yield 后面写，不写时，返回的是：{ value: undefined, done: false }
+    const parame1 = yield 100;
+
+    console.log(200, parame1);
+    const parame2 = yield 200;
+
+    console.log(300, "parame2", parame2);
+    const parame3 = yield 300;
+
+    console.log("函数结束", parame3);
+    return "函数结束";
+}
+
+// 调用生成器函数（fun）时，会给我们返回一个生成器对象
+const generator = fun("你好"); // 传入默认参数
+generator.next(); // 第一段代码，比较特赦，无法传递参数
+generator.next(10); // 在这传入参数，可以在上面，进行参数的接受，如：const parame1 = yield 100; parame1 就是这块传入的 10
+generator.next(20);
+generator.next(30);
+```
+
+### 3）生成器终止执行
+
+```javascript
+function* fun(value) {
+    console.log(value, "函数开始");
+
+    console.log(100);
+    const parame1 = yield 100;
+
+    console.log(200, parame1);
+    const parame2 = yield 200;
+
+    console.log(300, "parame2", parame2);
+    const parame3 = yield 300;
+
+    console.log("函数结束", parame3);
+    return "函数结束";
+}
+
+
+const generator = fun("你好");
+generator.next();
+// 第二段代码 终止执行，后面的就不会在执行了
+console.log(generator.return(15));
+generator.next();
+```
+
+ ![image-20240204114329764](https://not-have.github.io/file/images/image-20240204114329764.png)
+
+### 4）生成器 - 抛出异常
+
+```javascript
+function* fun(value) {
+    const num1 = 1;
+    console.log("第一段代码");
+    // yield;
+    try {
+        yield;
+    } catch (err) {
+        console.log("捕获到异常", err);
+        // 这里也可以写 yield "返回的参数"
+    }
+
+    const num2 = 1;
+    console.log("第二段代码");
+    yield;
+
+    console.log("函数结束");
+}
+
+
+const generator = fun("你好");
+generator.next();
+generator.throw("异常信息"); // 捕获到异常时，这块就不会报错了
+```
+
+![image-20240204132309845](https://not-have.github.io/file/images/image-20240204132309845.png)
+
+# 四、生成器替代迭代器
+
+注：生成器其实就是一种特殊的迭代器（开发过程中，能用 `生成器` 就尽量用）。
+
+```javascript
+/**
+ * 生成器替代迭代器
+ */
+function* createArrayIterator(arr) {
+    /*
+    // 下面的可以替换成 yield* 后面跟可迭代对象
+    for (const item of arr) {
+        yield item
+    }
+    */
+    yield* arr
+}
+
+const arr = [1, 2, 3];
+const arrIterator = createArrayIterator(arr);
+
+console.log(arrIterator.next());
+console.log(arrIterator.next());
+console.log(arrIterator.next());
+console.log(arrIterator.next());
+```
+
