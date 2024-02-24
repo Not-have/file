@@ -1,60 +1,27 @@
-# 一、setup函数的参数
-
-## 1、主要有两个参数
-
-1）第一个参数：props
-
-2）第二个参数：context
-
-## 2、props
-
-props非常好理解，它其实就是父组件传递过来的属性会被放到props对象中，我们在setup中如果需要使用，那么就可 以直接通过props参数获取
-
-注：setup中不能再用this获取东西了。
-
-① 对于定义props的类型，我们还是和之前的规则是一样的，在props选项中定义；
-
-② 并且在template中依然是可以正常去使用props中的属性，比如message；
-
-③  因为props有直接作为参数传递到setup函数中，所以我们可以直接通过参数来使用即可；
-
-![image-20211128190300681](https://gitee.com/Green_chicken/picture/raw/master/20211128190302.png)
-
-## 3、context
-
-1）attrs：所有的非prop的attribute（属性）
-
-![image-20211128215424656](https://gitee.com/Green_chicken/picture/raw/master/20211128215426.png)
-
-2）slots：父组件传递过来的插槽（这个在以渲染函数返回时会有作用）
-
-
-
-3）emit：当我们组件内部需要发出事件时会用到emit（因为我们不能访问this，所以不可以通过 this.$emit发出事件）
-
-
-
-# 二、setup中API的使用
+# 一、setup中API的使用
 
 注：ref、Reactive都是深层的响应式。
 
-## 1、setup返回值的作用
+## 1、Reactive
 
-1）setup的返回值可以在模板template中被使用
-
-2）通过setup的返回值来替代data选项
-
-3）返回值必须是一个对象
-
- ![image-20211129221912620](https://gitee.com/Green_chicken/picture/raw/master/20211129221913.png)
-
-## 2、Reactive
-
-  ![image-20211129222645476](https://gitee.com/Green_chicken/picture/raw/master/20211129222646.png)
+  ```vue
+  <script lang='ts' setup>
+  import { reactive } from 'vue';
+  const obj = reactive({ count: 0 });
+  obj.count++;
+  console.log(obj);
+  
+  </script>
+  <template>
+      <div>
+          API 的基础使用
+      </div>
+  </template>
+  ```
 
 <font color=red>注：</font>Reactive API必须传入的是一个对象或者数组类型。
 
-## 3、ref
+## 2、ref
 
 1）ref 会返回一个可变的响应式对象，该对象作为一个 响应式的引用 维护着它内部的值，这就是ref名称的来源；
 
@@ -64,35 +31,89 @@ props非常好理解，它其实就是父组件传递过来的属性会被放到
 
 ​         ② 在 setup 函数内部，它依然是一个 ref引用， 所以对其进行操作时，我们依然需要使用 ref.value的方式；在 setup 函数内部，它依然是一个 ref引用， 所以对其进行操作时，我们依然需要使用 ref.value的方式； 
 
- ![image-20211204170119254](https://gitee.com/Green_chicken/picture/raw/master/20211204170121.png)
+ ```vue
+ <script lang='ts' setup>
+ import { ref } from 'vue';
+ const count = ref(0);
+ console.log(count.value); // 0
+ 
+ count.value = 1;
+ console.log(count.value); // 1
+ 
+ </script>
+ <template>
+     <div>
+         API 的基础使用
+     </div>
+ </template>
+ ```
 
 3）使用ref获取DOM元素
 
-![image-20211220221915821](https://gitee.com/Green_chicken/picture/raw/master/20211220221917.png)
+```vue
+<script lang='ts' setup>
+import { ref, onMounted } from 'vue';
+const el = ref<Element | undefined>();
 
-## 4、readonly
+
+onMounted(() => {
+    console.log(el.value);
+})
+
+</script>
+<template>
+    <div ref="el">
+        API 的基础使用
+    </div>
+</template>
+```
+
+## 3、readonly
 
 readonly会返回原生对象的只读代理（也就是它依然是一个Proxy，这是一个proxy的set方法被劫持，并且不 能对其进行修改）
 
 注：用readonly包裹响应式数据，发送给子组件，让其不能在子组件中，随意改变，只能在组件中，去改变响应的数据，如果非要在子组件中改变传过去的数据，他就会报错。
 
- ![image-20211204173238773](https://gitee.com/Green_chicken/picture/raw/master/20211204173239.png)
+ ```vue
+ <script lang='ts' setup>
+ import { reactive, readonly } from 'vue';
+ const original = reactive({ count: 0 });
+ 
+ const copy = readonly(original);
+ 
+ // 更改源属性会触发其依赖的侦听器
+ original.count++;
+ 
+ // 更改该只读副本将会失败，并会得到一个警告
+ copy.count++; // warning!
+ 
+ console.log(copy.count);
+ 
+ </script>
+ <template>
+     <div ref="el">
+         API 的基础使用
+     </div>
+ </template>
+ ```
 
-## 5、Reactive其他API的使用
+![image-20240224191544976](https://not-have.github.io/file/images/image-20240224191544976.png)
 
-具体的，请参考文档： https://v3.cn.vuejs.org/api/basic-reactivity.html#isproxy
+## 4、Reactive其他API的使用
+
+具体的，请参考文档： https://cn.vuejs.org/api/reactivity-utilities.html
 
 1）isProxy
 
-检查对象是否是由 reactive 或 readonly创建的 proxy；
+检查一个对象是否是由 [`reactive()`](https://cn.vuejs.org/api/reactivity-core.html#reactive)、[`readonly()`](https://cn.vuejs.org/api/reactivity-core.html#readonly)、[`shallowReactive()`](https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive) 或 [`shallowReadonly()`](https://cn.vuejs.org/api/reactivity-advanced.html#shallowreadonly) 创建的代理，返回 boolean；
 
 2）isReactive
 
-检查对象是否是由 reactive创建的响应式代理，如果该代理是 readonly 建的，但包裹了由 reactive 创建的另一个代理，它也会返回 true；
+检查一个对象是否是由 [`reactive()`](https://cn.vuejs.org/api/reactivity-core.html#reactive) 或 [`shallowReactive()`](https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive) 创建的代理，返回 boolean；
 
 3）isReadonly
 
-检查对象是否是由 readonly 创建的只读代理；
+通过 [`readonly()`](https://cn.vuejs.org/api/reactivity-core.html#readonly) 和 [`shallowReadonly()`](https://cn.vuejs.org/api/reactivity-advanced.html#shallowreadonly) 创建的代理都是只读的，因为他们是没有 `set` 函数的 [`computed()`](https://cn.vuejs.org/api/reactivity-core.html#computed) ref。
 
 4）toRaw
 
@@ -106,7 +127,7 @@ readonly会返回原生对象的只读代理（也就是它依然是一个Proxy�
 
 创建一个 proxy，使其自身的 property 为只读，但不执行嵌套对象的深度只读转换（深层还是可读、可写的）；
 
-## 6、toRefs（将reactive 将对象中的所有属性都转成ref，并且是一个reactive的响应式的对象，才能作为转换）
+## 5、toRefs（将reactive 将对象中的所有属性都转成ref，并且是一个reactive的响应式的对象，才能作为转换）
 
 ```javascript
 <template>
@@ -138,7 +159,7 @@ export default defineComponent({
 </script>
 ```
 
-## 7、toRef（对其中一个属性进行转换，转成ref属性）
+## 6、toRef（对其中一个属性进行转换，转成ref属性）
 
 ```javascript
 <template>
@@ -170,7 +191,7 @@ export default {
 </script>
 ```
 
-## 8、ref的其他API
+## 7、ref的其他API
 
 具体的，请参考文档：https://v3.cn.vuejs.org/api/refs-api.html#unref
 
@@ -243,9 +264,11 @@ export default {
 </script>
 ```
 
-## 9、customRef
+## 8、customRef
 
 创建一个自定义的ref，并对其依赖项跟踪和更新触发进行显示控制
+
+https://cn.vuejs.org/api/reactivity-advanced.html#customref
 
 ```javascript
 /**
@@ -285,9 +308,9 @@ export default function (value, delay = 200) {
 
 在页面中的使用：
 
-![image-20211212190831716](https://gitee.com/Green_chicken/picture/raw/master/20211212190833.png)
+ ![image-20240225003349193](C:/Users/lenovo/Pictures/images/image-20240225003349193.png)
 
-## 10、computed 计算属性
+## 9、computed 计算属性
 
 方式一：接收一个getter函数，并为 getter 函数返回的值，返回一个不变的 ref 对象； 
 方式二：接收一个具有 get 和 set 的对象，返回一个可变的（可读写）ref 对象。
@@ -330,7 +353,7 @@ export default {
 </script>
 ```
 
-## 11、watchEffect
+## 10、watchEffect
 
 ### 1）watchEffect 自动响应式依赖
 
@@ -498,7 +521,7 @@ export default {
 </script>
 ```
 
-## 12、watch
+## 11、watch
 
 ### 1）监听单个数据源
 
@@ -657,15 +680,15 @@ export default {
 </script>
 ```
 
-## 13、provide
+## 12、provide
 
 注：修改数据的时候，请尽量做到单向数据流。
 
-![image-20211223113736557](https://gitee.com/Green_chicken/picture/raw/master/20211223113739.png)
+[文档](https://cn.vuejs.org/guide/components/provide-inject.html#provide)
 
-## 14、hooks的使用
+![image-20240225011508511](https://not-have.github.io/file/images/image-20240225011508511.png)
 
-![image-20211223171341205](https://gitee.com/Green_chicken/picture/raw/master/20211223171342.png)
+## 13、hooks的使用
 
 ### 1）封装一个修改title
 
@@ -837,8 +860,6 @@ el、binding、vnode、preVnode
 
 ## 4、动态指令参数
 
-![image-20211226181354267](https://gitee.com/Green_chicken/picture/raw/master/20211226181356.png)
-
 ```javascript
 <template>
     <div>
@@ -992,11 +1013,9 @@ export default {
 </script>
 ```
 
-![image-20211226190239132](https://gitee.com/Green_chicken/picture/raw/master/20211226190242.png)
-
 # 四、Teleport
 
-文档：https://v3.cn.vuejs.org/guide/teleport.html
+[文档](https://cn.vuejs.org/guide/built-ins/teleport.html)
 
 Vue 鼓励我们通过将 UI 和相关行为封装到组件中来构建 UI。我们可以将它们嵌套在另一个内部，以构建一个组成应用程序 UI 的树。
 
@@ -1046,5 +1065,5 @@ Vue 鼓励我们通过将 UI 和相关行为封装到组件中来构建 UI。我
 </html>
 ```
 
-![image-20211226192219534](https://gitee.com/Green_chicken/picture/raw/master/20211226192221.png)
+![image-20240225013124657](https://not-have.github.io/file/images/image-20240225013124657.png)
 
