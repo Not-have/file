@@ -1,0 +1,296 @@
+{
+	"storage": {
+		"Comments.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.panel.comments\",\"isHidden\":false}]"
+		},
+		"colorThemeData": {
+			"version": 1,
+			"value": "{\"id\":\"vs-dark vscode-theme-monokai-themes-monokai-color-theme-json\",\"label\":\"Monokai\",\"settingsId\":\"Monokai\",\"themeTokenColors\":[{\"settings\":{\"foreground\":\"#F8F8F2\"}},{\"settings\":{\"foreground\":\"#F8F8F2\"},\"scope\":[\"meta.embedded\",\"source.groovy.embedded\",\"string meta.image.inline.markdown\",\"variable.legacy.builtin.python\"]},{\"settings\":{\"foreground\":\"#88846f\"},\"scope\":\"comment\"},{\"settings\":{\"foreground\":\"#E6DB74\"},\"scope\":\"string\"},{\"settings\":{\"foreground\":\"#F92672\"},\"scope\":[\"punctuation.definition.template-expression\",\"punctuation.section.embedded\"]},{\"settings\":{\"foreground\":\"#F8F8F2\"},\"scope\":[\"meta.template.expression\"]},{\"settings\":{\"foreground\":\"#AE81FF\"},\"scope\":\"constant.numeric\"},{\"settings\":{\"foreground\":\"#AE81FF\"},\"scope\":\"constant.language\"},{\"settings\":{\"foreground\":\"#AE81FF\"},\"scope\":\"constant.character, constant.other\"},{\"settings\":{\"fontStyle\":\"\",\"foreground\":\"#F8F8F2\"},\"scope\":\"variable\"},{\"settings\":{\"foreground\":\"#F92672\"},\"scope\":\"keyword\"},{\"settings\":{\"fontStyle\":\"\",\"foreground\":\"#F92672\"},\"scope\":\"storage\"},{\"settings\":{\"fontStyle\":\"italic\",\"foreground\":\"#66D9EF\"},\"scope\":\"storage.type\"},{\"settings\":{\"fontStyle\":\"underline\",\"foreground\":\"#A6E22E\"},\"scope\":\"entity.name.type, entity.name.class, entity.name.namespace, entity.name.scope-resolution\"},{\"settings\":{\"fontStyle\":\"italic underline\",\"foreground\":\"#A6E22E\"},\"scope\":\"entity.other.inherited-class\"},{\"settings\":{\"fontStyle\":\"\",\"foreground\":\"#A6E22E\"},\"scope\":\"entity.name.function\"},{\"settings\":{\"fontStyle\":\"italic\",\"foreground\":\"#FD971F\"},\"scope\":\"variable.parameter\"},{\"settings\":{\"fontStyle\":\"\",\"foreground\":\"#F92672\"},\"scope\":\"entity.name.tag\"},{\"settings\":{\"fontStyle\":\"\",\"foreground\":\"#A6E22E\"},\"scope\":\"entity.other.attribute-name\"},{\"settings\":{\"fontStyle\":\"\",\"foreground\":\"#66D9EF\"},\"scope\":\"support.function\"},{\"settings\":{\"fontStyle\":\"\",\"foreground\":\"#66D9EF\"},\"scope\":\"support.constant\"},{\"settings\":{\"fontStyle\":\"italic\",\"foreground\":\"#66D9EF\"},\"scope\":\"support.type, support.class\"},{\"settings\":{\"fontStyle\":\"\"},\"scope\":\"support.other.variable\"},{\"settings\":{\"fontStyle\":\"\",\"foreground\":\"#F44747\"},\"scope\":\"invalid\"},{\"settings\":{\"foreground\":\"#F44747\"},\"scope\":\"invalid.deprecated\"},{\"settings\":{\"foreground\":\"#CFCFC2\"},\"scope\":\"meta.structure.dictionary.json string.quoted.double.json\"},{\"settings\":{\"foreground\":\"#75715E\"},\"scope\":\"meta.diff, meta.diff.header\"},{\"settings\":{\"foreground\":\"#F92672\"},\"scope\":\"markup.deleted\"},{\"settings\":{\"foreground\":\"#A6E22E\"},\"scope\":\"markup.inserted\"},{\"settings\":{\"foreground\":\"#E6DB74\"},\"scope\":\"markup.changed\"},{\"settings\":{\"foreground\":\"#AE81FFA0\"},\"scope\":\"constant.numeric.line-number.find-in-files - match\"},{\"settings\":{\"foreground\":\"#E6DB74\"},\"scope\":\"entity.name.filename.find-in-files\"},{\"settings\":{\"foreground\":\"#F92672\"},\"scope\":\"markup.quote\"},{\"settings\":{\"foreground\":\"#E6DB74\"},\"scope\":\"markup.list\"},{\"settings\":{\"foreground\":\"#66D9EF\"},\"scope\":\"markup.bold, markup.italic\"},{\"settings\":{\"fontStyle\":\"\",\"foreground\":\"#FD971F\"},\"scope\":\"markup.inline.raw\"},{\"settings\":{\"foreground\":\"#A6E22E\"},\"scope\":\"markup.heading\"},{\"settings\":{\"foreground\":\"#A6E22E\",\"fontStyle\":\"bold\"},\"scope\":\"markup.heading.setext\"},{\"settings\":{\"fontStyle\":\"bold\"},\"scope\":\"markup.heading.markdown\"},{\"settings\":{\"fontStyle\":\"italic\",\"foreground\":\"#75715E\"},\"scope\":\"markup.quote.markdown\"},{\"settings\":{\"fontStyle\":\"bold\"},\"scope\":\"markup.bold.markdown\"},{\"settings\":{\"foreground\":\"#AE81FF\"},\"scope\":\"string.other.link.title.markdown,string.other.link.description.markdown\"},{\"settings\":{\"foreground\":\"#E6DB74\"},\"scope\":\"markup.underline.link.markdown,markup.underline.link.image.markdown\"},{\"settings\":{\"fontStyle\":\"italic\"},\"scope\":\"markup.italic.markdown\"},{\"settings\":{\"fontStyle\":\"strikethrough\"},\"scope\":\"markup.strikethrough\"},{\"settings\":{\"foreground\":\"#f8f8f2\"},\"scope\":\"markup.list.unnumbered.markdown, markup.list.numbered.markdown\"},{\"settings\":{\"foreground\":\"#A6E22E\"},\"scope\":[\"punctuation.definition.list.begin.markdown\"]},{\"settings\":{\"foreground\":\"#6796e6\"},\"scope\":\"token.info-token\"},{\"settings\":{\"foreground\":\"#cd9731\"},\"scope\":\"token.warn-token\"},{\"settings\":{\"foreground\":\"#f44747\"},\"scope\":\"token.error-token\"},{\"settings\":{\"foreground\":\"#b267e6\"},\"scope\":\"token.debug-token\"},{\"settings\":{\"foreground\":\"#FD971F\"},\"scope\":\"variable.language\"}],\"semanticTokenRules\":[],\"extensionData\":{\"_extensionId\":\"vscode.theme-monokai\",\"_extensionIsBuiltin\":true,\"_extensionName\":\"theme-monokai\",\"_extensionPublisher\":\"vscode\"},\"themeSemanticHighlighting\":true,\"colorMap\":{\"dropdown.background\":\"#414339\",\"list.activeSelectionBackground\":\"#75715e\",\"quickInputList.focusBackground\":\"#414339\",\"dropdown.listBackground\":\"#1e1f1c\",\"list.inactiveSelectionBackground\":\"#414339\",\"list.hoverBackground\":\"#3e3d32\",\"list.dropBackground\":\"#414339\",\"list.highlightForeground\":\"#f8f8f2\",\"button.background\":\"#75715e\",\"editor.background\":\"#272822\",\"editor.foreground\":\"#f8f8f2\",\"selection.background\":\"#878b9180\",\"editor.selectionHighlightBackground\":\"#575b6180\",\"editor.selectionBackground\":\"#878b9180\",\"minimap.selectionHighlight\":\"#878b9180\",\"editor.wordHighlightBackground\":\"#4a4a7680\",\"editor.wordHighlightStrongBackground\":\"#6a6a9680\",\"editor.lineHighlightBackground\":\"#3e3d32\",\"editorLineNumber.activeForeground\":\"#c2c2bf\",\"editorCursor.foreground\":\"#f8f8f0\",\"editorWhitespace.foreground\":\"#464741\",\"editorIndentGuide.background\":\"#464741\",\"editorIndentGuide.activeBackground\":\"#767771\",\"editorGroupHeader.tabsBackground\":\"#1e1f1c\",\"editorGroup.dropBackground\":\"#41433980\",\"tab.inactiveBackground\":\"#34352f\",\"tab.border\":\"#1e1f1c\",\"tab.inactiveForeground\":\"#ccccc7\",\"tab.lastPinnedBorder\":\"#414339\",\"widget.shadow\":\"#00000098\",\"progressBar.background\":\"#75715e\",\"badge.background\":\"#75715e\",\"badge.foreground\":\"#f8f8f2\",\"editorLineNumber.foreground\":\"#90908a\",\"panelTitle.activeForeground\":\"#f8f8f2\",\"panelTitle.activeBorder\":\"#75715e\",\"panelTitle.inactiveForeground\":\"#75715e\",\"panel.border\":\"#414339\",\"settings.focusedRowBackground\":\"#4143395a\",\"titleBar.activeBackground\":\"#1e1f1c\",\"statusBar.background\":\"#414339\",\"statusBar.noFolderBackground\":\"#414339\",\"statusBar.debuggingBackground\":\"#75715e\",\"statusBarItem.remoteBackground\":\"#ac6218\",\"ports.iconRunningProcessForeground\":\"#ccccc7\",\"activityBar.background\":\"#272822\",\"activityBar.foreground\":\"#f8f8f2\",\"sideBar.background\":\"#1e1f1c\",\"sideBarSectionHeader.background\":\"#272822\",\"menu.background\":\"#1e1f1c\",\"menu.foreground\":\"#cccccc\",\"pickerGroup.foreground\":\"#75715e\",\"input.background\":\"#414339\",\"inputOption.activeBorder\":\"#75715e\",\"focusBorder\":\"#99947c\",\"editorWidget.background\":\"#1e1f1c\",\"debugToolBar.background\":\"#1e1f1c\",\"diffEditor.insertedTextBackground\":\"#4b661680\",\"diffEditor.removedTextBackground\":\"#90274a70\",\"inputValidation.errorBackground\":\"#90274a\",\"inputValidation.errorBorder\":\"#f92672\",\"inputValidation.warningBackground\":\"#848528\",\"inputValidation.warningBorder\":\"#e2e22e\",\"inputValidation.infoBackground\":\"#546190\",\"inputValidation.infoBorder\":\"#819aff\",\"editorHoverWidget.background\":\"#414339\",\"editorHoverWidget.border\":\"#75715e\",\"editorSuggestWidget.background\":\"#272822\",\"editorSuggestWidget.border\":\"#75715e\",\"editorGroup.border\":\"#34352f\",\"peekView.border\":\"#75715e\",\"peekViewEditor.background\":\"#272822\",\"peekViewResult.background\":\"#1e1f1c\",\"peekViewTitle.background\":\"#1e1f1c\",\"peekViewResult.selectionBackground\":\"#414339\",\"peekViewResult.matchHighlightBackground\":\"#75715e\",\"peekViewEditor.matchHighlightBackground\":\"#75715e\",\"terminal.ansiBlack\":\"#333333\",\"terminal.ansiRed\":\"#c4265e\",\"terminal.ansiGreen\":\"#86b42b\",\"terminal.ansiYellow\":\"#b3b42b\",\"terminal.ansiBlue\":\"#6a7ec8\",\"terminal.ansiMagenta\":\"#8c6bc8\",\"terminal.ansiCyan\":\"#56adbc\",\"terminal.ansiWhite\":\"#e3e3dd\",\"terminal.ansiBrightBlack\":\"#666666\",\"terminal.ansiBrightRed\":\"#f92672\",\"terminal.ansiBrightGreen\":\"#a6e22e\",\"terminal.ansiBrightYellow\":\"#e2e22e\",\"terminal.ansiBrightBlue\":\"#819aff\",\"terminal.ansiBrightMagenta\":\"#ae81ff\",\"terminal.ansiBrightCyan\":\"#66d9ef\",\"terminal.ansiBrightWhite\":\"#f8f8f2\"},\"watch\":false}"
+		},
+		"commandPalette.mru.cache": {
+			"version": 1,
+			"value": "{\"usesLRU\":true,\"entries\":[{\"key\":\"editor.action.previousSelectionMatchFindAction\",\"value\":1},{\"key\":\"workbench.action.terminal.clearSelection\",\"value\":2},{\"key\":\"workbench.action.terminal.selectDefaultShell\",\"value\":4},{\"key\":\"extension.js-debug.debugLink\",\"value\":9},{\"key\":\"commentTranslate.changeTranslateSource\",\"value\":46},{\"key\":\"workbench.action.reloadWindow\",\"value\":51}]}"
+		},
+		"commandPalette.mru.counter": {
+			"version": 1,
+			"value": "52"
+		},
+		"cpp.1.lastSessionDate": {
+			"version": 1,
+			"value": "Mon Jul 05 2021"
+		},
+		"cpp.1.sessionCount": {
+			"version": 1,
+			"value": "3"
+		},
+		"csharp.1.lastSessionDate": {
+			"version": 1,
+			"value": "Sun Mar 03 2024"
+		},
+		"csharp.1.sessionCount": {
+			"version": 1,
+			"value": "1"
+		},
+		"expandSuggestionDocs": {
+			"version": 1,
+			"value": "true"
+		},
+		"extensionsAssistant/deprecated": {
+			"version": 1,
+			"value": "[\"coenraads.bracket-pair-colorizer-2\",\"hookyqr.beautify\",\"msjsdiag.debugger-for-chrome\",\"vue.vscode-typescript-vue-plugin\"]"
+		},
+		"fileBasedRecommendations/promptedFileExtensions": {
+			"version": 1,
+			"value": "[\"vue\",\"ashx\"]"
+		},
+		"fileBasedRecommendations/promptedRecommendations": {
+			"version": 1,
+			"value": "{\"cpp\":[\"ms-vscode.cpptools\"],\"plaintext\":[\"octref.vetur\",\"vue.volar\"],\"dockerfile\":[\"ms-azuretools.vscode-docker\"]}"
+		},
+		"github-Not-have": {
+			"version": 1,
+			"value": "[{\"id\":\"github.copilot\",\"name\":\"GitHub Copilot\",\"allowed\":true},{\"id\":\"github.remotehub\",\"name\":\"GitHub Repositories\",\"allowed\":true}]"
+		},
+		"globalState.argv.locale": {
+			"version": 1,
+			"value": "zh-cn"
+		},
+		"hasNotifiedOfSettingsAutosave": {
+			"version": 1,
+			"value": "true"
+		},
+		"http.linkProtectionTrustedDomains": {
+			"version": 1,
+			"value": "[\"10.10.103.171:*\"]"
+		},
+		"java.2.lastSessionDate": {
+			"version": 1,
+			"value": "Mon Jul 05 2021"
+		},
+		"java.2.sessionCount": {
+			"version": 1,
+			"value": "3"
+		},
+		"javascript.1.lastSessionDate": {
+			"version": 1,
+			"value": "Mon Jul 05 2021"
+		},
+		"javascript.1.sessionCount": {
+			"version": 1,
+			"value": "3"
+		},
+		"memento/gettingStartedService": {
+			"version": 1,
+			"value": "{\"pickColorTheme\":{\"done\":true},\"installGit\":{\"done\":true},\"settings\":{\"done\":true},\"pickAFolderTask-Other\":{\"done\":true},\"settingsSync\":{\"done\":true},\"settingsSyncWeb\":{\"done\":true},\"pickColorThemeWeb\":{\"done\":true},\"quickOpen\":{\"done\":true},\"quickOpenWeb\":{\"done\":true},\"eamodio.gitlens#gitlens.welcome#gitlens.welcome.additional\":{\"done\":true},\"splitview\":{\"done\":true},\"terminal\":{\"done\":true}}"
+		},
+		"memento/workbench.editor.keybindings": {
+			"version": 1,
+			"value": "{\"searchHistory\":[\"f\",\"ge'shi\",\"格式化\",\"翻译\",\"\\\"ctrl+shift+x backspace\\\"\",\"\\\"ctrl+shift+t\\\"\",\"\\\"ctrl+shift+t ctrl+alt+t\\\"\",\"\\\"backspace ctrl+alt+t\\\"\",\"\\\"ctrl+alt+t ctrl+shift+x\\\"\",\"\\\"backspace ctrl+shift+x\\\"\",\"\\\" \\\"\",\"\\\"backspace\\\"\",\"\\\"shift\\\"\",\"\\\"n backspace\\\"\",\"translate to \",\"\\\"\",\"translate to chinese\",\"translate to chi\",\"translate\",\"\\\"ctrl+shift+x\\\"\",\"\\\"ctrl+alt+t\\\"\",\"\\\"ctrl+alt+t backspace\\\"\",\"koroFileHeade\",\"koroFil\",\"koro\",\"k\",\"\\\" shift\\\"\",\"\\\"t\\\"\",\"\\\"ctrl+z\\\"\",\"\\\"ctrl+z ctrl+z\\\"\",\"\\\"backspace backspace\\\"\",\"fileheader\",\"koroFileHeader\",\"fileHeader\",\"cursorTip\",\"\\\"ctrl+alt+y\\\"\",\"\\\"ctrl+alt+y backspace\\\"\",\"\\\"ctrl+alt+i\\\"\",\"\\\"\\\"\",\"\\\" backspace\\\"\",\"\\\"ctrl+alt\\\"\",\"\\\"ctrl+alt+o\\\"\"]}"
+		},
+		"nps/lastSessionDate": {
+			"version": 1,
+			"value": "Mon Jul 05 2021"
+		},
+		"nps/sessionCount": {
+			"version": 1,
+			"value": "3"
+		},
+		"recently.opened": {
+			"version": 1,
+			"value": "{\"entries\":[{\"folderUri\":\"vscode-remote://codespaces%2Blaughing-acorn-7559wx4p744fj6p/workspaces/dev/alibabacloud-console-base\",\"label\":\"/workspaces/dev/alibabacloud-console-base [Codespace laughing-acorn-7559wx4p744fj6p]\"},{\"folderUri\":\"vscode-remote://codespaces%2Blaughing-acorn-7559wx4p744fj6p/workspaces\",\"label\":\"/workspaces [Codespace laughing-acorn-7559wx4p744fj6p]\"}]}"
+		},
+		"remote.explorerType": {
+			"version": 1,
+			"value": "virtualfs"
+		},
+		"remote.tunnels.toRestore.codespaces+laughing-acorn-7559wx4p744fj6p.-2104322858": {
+			"version": 1,
+			"value": "[{\"remoteHost\":\"localhost\",\"remotePort\":6077,\"closeable\":true,\"localAddress\":\"https://laughing-acorn-7559wx4p744fj6p-6077.app.github.dev/\",\"protocol\":\"http\",\"localUri\":{\"$mid\":1,\"path\":\"/\",\"scheme\":\"https\",\"authority\":\"laughing-acorn-7559wx4p744fj6p-6077.app.github.dev\"},\"hasRunningProcess\":false,\"source\":{\"source\":2,\"description\":\"Codespaces: laughing acorn\"},\"privacy\":\"public\"},{\"remoteHost\":\"0:0:0:0:0:0:0:0\",\"remotePort\":9000,\"closeable\":true,\"localAddress\":\"https://laughing-acorn-7559wx4p744fj6p-9000.app.github.dev/\",\"protocol\":\"http\",\"localUri\":{\"$mid\":1,\"path\":\"/\",\"scheme\":\"https\",\"authority\":\"laughing-acorn-7559wx4p744fj6p-9000.app.github.dev\"},\"runningProcess\":\"node\\u0000/workspaces/dev/alibabacloud-console-base/packages-rc/rc-markdown/node_modules/.bin/breezr\\u0000start-storybook\\u0000\",\"hasRunningProcess\":true,\"pid\":33836,\"source\":{\"source\":1,\"description\":\"自动转发\"},\"privacy\":\"public\"},{\"remoteHost\":\"0:0:0:0:0:0:0:0\",\"remotePort\":9001,\"closeable\":true,\"localAddress\":\"https://laughing-acorn-7559wx4p744fj6p-9001.app.github.dev/\",\"protocol\":\"http\",\"localUri\":{\"$mid\":1,\"path\":\"/\",\"scheme\":\"https\",\"authority\":\"laughing-acorn-7559wx4p744fj6p-9001.app.github.dev\"},\"runningProcess\":\"node\\u0000/workspaces/dev/alibabacloud-console-base/packages-rc/rc-codemirror/node_modules/.bin/breezr\\u0000start-storybook\\u0000\",\"hasRunningProcess\":true,\"pid\":34982,\"source\":{\"source\":1,\"description\":\"自动转发\"},\"privacy\":\"private\"}]"
+		},
+		"remote.tunnels.toRestore.codespaces+laughing-acorn-7559wx4p744fj6p.-87819100": {
+			"version": 1,
+			"value": "[{\"remoteHost\":\"localhost\",\"remotePort\":6077,\"closeable\":true,\"localAddress\":\"https://laughing-acorn-7559wx4p744fj6p-6077.app.github.dev/\",\"protocol\":\"http\",\"localUri\":{\"$mid\":1,\"path\":\"/\",\"scheme\":\"https\",\"authority\":\"laughing-acorn-7559wx4p744fj6p-6077.app.github.dev\"},\"hasRunningProcess\":false,\"source\":{\"source\":2,\"description\":\"Codespaces: laughing acorn\"},\"privacy\":\"public\"}]"
+		},
+		"remote.tunnels.toRestore.codespaces+laughing-acorn-7559wx4p744fj6p.1703891757": {
+			"version": 1,
+			"value": "[{\"remoteHost\":\"0:0:0:0:0:0:0:0\",\"remotePort\":6077,\"closeable\":true,\"localAddress\":\"https://laughing-acorn-7559wx4p744fj6p-6077.app.github.dev/\",\"protocol\":\"http\",\"localUri\":{\"$mid\":1,\"path\":\"/\",\"scheme\":\"https\",\"authority\":\"laughing-acorn-7559wx4p744fj6p-6077.app.github.dev\"},\"hasRunningProcess\":false,\"source\":{\"source\":1,\"description\":\"自动转发\"},\"privacy\":\"public\"}]"
+		},
+		"remoteTunnelServicePromptedPreview": {
+			"version": 1,
+			"value": "true"
+		},
+		"settingsEditor2.splitViewWidth": {
+			"version": 1,
+			"value": "370"
+		},
+		"snippets.usageTimestamps": {
+			"version": 1,
+			"value": "[[\"lib/snippets/generated.json/useContext\",1694614647336],[\"snippets/typescript.code-snippets/Import Statement\",1694616686283],[\"snippets/typescript.code-snippets/Triple-slash reference\",1709107336154],[\"vue.json/creat a vue template\",1709137572564],[\"snippets/typescript.code-snippets/Log to the console\",1710069968485],[\"snippets/javascript.code-snippets/Log to the console\",1710093252170],[\"snippets/typescript.code-snippets/Log error to console\",1710155909499]]"
+		},
+		"tabs-list-width-horizontal": {
+			"version": 1,
+			"value": "259"
+		},
+		"terminal.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"terminal\",\"isHidden\":false}]"
+		},
+		"terminal.integrated.showTerminalConfigPrompt": {
+			"version": 1,
+			"value": "false"
+		},
+		"themeUpdatedNotificationShown": {
+			"version": 1,
+			"value": "true"
+		},
+		"typescript.1.lastSessionDate": {
+			"version": 1,
+			"value": "Mon Jul 05 2021"
+		},
+		"typescript.1.sessionCount": {
+			"version": 1,
+			"value": "3"
+		},
+		"userDataProfiles.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.views.profiles.export.preview\",\"isHidden\":false}]"
+		},
+		"workbench.activity.pinnedViewlets2": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.view.explorer\",\"pinned\":true,\"visible\":true,\"order\":0},{\"id\":\"workbench.view.search\",\"pinned\":true,\"visible\":true,\"order\":1},{\"id\":\"workbench.view.scm\",\"pinned\":true,\"visible\":true,\"order\":2},{\"id\":\"workbench.view.debug\",\"pinned\":true,\"visible\":true,\"order\":3},{\"id\":\"workbench.view.remote\",\"pinned\":true,\"visible\":false,\"order\":4},{\"id\":\"workbench.view.extension.test\",\"pinned\":true,\"visible\":false,\"order\":6},{\"id\":\"workbench.view.extension.references-view\",\"pinned\":true,\"visible\":false,\"order\":7},{\"id\":\"workbench.view.extension.deveco\",\"pinned\":true,\"visible\":false,\"order\":8},{\"id\":\"workbench.view.extension.github-pull-requests\",\"pinned\":true,\"visible\":false,\"order\":8},{\"id\":\"workbench.view.extension.todo-tree-container\",\"pinned\":true,\"visible\":true,\"order\":13},{\"id\":\"workbench.view.extension.postcode\",\"pinned\":true,\"visible\":false,\"order\":14},{\"id\":\"workbench.panel.chatSidebar\",\"pinned\":true,\"visible\":false,\"order\":100},{\"id\":\"workbench.view.extension.gitlensPatch\",\"pinned\":true,\"visible\":false,\"order\":11},{\"id\":\"workbench.view.extension.i18n-ally\",\"pinned\":true,\"visible\":false,\"order\":14},{\"id\":\"workbench.view.extension.sidebar-panel\",\"pinned\":true,\"visible\":true,\"order\":15},{\"id\":\"userDataProfiles\",\"pinned\":true,\"visible\":false},{\"id\":\"workbench.view.editSessions\",\"pinned\":true,\"visible\":false},{\"id\":\"workbench.view.extension.project-manager\",\"pinned\":true,\"visible\":true,\"order\":8},{\"id\":\"workbench.view.extension.gitlensInspect\",\"pinned\":true,\"visible\":true,\"order\":10},{\"id\":\"workbench.view.extension.gitlens\",\"pinned\":true,\"visible\":true,\"order\":9},{\"id\":\"workbench.view.extension.dockerView\",\"pinned\":true,\"visible\":true,\"order\":12},{\"id\":\"workbench.view.extension.todomd\",\"pinned\":true,\"visible\":false,\"order\":16},{\"id\":\"workbench.view.extensions\",\"pinned\":true,\"visible\":true,\"order\":4},{\"id\":\"workbench.view.extension.cspell-explorer\",\"pinned\":true,\"visible\":false,\"order\":16},{\"id\":\"workbench.view.extension.github-pull-request\",\"pinned\":true,\"visible\":false,\"order\":9},{\"id\":\"workbench.view.sync\",\"pinned\":true,\"visible\":false}]"
+		},
+		"workbench.activityBar.location": {
+			"version": 1,
+			"value": "side"
+		},
+		"workbench.explorer.views.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"outline\",\"isHidden\":false},{\"id\":\"timeline\",\"isHidden\":false},{\"id\":\"workbench.explorer.openEditorsView\",\"isHidden\":false},{\"id\":\"workbench.explorer.emptyView\",\"isHidden\":false},{\"id\":\"npm\",\"isHidden\":true},{\"id\":\"workbench.explorer.fileView\",\"isHidden\":false},{\"id\":\"commitViewProvider\",\"isHidden\":false},{\"id\":\"compareCommitViewProvider\",\"isHidden\":false},{\"id\":\"i18n-ally-locales-file-explorer\",\"isHidden\":false}]"
+		},
+		"workbench.panel.alignment": {
+			"version": 1,
+			"value": "center"
+		},
+		"workbench.panel.markers.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.panel.markers.view\",\"isHidden\":false}]"
+		},
+		"workbench.panel.output.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.panel.output\",\"isHidden\":false}]"
+		},
+		"workbench.panel.pinnedPanels": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.panel.markers\",\"name\":\"问题\",\"pinned\":true,\"order\":0,\"visible\":true},{\"id\":\"workbench.panel.output\",\"name\":\"输出\",\"pinned\":true,\"order\":1,\"visible\":true},{\"id\":\"workbench.panel.repl\",\"name\":\"调试控制台\",\"pinned\":true,\"order\":2,\"visible\":true},{\"id\":\"workbench.panel.testResults\",\"name\":\"测试结果\",\"pinned\":true,\"order\":3,\"visible\":false},{\"id\":\"terminal\",\"name\":\"终端\",\"pinned\":true,\"order\":3,\"visible\":true},{\"id\":\"~remote.forwardedPortsContainer\",\"name\":\"端口\",\"pinned\":true,\"order\":5,\"visible\":true},{\"id\":\"workbench.view.extension.gitlensPanel\",\"name\":\"GitLens\",\"pinned\":true,\"order\":6,\"visible\":true},{\"id\":\"workbench.view.extension.postman-console-view-container\",\"name\":\"Postman Console\",\"pinned\":true,\"order\":7,\"visible\":true},{\"id\":\"workbench.panel.comments\",\"name\":\"注释\",\"pinned\":true,\"order\":10,\"visible\":true},{\"id\":\"refactorPreview\",\"name\":\"重构预览\",\"pinned\":true,\"visible\":false}]"
+		},
+		"workbench.panel.repl.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.panel.repl.view\",\"isHidden\":false}]"
+		},
+		"workbench.panel.terminal.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.panel.terminal\",\"isHidden\":false}]"
+		},
+		"workbench.scm.views.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.scm\",\"isHidden\":false},{\"id\":\"workbench.scm.repositories\",\"isHidden\":true},{\"id\":\"gitlens.views.commits\",\"isHidden\":false},{\"id\":\"gitlens.views.repositories\",\"isHidden\":true},{\"id\":\"gitlens.views.fileHistory\",\"isHidden\":false},{\"id\":\"gitlens.views.lineHistory\",\"isHidden\":true},{\"id\":\"gitlens.views.branches\",\"isHidden\":false},{\"id\":\"gitlens.views.remotes\",\"isHidden\":false},{\"id\":\"gitlens.views.stashes\",\"isHidden\":false},{\"id\":\"gitlens.views.tags\",\"isHidden\":false},{\"id\":\"gitlens.views.contributors\",\"isHidden\":true},{\"id\":\"gitlens.views.searchAndCompare\",\"isHidden\":false},{\"id\":\"gitlens.views.worktrees\",\"isHidden\":false}]"
+		},
+		"workbench.statusbar.hidden": {
+			"version": 1,
+			"value": "[\"status.workspaceTrust.1623391053797\",\"status.workspaceTrust.ab95eebcf150d01d6be9c0ec278b59c7\",\"status.workspaceTrust.1623722820742\",\"status.workspaceTrust.77777f87e3ddb47c84ae386e312fc207\",\"status.workspaceTrust.1623745059542\",\"status.workspaceTrust.8dd011793da920ddf574f0100c9043fa\",\"status.workspaceTrust.1623745786766\",\"status.workspaceTrust.eba0690854f7ae04fbd3149b86f284fc\",\"status.workspaceTrust.1623825242141\",\"status.workspaceTrust.1623837346446\",\"status.workspaceTrust.1623933551225\",\"status.workspaceTrust.f389977192ef61ae15253dc013347647\",\"status.workspaceTrust.1623983756995\",\"status.workspaceTrust.1623983788233\",\"status.workspaceTrust.1624255282665\",\"status.workspaceTrust.1624278472040\",\"status.workspaceTrust.8ddc765893d38dd0cdea5e2351344cb6\",\"status.workspaceTrust.1624432613529\",\"status.workspaceTrust.1624539988980\",\"status.workspaceTrust.ab82cf34969a926f7901c6b41ef8b058\",\"status.workspaceTrust.2b4dda2c09373f3f8650c4b4081c4f86\",\"status.workspaceTrust.1624613084420\",\"status.workspaceTrust.2dfb07613d830f48278477f1da049e13\",\"status.workspaceTrust.ca9782d95ae7f526ddd2f631c25fe215\",\"status.workspaceTrust.1624930076196\",\"status.workspaceTrust.1624935533130\",\"status.workspaceTrust.bd44ef0508939356d0e0e247224727d3\",\"status.workspaceTrust.a82180d1d2a5916c7f3d253c8c13222c\",\"status.workspaceTrust.1625040956456\",\"status.workspaceTrust.1625041722247\",\"status.workspaceTrust.1625043346150\",\"status.workspaceTrust.ef66fb4f462689484578e407ebbb8c56\",\"status.workspaceTrust.1625056101909\",\"status.workspaceTrust.1625065085128\",\"status.workspaceTrust.1625065165373\",\"status.workspaceTrust.1625065220023\",\"status.workspaceTrust.1625105679815\",\"status.workspaceTrust.f087be3f12f000b2b56d5f56ffbfe610\",\"status.workspaceTrust.1625203164138\",\"status.workspaceTrust.1625207000686\",\"status.workspaceTrust.58e8446522e6907104a97a70439a45c9\",\"status.workspaceTrust.f60f3caa1cee05399583fdd36bea5221\",\"status.workspaceTrust.1625218312411\",\"status.workspaceTrust.058d2493b00adbf0894aae1e45dac181\",\"status.workspaceTrust.08359908b2495fa1e1150cd67c8163e0\",\"status.workspaceTrust.1625448924647\",\"status.workspaceTrust.1625462854298\",\"status.workspaceTrust.fbb779018613ff79dca19a92aa1480e7\",\"status.workspaceTrust.6c05061d613a12b0fae9b513abc6b749\",\"status.workspaceTrust.1628163218223\",\"status.workspaceTrust.ec593302645ee6708540c60cfeef138a\",\"status.workspaceTrust.1628213669762\",\"status.workspaceTrust.1628219039923\",\"status.workspaceTrust.4bdd516208eff608da87eb53e2a03be1\",\"status.workspaceTrust.1628227007434\",\"status.workspaceTrust.1628314989824\",\"status.workspaceTrust.1628415925583\",\"status.workspaceTrust.1628415943148\",\"status.workspaceTrust.1628472829428\",\"status.workspaceTrust.1628503412202\",\"status.workspaceTrust.1628563125290\",\"status.workspaceTrust.7d7bc06357ca958fbb261028ef22ee81\",\"status.workspaceTrust.4bdf8c1dc4d16017385eb473575be01a\",\"status.workspaceTrust.1628666559262\",\"status.workspaceTrust.1628735460760\",\"status.workspaceTrust.1628759228637\",\"status.workspaceTrust.1628762591419\",\"status.workspaceTrust.1628768705296\",\"status.workspaceTrust.51021776d064ca8b7cd51cb9deabfc45\",\"status.workspaceTrust.51cf87d9a166ef97fb0e0e6b765d58e0\",\"status.workspaceTrust.f2d65d3c82031fc3eb64cac45f065711\",\"status.workspaceTrust.1629355606038\",\"status.workspaceTrust.2deccc65bd116394ca3fcf40db30dd1f\",\"status.workspaceTrust.83e3ac5351798960cffd6b75a670b29a\",\"status.workspaceTrust.1629690345159\",\"status.workspaceTrust.f9193c5d75df9df55a54b5ed1452d7dc\",\"status.workspaceTrust.1629796250805\",\"status.workspaceTrust.51999948c9fc808e6b2f3ba8f408f2c0\",\"status.workspaceTrust.1629873728908\",\"status.workspaceTrust.a706cff5c1c313b963eb763506dc56ea\",\"status.workspaceTrust.c2f527ebd55cffab33d6cb3051cb1860\",\"status.workspaceTrust.782375bcbfde04e41bb2b3d268ae04c0\",\"status.workspaceTrust.1630287700899\",\"status.workspaceTrust.31d0f71b2d3a971aa89763c5350142be\",\"status.workspaceTrust.1630314048477\",\"status.workspaceTrust.1630318141005\",\"status.workspaceTrust.1630380935978\",\"status.workspaceTrust.1630393293517\",\"status.workspaceTrust.1630397214057\",\"status.workspaceTrust.1630400874405\",\"status.workspaceTrust.1630460341011\",\"status.workspaceTrust.1630547222974\",\"status.workspaceTrust.1630547280055\",\"status.workspaceTrust.2a067fbc0d420fe5f471ab1c6a2101ce\",\"status.workspaceTrust.1630639320937\",\"status.workspaceTrust.1630653185479\",\"status.workspaceTrust.1630654748928\",\"status.workspaceTrust.1630656522634\",\"status.workspaceTrust.1630995240422\",\"status.workspaceTrust.1631181640392\",\"status.workspaceTrust.1631520210248\",\"status.workspaceTrust.1631521022148\",\"status.workspaceTrust.1631521265586\",\"status.workspaceTrust.1631586892777\",\"status.workspaceTrust.1631587068345\",\"status.workspaceTrust.1631602269509\",\"status.workspaceTrust.4c515a90ef16b1b8b2ac433c1a20ea5e\",\"status.workspaceTrust.affe20afa1edf17082f2c3a4e68a3685\",\"status.workspaceTrust.1631783357299\",\"status.workspaceTrust.1631786527458\",\"status.workspaceTrust.1631843677506\",\"status.workspaceTrust.191d1e488b7a2ef3fcf1a61204074d8a\",\"status.workspaceTrust.1631846708955\",\"status.workspaceTrust.44149866e3220efbde47d3692eb6a62c\",\"status.workspaceTrust.1631875352125\",\"status.workspaceTrust.1631875368210\",\"status.workspaceTrust.1631935150566\",\"status.workspaceTrust.1631946654385\",\"status.workspaceTrust.1631947059502\",\"status.workspaceTrust.a6f20e8ed1f1458913c28981f8fe5e93\",\"status.workspaceTrust.1632275013885\",\"status.workspaceTrust.1632381928402\",\"status.workspaceTrust.b337a74e80f150e8024c8cf8d0b253a8\",\"status.workspaceTrust.1632447626679\",\"status.workspaceTrust.60350a241162d293e367a7642dd0744e\",\"status.workspaceTrust.1632454798987\",\"status.workspaceTrust.8f4c1e0ee5fdb632c96264b577630a0f\",\"status.workspaceTrust.1632475374967\",\"status.workspaceTrust.1632622800401\",\"status.workspaceTrust.1632646488691\",\"status.workspaceTrust.a231cd4e2d7e79641b398350c4dd0734\",\"status.workspaceTrust.773e0a070f357f1c255a7bcd60cf2d2a\",\"status.workspaceTrust.1632822591063\",\"status.workspaceTrust.1694232122524\",\"status.workspaceTrust.ce420b0c115a50421bf781d9598a190f\",\"status.workspaceTrust.1694283371526\",\"status.workspaceTrust.6c76dd123b3814170dd7184e460e1044\",\"status.workspaceTrust.1694288292504\",\"status.workspaceTrust.1694291395770\",\"status.workspaceTrust.7378fe5fc447e0d52b59c78c28b74f31\",\"status.workspaceTrust.1694838377604\",\"status.workspaceTrust.069e5281ba2193d0767ee992e9be6d21\",\"status.workspaceTrust.1694862582237\",\"status.workspaceTrust.31a00a299e54cffabc24f960f3d2857d\",\"status.workspaceTrust.124dc72c1a9239973a7545f4db0aec25\",\"status.workspaceTrust.1705417616643\",\"status.workspaceTrust.c374354ad7212819241ff18e3f02838a\",\"status.workspaceTrust.1705417639211\",\"status.workspaceTrust.b0d63709d0c9b591b6276e566f0af561\",\"status.workspaceTrust.1705418320634\",\"status.workspaceTrust.1706521069417\",\"status.workspaceTrust.1708369108719\",\"status.workspaceTrust.1708370659680\",\"status.workspaceTrust.8428b6eb40e907dc5a6ae63073e475cf\",\"status.workspaceTrust.6876b42a08e74f70c82cc36046952e9e\",\"status.workspaceTrust.1708701596442\",\"status.workspaceTrust.298bc009031560a4dccbf84bacfb4e31\",\"status.workspaceTrust.1708714787725\",\"status.workspaceTrust.1708714883622\",\"status.workspaceTrust.1708766742191\",\"status.workspaceTrust.1708769262025\",\"status.workspaceTrust.1708865834042\",\"status.workspaceTrust.1708866224770\",\"status.workspaceTrust.4636e7503336e3729e2f6070555b9b54\",\"status.workspaceTrust.28fb8332544f3f4919e94ef60acfea66\",\"status.workspaceTrust.ea397c96d9e9afd5f966c42a36343238\",\"status.workspaceTrust.70e6b277b805b552b5652fe132b86865\",\"status.workspaceTrust.1708934580036\",\"status.workspaceTrust.c42fecd48671e7f354e9b757be27afc6\",\"status.workspaceTrust.1708935993022\",\"status.workspaceTrust.1708936027185\",\"status.workspaceTrust.4cb2c5b2c413f799db9bd0711523ccc5\",\"status.workspaceTrust.c83786c03d94f20ac484a2d9582d3821\",\"status.workspaceTrust.1709027809154\",\"status.workspaceTrust.1709031939075\",\"status.workspaceTrust.82377f47f5f834e34329a066fa95c546\",\"status.workspaceTrust.1709044601972\",\"status.workspaceTrust.1709046814707\",\"status.workspaceTrust.52deb0d80d32c5916c876140a329ae6e\",\"status.workspaceTrust.1709048622024\",\"status.workspaceTrust.1709052924427\",\"status.workspaceTrust.ecd2fb5144c9878e0ea4359941601f50\",\"status.workspaceTrust.1709053339777\",\"status.workspaceTrust.0d346c9e5ba4541367c2c16894eace23\",\"status.workspaceTrust.1709056014491\",\"status.workspaceTrust.b881e751fdff995ecbd5bb17210ee195\",\"status.workspaceTrust.1709090484878\",\"status.workspaceTrust.1709090485448\",\"status.workspaceTrust.fc66e181930f3e57839bc6d36a6a5847\",\"status.workspaceTrust.1709090827584\",\"status.workspaceTrust.ae49c52d709db5a97ed43414210e21b2\",\"status.workspaceTrust.1709092445275\",\"status.workspaceTrust.a19adeeb0b020552fcc41f5037c6679b\",\"status.workspaceTrust.1709092483448\",\"status.workspaceTrust.233b6eb43e5309857428e93f7ac6e324\",\"status.workspaceTrust.1709116646673\",\"status.workspaceTrust.1709177079131\",\"status.workspaceTrust.00189e0fdae6794f6440bd757bce28f6\",\"status.workspaceTrust.8d7b7df1f5fe4cd7acbc1d6a16beb4dc\",\"status.workspaceTrust.1710082957181\",\"status.workspaceTrust.f922640bb0e5e2d0154da208aa3f770e\",\"status.workspaceTrust.1710118698685\",\"status.workspaceTrust.1710120189049\",\"status.workspaceTrust.a9eccddad7d2e378132efcd749552f7e\",\"status.workspaceTrust.1710146915567\",\"status.workspaceTrust.1710152326485\",\"status.workspaceTrust.f77f88ca4211b55f7b72e773d39ccd46\",\"status.workspaceTrust.7f0f39f8fb45c235b5b57ee2ee132b23\",\"status.workspaceTrust.1710338600385\",\"status.workspaceTrust.1710344607182\",\"status.workspaceTrust.0eb5dc7396a54c40aca419dc03b9f267\"]"
+		},
+		"workbench.telemetryOptOutShown": {
+			"version": 1,
+			"value": "true"
+		},
+		"workbench.view.debug.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.debug.welcome\",\"isHidden\":false},{\"id\":\"workbench.debug.variablesView\",\"isHidden\":false},{\"id\":\"workbench.debug.watchExpressionsView\",\"isHidden\":false},{\"id\":\"workbench.debug.callStackView\",\"isHidden\":false},{\"id\":\"workbench.debug.loadedScriptsView\",\"isHidden\":false},{\"id\":\"workbench.debug.breakPointsView\",\"isHidden\":false},{\"id\":\"jsBrowserBreakpoints\",\"isHidden\":false},{\"id\":\"jsExcludedCallers\",\"isHidden\":false},{\"id\":\"deveco-device-tool-debug.memoryBreakpoint\",\"isHidden\":false},{\"id\":\"deveco-device-tool-debug.peripherals\",\"isHidden\":false},{\"id\":\"deveco-device-tool-debug.livewatch\",\"isHidden\":false},{\"id\":\"deveco-device-tool-debug.memory\",\"isHidden\":false},{\"id\":\"deveco-device-tool-debug.disassembly\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.deveco.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"deveco-activitybar.quickAccess\",\"isHidden\":false},{\"id\":\"deveco-activitybar.projectTasks\",\"isHidden\":false},{\"id\":\"deveco-activitybar.remoteDevelopment\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.dockerView.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"dockerContainers\",\"isHidden\":false},{\"id\":\"dockerImages\",\"isHidden\":false},{\"id\":\"dockerRegistries\",\"isHidden\":false},{\"id\":\"dockerNetworks\",\"isHidden\":false},{\"id\":\"dockerVolumes\",\"isHidden\":false},{\"id\":\"vscode-docker.views.dockerContexts\",\"isHidden\":false},{\"id\":\"vscode-docker.views.help\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.github-pull-request.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"github:createPullRequestWebview\",\"isHidden\":false},{\"id\":\"github:compareChangesFiles\",\"isHidden\":false},{\"id\":\"github:compareChangesCommits\",\"isHidden\":false},{\"id\":\"prStatus:github\",\"isHidden\":false},{\"id\":\"github:activePullRequest\",\"isHidden\":false},{\"id\":\"github:activePullRequest:welcome\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.github-pull-requests.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"github:login\",\"isHidden\":false},{\"id\":\"pr:github\",\"isHidden\":false},{\"id\":\"issues:github\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.gitlens.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"gitlens.views.updates\",\"isHidden\":false},{\"id\":\"gitlens.views.welcome\",\"isHidden\":false},{\"id\":\"gitlens.views.home\",\"isHidden\":false},{\"id\":\"gitlens.views.workspaces\",\"isHidden\":false},{\"id\":\"gitlens.views.account\",\"isHidden\":false},{\"id\":\"gitlens.views.drafts\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.gitlensInspect.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"gitlens.views.commitDetails\",\"isHidden\":false},{\"id\":\"gitlens.views.lineHistory\",\"isHidden\":false},{\"id\":\"gitlens.views.fileHistory\",\"isHidden\":false},{\"id\":\"gitlens.views.timeline\",\"isHidden\":false},{\"id\":\"gitlens.views.searchAndCompare\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.gitlensPanel.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"gitlens.views.graph\",\"isHidden\":false},{\"id\":\"gitlens.views.graphDetails\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.i18n-ally.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"i18n-ally-locales-sidebar-file\",\"isHidden\":false},{\"id\":\"i18n-ally-locales-progress\",\"isHidden\":false},{\"id\":\"i18n-ally-locales-tree\",\"isHidden\":false},{\"id\":\"i18n-ally-locales-usage\",\"isHidden\":false},{\"id\":\"i18n-ally-help-feedback\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.postcode.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"postcode.request\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.postman-console-view-container.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"postman-console-view\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.project-manager.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"projectsExplorerFavorites\",\"isHidden\":false},{\"id\":\"projectsExplorerGit\",\"isHidden\":false},{\"id\":\"projectsExplorerSVN\",\"isHidden\":false},{\"id\":\"projectsExplorerAny\",\"isHidden\":false},{\"id\":\"projectsExplorerMercurial\",\"isHidden\":false},{\"id\":\"projectsExplorerVSCode\",\"isHidden\":false},{\"id\":\"projectManagerHelpAndFeedback\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.sidebar-panel.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"postman-for-vscode.sidebar-panel\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.todo-tree-container.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"todo-tree-view\",\"isHidden\":false}]"
+		},
+		"workbench.view.extension.todomd.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"todomd.webviewTasks\",\"isHidden\":false},{\"id\":\"todomd.tasks\",\"isHidden\":false},{\"id\":\"todomd.tags\",\"isHidden\":false},{\"id\":\"todomd.projects\",\"isHidden\":false},{\"id\":\"todomd.contexts\",\"isHidden\":false},{\"id\":\"todomd.archived\",\"isHidden\":false},{\"id\":\"todomd.due\",\"isHidden\":false},{\"id\":\"todomd.generic1\",\"isHidden\":false},{\"id\":\"todomd.generic2\",\"isHidden\":false},{\"id\":\"todomd.generic3\",\"isHidden\":false}]"
+		},
+		"workbench.view.extensions.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.views.extensions.popular\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.workspaceRecommendations\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.installed\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.otherRecommendations\",\"isHidden\":false},{\"id\":\"extensions.recommendedList\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.enabled\",\"isHidden\":true},{\"id\":\"workbench.views.extensions.disabled\",\"isHidden\":true},{\"id\":\"workbench.views.extensions.marketplace\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.searchInstalled\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.searchEnabled\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.searchDisabled\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.searchOutdated\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.searchBuiltin\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.builtinFeatureExtensions\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.builtinThemeExtensions\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.builtinProgrammingLanguageExtensions\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.installed.empty\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.searchWorkspaceUnsupported\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.untrustedUnsupportedExtensions\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.untrustedPartiallySupportedExtensions\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.virtualUnsupportedExtensions\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.virtualPartiallySupportedExtensions\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.searchRecentlyUpdated\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.deprecatedExtensions\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.remote.installed\",\"isHidden\":false},{\"id\":\"workbench.views.extensions.web.installed\",\"isHidden\":false}]"
+		},
+		"workbench.view.remote.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"remoteHub.views.workspaceRepositories\",\"isHidden\":false},{\"id\":\"github.codespaces.explorer\",\"isHidden\":false},{\"id\":\"github.codespaces.performanceExplorer\",\"isHidden\":false},{\"id\":\"github.codespaces.warnExplorer\",\"isHidden\":false},{\"id\":\"~remote.helpPanel\",\"isHidden\":false}]"
+		},
+		"workbench.view.search.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.view.search\",\"isHidden\":false}]"
+		},
+		"workbench.view.sync.state.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"workbench.views.sync.merges\",\"isHidden\":false},{\"id\":\"workbench.views.sync.remoteActivity\",\"isHidden\":false},{\"id\":\"workbench.views.sync.machines\",\"isHidden\":false},{\"id\":\"workbench.views.sync.localActivity\",\"isHidden\":true},{\"id\":\"workbench.views.sync.troubleshoot\",\"isHidden\":true},{\"id\":\"workbench.views.sync.conflicts\",\"isHidden\":false}]"
+		},
+		"workbench.welcomePage.hiddenCategories": {
+			"version": 1,
+			"value": "[\"Intermediate\",\"Setup\",\"Beginner\"]"
+		},
+		"workbench.welcomePage.walkthroughMetadata": {
+			"version": 1,
+			"value": "[[\"eamodio.gitlens#gitlens.welcome\",{\"firstSeen\":1694233946045,\"stepIDs\":[\"gitlens.welcome.tutorial\",\"gitlens.welcome.sidebars\",\"gitlens.welcome.currentLineBlame\",\"gitlens.welcome.fileAnnotations\",\"gitlens.welcome.revisionHistory\",\"gitlens.welcome.commitGraph\",\"gitlens.welcome.workspaces\",\"gitlens.welcome.hostingServiceIntegrations\",\"gitlens.welcome.labs\",\"gitlens.welcome.preview\",\"gitlens.welcome.trial\",\"gitlens.welcome.services\",\"gitlens.welcome.additional\"],\"manaullyOpened\":false}],[\"ms-vscode.remote-repositories#remoteRepositoriesWalkthrough\",{\"firstSeen\":1710004935237,\"stepIDs\":[\"editCommitRepo\",\"createGitHubPullRequest\",\"continueOn\",\"openRepo\",\"remoteIndicator\"],\"manaullyOpened\":false}],[\"ms-azuretools.vscode-docker#dockerStart\",{\"firstSeen\":1710348502377,\"stepIDs\":[\"openFolder\",\"openFolderMac\",\"scaffold\",\"buildImage\",\"runContainer\",\"dockerExplorer\",\"pushImage\",\"azDeploy\",\"learn\"],\"manaullyOpened\":false}]]"
+		},
+		"~remote.forwardedPortsContainer.hidden": {
+			"version": 1,
+			"value": "[{\"id\":\"~remote.forwardedPorts\",\"isHidden\":false}]"
+		}
+	}
+}
