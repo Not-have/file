@@ -155,3 +155,229 @@ public class Test02 {
 }
 ```
 
+# 五、部分指令（DDL）
+
+注：登录当前数据库之后，才可以运行 mysql 指令
+
+```bash
+# 登录
+mysql -uroot -proot
+# mysql -u用户名 -p密码
+```
+
+## 1、查看当前数据库
+
+``` mysql
+show databases;
+-- SQL 语句以 ; 结尾
+-- 默认安装号是有四个库，这四个不要动
+-- information_schema
+-- mysql              
+-- performance_schema 
+-- sys
+```
+
+## 2、创建数据库
+
+```mysql
+create database test01;
+
+-- Query OK, 1 row affected (0.01 sec)
+-- 数据库名称一版不要修改
+```
+
+## 3、删除数据库
+
+```mysql
+drop database test01;
+
+-- Query OK, 0 rows affected (0.01 sec)
+```
+
+## 4、使用数据库
+
+```mysql
+use 库名;
+```
+
+## 5、查询当前使用的数据库
+
+```mysql
+select database();
+```
+
+## 6、约束
+
+可以限制表的插入、更新和删除等，例如：id、日期等；
+
+主键不能重复。
+
+### 1）设置主键 `primary key`
+
+① 初始时设置主键
+
+```mysql
+create table test01(
+	id int(11) primary key,
+	-- mysql 中没有 String 所以使用 varchar(这个里面定义字符的长度)
+	name varchar(30)
+);
+
+insert into test01 (id, name) values(2, "哈哈哈");
+```
+
+② 后面指定主键
+
+```mysql
+create table test02(
+	id int(11),
+	-- mysql 中没有 String 所以使用 varchar(这个里面定义字符的长度)
+	name varchar(30),
+	age int,
+	primary key(id)  -- 指定主键
+)
+
+INSERT INTO test02(id, name, age) VALUES(2, '呵呵呵', 1);
+```
+
+③ 对已建成的表设置主键
+
+```mysql
+create table test03(
+	id int(11),
+	-- mysql 中没有 String 所以使用 varchar(这个里面定义字符的长度)
+	name varchar(30),
+	age int
+)
+
+INSERT INTO test03(id, name, age) VALUES(2, '呵呵呵', 1);
+
+-- 修改表，设置主键,设置主键时，上面创建的一定要存在 id
+alter table test03 add primary key (id);
+```
+
+④ 直接在 navicat  中设置
+
+![image-20240526225055560](https://not-have.github.io/file/images/image-20240526225055560.png)
+
+### 2）自增约束 `primary key auto_increment`
+
+注：自增约束，主要是配合主键使用，防止主键为空、重复。
+
+```mysql
+create table test04(
+	id int(11) primary key auto_increment,
+	-- mysql 中没有 String 所以使用 varchar(这个里面定义字符的长度)
+	name varchar(30)
+)
+
+insert into test04(name) values("哈哈哈");
+-- 每次自增都是给 id + 1
+insert into test04(name) values("啊啊啊");
+insert into test04(name) values("呵呵呵");
+
+-- 删除 不影响自增顺序
+delete from test04 where id = 3;
+insert into test04(name) values("啦啦啦啦");
+```
+
+### 3）唯一约束 `unique`
+
+```mysql
+create table test05(
+	id int(11),
+	-- mysql 中没有 String 所以使用 varchar(这个里面定义字符的长度)
+	name varchar(30) unique
+)
+
+insert into test05(id, name) values(1, "哈哈哈");
+-- 报错：1062 - Duplicate entry '哈哈哈' for key 'test05.name'
+insert into test05(id, name) values(2, "哈哈哈");
+```
+
+### 4）非空约束 `not null`
+
+```mysql
+create table test06(
+	id int(11),
+	-- mysql 中没有 String 所以使用 varchar(这个里面定义字符的长度)
+	name varchar(30) not null
+)
+
+-- 报错：1364 - Field 'name' doesn't have a default value
+insert into test06(id) values(1);
+
+-- 正确
+insert into test06(id, name) values(1, "呵呵呵");
+-- 只指定了 name 不为空，但是可以重复
+insert into test06(id, name) values(1, "呵呵呵");
+```
+
+### 5）默认值 
+
+```mysql
+create table test07(
+	id int(11),
+	-- mysql 中没有 String 所以使用 varchar(这个里面定义字符的长度)
+	sex char(1) default "女"
+)
+
+insert into test06(id) values(1);
+
+insert into test06(id, sex) values(1, "男");
+```
+
+### 6）外键约束
+
+注：多表之间的一种关联关系的一种限制。
+
+```mysql
+-- 商品
+create table tb_goods(
+	id int primary key,
+	name varchar(20),
+	description varchar(100)
+)
+
+-- 订单（订单表关联了商品）
+create table tb_order(
+	id int primary key,
+	time datetime,
+  goodId int,
+	-- 设置外键：constraint 外键名 foreign key (当前表中的列名) references 表(主键) 
+	constraint relation_order_goods foreign key (goodId) references tb_goods(id)
+)
+
+
+/*
+被引用的表被成为父表 tb_goods
+引用别人的表称为子表 tb_order
+
+*/
+
+insert into tb_goods(id, name, description) values(1, "小米", "手机");
+insert into tb_goods(id, name, description) values(2, "锤子", "手机");
+insert into tb_goods(id, name, description) values(3, "魅族", "手机");
+
+-- 1452 - Cannot add or update a child row: a foreign key constraint fails (`test1`.`tb_order`, CONSTRAINT `relation_order_goods` FOREIGN KEY (`goodId`) REFERENCES `tb_goods` (`id`)) 给子表添加一个父没有的
+insert into tb_order values(1, "2024-05-27", 3);
+insert into tb_order values(2, "2024-05-27", 3);
+
+-- 子表可以随意删
+delete from tb_order where id = 2;
+
+-- 父表被引用的数据不能删
+delete from tb_goods where id = 1;
+-- 1451 - Cannot delete or update a parent row: a foreign key constraint fails (`test1`.`tb_order`, CONSTRAINT `relation_order_goods` FOREIGN KEY (`goodId`) REFERENCES `tb_goods` (`id`))
+delete from tb_goods where id = 3; -- 有引用
+```
+
+![image-20240527001831151](https://not-have.github.io/file/images/image-20240527001831151.png)
+
+# 六、查询
+
+
+
+
+
+39
