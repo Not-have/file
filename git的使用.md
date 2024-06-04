@@ -131,6 +131,12 @@ git push origin --delete 分支名
 git remote prune origin
 ```
 
+## 6、更新本地分支
+
+```bash
+git remote update origin -p
+```
+
 # 六、修改分支名
 
 ## 1、先把远端的分支拉到本地
