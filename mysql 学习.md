@@ -78,84 +78,7 @@ create table t_book(
 
 ![image-20231006220601208](https://not-have.github.io/file/images/image-20231006220601208.png)
 
-# 四、java 链接数据库
-
-## 1、下载 JBDC 驱动
-
-地址：https://dev.mysql.com/downloads/connector/j/?os=26
-
-![image-20231119220940508](https://not-have.github.io/file/images/image-20231119220940508.png)
-
-## 2、插入数据
-
-```java
-package com.mysql.test01;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-public class Test01 {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        // 1、加载驱动
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        /**
-         * 2、获取链接
-         * riverManager.getConnection 要三个参数
-         */
-        Connection conn = DriverManager.getConnection("jdbc:mysql://本机IP（127.0.0.1）:端口号（3306）/数据库名称?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true", "root", "root");
-        // 3、创建会话
-        Statement sta = conn.createStatement();
-        // 4、发送 sql （也就是这里写 sql 语句）
-        long i = sta.executeLargeUpdate("insert into t_book(id, name, author, price) values (1, '测试一', 'test', 22)");
-        // 5、处理结果
-
-        if (i > 0) {
-            System.out.println("插入成gong");
-        } else {
-            System.out.println("插入 error");
-        }
-        // 6、关闭资源
-        sta.close();
-        conn.close();
-    }
-}
-```
-
-## 3、查询
-
-```java
-package com.mysql.test01;
-
-import java.sql.*;
-
-public class Test02 {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        // 1、加载驱动
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        /**
-         * 2、获取链接
-         * riverManager.getConnection 要三个参数
-         */
-        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test1?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true", "root", "root");
-        // 3、创建会话
-        Statement sta = conn.createStatement();
-        // 4、发送 sql （也就是这里写 sql 语句）
-        // ResultSet 理解为结果集合
-        ResultSet resultSet = sta.executeQuery("select * from t_book");
-        // 5、判断是否有记录
-        while (resultSet.next()) {
-            System.out.println(resultSet.getString("name"));
-        }
-        // 6、关闭资源
-        sta.close();
-        conn.close();
-    }
-}
-```
-
-# 五、部分指令（DDL）
+# 四、部分指令（DDL）
 
 注：登录当前数据库之后，才可以运行 mysql 指令
 
@@ -374,7 +297,7 @@ delete from tb_goods where id = 3; -- 有引用
 
 ![image-20240527001831151](https://not-have.github.io/file/images/image-20240527001831151.png)
 
-# 六、查询
+# 五、查询
 
 基础数据创建：
 
@@ -555,11 +478,11 @@ SELECT * FROM tb_search LIMIT 2;
 SELECT * FROM tb_search LIMIT 2, 2;
 ```
 
-# 七、多表联查
+# 六、多表联查
 
 ## 1、合并结果集
 
-### 1）纵向拼接
+### 纵向拼接
 
 注：
 
@@ -597,17 +520,199 @@ SELECT * FROM tb_test02
 
 最好数据类型、数量要一致
 
+UNION 数据重复，会进行去重
+
+UNION ALL 数据重复了，也会保留，不会进行去重操作
 */
 SELECT id, name FROM tb_test01
 UNION
 SELECT id, name FROM tb_test02
 ```
 
+## 2、链接查询
+
+注：连接查询是将多张表数据链接在一起（横向）查询返回。
+
+![image-20240617225909241](https://not-have.github.io/file/images/image-20240617225909241.png)
+
+这就是不正确的，`链接查询最重要的就是过滤条件`。
+
+链接查询分为以下几种：
+
+* 内链接
+* 外连接
+* 子查询
+
+### 1）内链接
+
+```mysql
+-- 一个班级中存在多个学生，这个就是一对多
+
+-- 创建学生表 
+
+DROP TABLE IF EXISTS tb_student;
+
+CREATE TABLE tb_student (
+	id INT(11) DEFAULT NULL,
+	name VARCHAR(99) DEFAULT NULL,
+	age INT(11) DEFAULT NULL,
+	sex CHAR(6) DEFAULT NULL,
+	score CHAR(11) DEFAULT NULL,
+	cid INT(11) DEFAULT NULL,
+	groupLeaderId INT(11) DEFAULT NULL
+);
+
+
+INSERT INTO tb_student VALUES (1, "张三", 22, "男", 44, 1, 22);
+INSERT INTO tb_student VALUES (2, "张二", 23, "男", 55, 1, 23);
+INSERT INTO tb_student VALUES (3, "张四", 24, "男", 66, 2, 24);
+INSERT INTO tb_student VALUES (4, "张五", 26, "女", 86, 2, 25);
+INSERT INTO tb_student VALUES (5, "张六", 27, "男", 24, 1, 26);
+INSERT INTO tb_student VALUES (6, "张七", 29, "女", 85, 3, 27);
+INSERT INTO tb_student VALUES (7, "张八", 18, "女", 12, 3, 28);
+INSERT INTO tb_student VALUES (8, "张九", 16, "女", 32, 3, 29);
+INSERT INTO tb_student VALUES (9, "张十", 17, "女", 7, 1, 21);
+INSERT INTO tb_student VALUES (10, "张十一", 15, "男", 75, 2, 20);
+INSERT INTO tb_student VALUES (11, "张十二", 19, "女", 23, 1, 19);
+
+-- 创建班级表
+
+DROP TABLE IF EXISTS tb_class;
+
+CREATE TABLE tb_class (
+	cid INT(11) DEFAULT NULL,
+	cname VARCHAR(99) DEFAULT NULL,
+	caddress VARCHAR(11) DEFAULT NULL
+);
+
+
+INSERT INTO tb_class VALUES (1, "一班", "1 楼");
+INSERT INTO tb_class VALUES (2, "二班", "2 楼");
+INSERT INTO tb_class VALUES (4, "三班", "3 楼");
+
+-- 语法(查询学生信息以及学生关联的班级信息)
+SELECT * FROM 表名一 INNER JOIN 表名二 on 表名一.字段名 = 表名二.字段名;
+
+SELECT * FROM tb_student INNER JOIN tb_class on tb_student.cid = tb_class.cid;
+```
+
+![image-20240617232342497](https://not-have.github.io/file/images/image-20240617232342497.png)
+
+```mysql
+-- 指定学生 学号 姓名 班号 班名
+SELECT tb_student.id, tb_student.name, tb_class.cname FROM tb_student INNER JOIN tb_class on tb_student.cid = tb_class.cid;
+
+-- 也可以给表设置别名
+-- as 可以省略
+SELECT s.id, s.name, c.cname 
+FROM tb_student as s 
+INNER JOIN tb_class as c
+on s.cid = c.cid;
+
+-- 简写 别名和上面的写法一样
+SELECT tb_student.id, tb_student.name, tb_class.cname FROM tb_student, tb_class WHERE tb_student.cid = tb_class.cid;
+```
+
+ ![image-20240617232654730](https://not-have.github.io/file/images/image-20240617232654730.png)
+
+特点：
+
+`只会查询符合关联条件的数据。`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 40
 
-## 2、链接查询
+# ~~java 链接数据库~~
 
+## 1、下载 JBDC 驱动
 
+地址：https://dev.mysql.com/downloads/connector/j/?os=26
+
+![image-20231119220940508](https://not-have.github.io/file/images/image-20231119220940508.png)
+
+## 2、插入数据
+
+```java
+package com.mysql.test01;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Test01 {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        // 1、加载驱动
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        /**
+         * 2、获取链接
+         * riverManager.getConnection 要三个参数
+         */
+        Connection conn = DriverManager.getConnection("jdbc:mysql://本机IP（127.0.0.1）:端口号（3306）/数据库名称?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true", "root", "root");
+        // 3、创建会话
+        Statement sta = conn.createStatement();
+        // 4、发送 sql （也就是这里写 sql 语句）
+        long i = sta.executeLargeUpdate("insert into t_book(id, name, author, price) values (1, '测试一', 'test', 22)");
+        // 5、处理结果
+
+        if (i > 0) {
+            System.out.println("插入成gong");
+        } else {
+            System.out.println("插入 error");
+        }
+        // 6、关闭资源
+        sta.close();
+        conn.close();
+    }
+}
+```
+
+## 3、查询
+
+```java
+package com.mysql.test01;
+
+import java.sql.*;
+
+public class Test02 {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        // 1、加载驱动
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        /**
+         * 2、获取链接
+         * riverManager.getConnection 要三个参数
+         */
+        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test1?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true", "root", "root");
+        // 3、创建会话
+        Statement sta = conn.createStatement();
+        // 4、发送 sql （也就是这里写 sql 语句）
+        // ResultSet 理解为结果集合
+        ResultSet resultSet = sta.executeQuery("select * from t_book");
+        // 5、判断是否有记录
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString("name"));
+        }
+        // 6、关闭资源
+        sta.close();
+        conn.close();
+    }
+}
+```
 
