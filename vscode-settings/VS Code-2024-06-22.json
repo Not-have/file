@@ -1,0 +1,111 @@
+{
+    "update.mode": "manual",
+    "update.showReleaseNotes": false,
+    "telemetry.telemetryLevel": "off",
+    // 搜索过滤
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/dist": true,
+        "/lib": true
+    },
+    /* eslint */
+    // "eslint.run": "onSave",
+    // 要格式化的文件类型
+    "eslint.validate": [
+        "typescript",
+        "typescriptreact",
+        "javascript",
+        "tsx"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "never"
+    },
+    // 在.js中，写div按下tab就可以自动补全，而不需要写<div再补全
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "editor.renderWhitespace": "all",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.unicodeHighlight.includeComments": false,
+    "editor.fontSize": 18,
+    "window.zoomLevel": -2, // 侧边栏字体大小
+    "git.confirmSync": false,
+    "terminal.integrated.env.osx": {
+        "FIG_NEW_SESSION": "1"
+    },
+    // "editor.formatOnType": false,
+    // "javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+    // "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+    // "editor.accessibilitySupport": "off",
+    "editor.wordWrap": "on",
+    "debug.console.wordWrap": false,
+    "notebook.output.wordWrap": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.detectIndentation": false,
+    "terminal.integrated.altClickMovesCursor": false,
+    "prettier.tabWidth": 4,
+    "debug.showInStatusBar": "always",
+    "problems.showCurrentInStatus": true,
+    "editor.suggest.showStatusBar": true,
+    // "commentTranslate.source": "webxmsj.baidu-translate-baidu",
+    // "baiduTranslate.appId": "20210204000690101",
+    // "baiduTranslate.appKey": "NXbR83r4AT_21sVZ7KDV",
+    "commentTranslate.hover.string": true,
+    "commentTranslate.hover.variable": true,
+    "commentTranslate.hover.content": true,
+    "commentTranslate.targetLanguage": "zh-CN",
+    "commentTranslate.maxTranslationLength": 10000,
+    "commentTranslate.ignore": [
+        {
+            "languageId": "javascript,typescript,javascriptreact,typescriptreact",
+            "regular": "[\\*\\s]+"
+        },
+        {
+            "languageId": "dart",
+            "regular": "[\\s|/]+"
+        }
+    ],
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    // 同步时 忽略的插件
+    "settingsSync.ignoredExtensions": [
+      "vue.vscode-typescript-vue-plugin",
+      "dariofuzinato.vue-peek"
+    ],
+    "update.enableWindowsBackgroundUpdates": false,
+    // "[vue]": {
+    //     "editor.defaultFormatter": "Vue.volar"
+    // },
+    // "[typescript]": {
+    //     "editor.defaultFormatter": "vscode.typescript-language-features"
+    // },
+    "files.autoSave": "off",
+    // "javascript.format.semicolons": "insert",
+    // "typescript.format.semicolons": "insert",
+    // "[html]": {
+    //     "editor.defaultFormatter": "vscode.html-language-features"
+    // },
+    "docker.languageserver.diagnostics.instructionJSONInSingleQuotes": "error",
+    // "[javascript]": {
+    //     "editor.defaultFormatter": "vscode.typescript-language-features"
+    // },
+    "terminal.integrated.profiles.windows": {
+        "Git Bash": {
+            "path": "D:\\git\\install\\bin\\bash.exe"
+        }
+    },
+    // "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "[javascript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "typescript.locale": "zh-CN",
+    "workbench.colorTheme": "Monokai"
+}
