@@ -619,25 +619,213 @@ SELECT tb_student.id, tb_student.name, tb_class.cname FROM tb_student, tb_class 
 
 `只会查询符合关联条件的数据。`
 
+### 2）外连接
+
+```mysql
+-- 语法(查询学生信息以及学生关联的班级信息)
+SELECT * FROM 表名一 LEFT|RIGHT OUTER JOIN 表名二 on 表名一.字段名 = 表名二.字段名;
+```
+
+外链接会保留不符合条件的信息。
+
+左 以左表为主
+
+右 以右表为主
+
+```mysql
+DROP TABLE IF EXISTS tb_student;
+
+CREATE TABLE tb_student (
+	id INT(11) DEFAULT NULL,
+	name VARCHAR(99) DEFAULT NULL,
+	age INT(11) DEFAULT NULL,
+	sex CHAR(6) DEFAULT NULL,
+	score CHAR(11) DEFAULT NULL,
+	cid INT(11) DEFAULT NULL,
+	groupLeaderId INT(11) DEFAULT NULL
+);
 
 
+INSERT INTO tb_student VALUES (1, "张三", 22, "男", 44, 1, 22);
+INSERT INTO tb_student VALUES (2, "张二", 23, "男", 55, 1, 23);
+INSERT INTO tb_student VALUES (3, "张四", 24, "男", 66, 2, 24);
+INSERT INTO tb_student VALUES (4, "张五", 26, "女", 86, 2, 25);
+INSERT INTO tb_student VALUES (5, "张六", 27, "男", 24, 1, 26);
+INSERT INTO tb_student VALUES (6, "张七", 29, "女", 85, 3, 27);
+INSERT INTO tb_student VALUES (7, "张八", 18, "女", 12, 3, 28);
+INSERT INTO tb_student VALUES (8, "张九", 16, "女", 32, 3, 29);
+INSERT INTO tb_student VALUES (9, "张十", 17, "女", 7, 1, 21);
+INSERT INTO tb_student VALUES (10, "张十一", 15, "男", 75, 2, 20);
+INSERT INTO tb_student VALUES (11, "张十二", 19, "女", 23, 1, 19);
 
 
+DROP TABLE IF EXISTS tb_class;
+
+CREATE TABLE tb_class (
+	cid INT(11) DEFAULT NULL,
+	cname VARCHAR(99) DEFAULT NULL,
+	caddress VARCHAR(11) DEFAULT NULL
+);
 
 
+INSERT INTO tb_class VALUES (1, "一班", "1 楼");
+INSERT INTO tb_class VALUES (2, "二班", "2 楼");
+INSERT INTO tb_class VALUES (4, "三班", "3 楼");
+
+SELECT * FROM tb_student s LEFT OUTER JOIN tb_class c on s.cid = c.cid;
+
+SELECT * FROM tb_student s RIGHT OUTER JOIN tb_class c on s.cid = c.cid;
+```
+
+### 3）子查询（subquery）
+
+注：也叫嵌套查询。
+
+将 sql 语句当表，写在 from 后
+
+将 sql 语句当条件，写在 where 后
+
+```mysql
+-- 子查询就是嵌套查询
+-- 查询的结果就是一张虚拟表
+
+SELECT * FROM tb_student WHERE sex = "男";
+SELECT id, name, sex, age FROM tb_student WHERE sex = "男";
 
 
+-- 子查询当表
+SELECT * FROM (SELECT id, name, sex, age FROM tb_student WHERE sex = "男") t WHERE t.age < 20;
 
+-- 子查询当作条件（但是注意条件值的个数，也就是列数和行数）
+SELECT age FROM tb_student WHERE id = 3;
 
+-- 年龄大于 id 为 3的这个的年龄
+SELECT * FROM tb_student WHERE age < (SELECT age FROM tb_student WHERE id = 3);
 
+-- 查询与 id 为 1 同一个班级的
+SELECT * FROM tb_student WHERE cid = (SELECT cid FROM tb_student WHERE id = 1);
+```
 
+# 八、[MySQL](https://www.mysqlzh.com/) 函数
 
+[docs](https://www.mysqlzh.com/doc/113.html)
 
+[docs](https://www.mysql.net.cn/doc/refman/8.0/en/functions.html)
 
+ ## 1、字符串函数
 
+| 名字                         | 描述                                                         | 示例                                                         |
+| :--------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| CHARSET(str)                 | 返回字符串的集                                               | SELECT CHARSET("李勇"); -- 返回字符集<br/>SELECT CHARSET("李勇") FROM DUAL; |
+| CONCAT(str1, str2, str3)     | 合并字符串                                                   | SELECT CONCAT("hello", "word", "!");<br/><br/>SELECT CONCAT(cid, name) FROM tb_student; |
+| INSTR(str, substr)           | 返回第一次出现的子字符串的索引<br/>返回 0 时表示不存在       | SELECT INSTR("hello", "o");                                  |
+| UCASE(str)                   | 转换成大写                                                   | SELECT UCASE("hello");                                       |
+| LCASE(str)                   | 转换成小写                                                   | SELECT LCASE("HELLO");                                       |
+| LEFT(str, len)               | 返回字符串最左边 len 的字符 str ，或者  NULL 如果任何参数是 NULL | SELECT LEFT("HELLO", 2);                                     |
+| RIGHT(str, len)              | 返回字符串最右边 len 的字符 str ，或者  NULL 如果任何参数是 NULL | SELECT RIGHT("HELLO", 2);                                    |
+| LENGTH(str)                  | str 的长度                                                   | SELECT LENGTH("hello");                                      |
+| REPLACE(str,from_str,to_str) | 在 str 中用 to_str 替换 from_str                             | SELECT REPLACE("hello.", ".", "!");                          |
+| LTRIM(str) <br />RTRIM(str)  | 去除前后空格                                                 | SELECT LTRIM(" hello");<br/>SELECT RTRIM("hello ");          |
 
+## 2、数学函数
 
-40
+[docs](https://www.mysql.net.cn/doc/refman/8.0/en/numeric-functions.html)
+
+| 名字          | 描述                                       | 示例                           |
+| ------------- | ------------------------------------------ | ------------------------------ |
+| ABS(X)        | 绝对值                                     | SELECT ABS(-1);                |
+| BIN(N)        | 十进制转二进制                             |                                |
+| CEILING(X)    | 向上取整                                   | SELECT CEILING(10.2);          |
+| FLOOR(X)      | 向下取整                                   | SELECT FLOOR(10.2);            |
+| FORMAT(X,D)   | 保留小数位数，x 真实的数字，d 保留几位小数 | SELECT FORMAT(10.333333,2);    |
+| TRUNCATE(X,D) | 截取                                       | SELECT TRUNCATE(10.633333, 2); |
+| ROUND(X, D)   | 四舍五入, D保留小数点后几位，可以不传      | SELECT ROUND(10.633333);       |
+| RAND()        | 随机数，0 ~ 1 之间                         | SELECT RAND                    |
+
+## 3、日期函数
+
+[docs](https://www.mysql.net.cn/doc/refman/8.0/en/date-and-time-functions.html)
+
+| 名字                              | 描述         | 示例                                                         |
+| --------------------------------- | ------------ | ------------------------------------------------------------ |
+| SYSDATE()                         | 获取当前时间 | SELECT SYSDATE();                                            |
+| NOW()                             | 获取当前时间 | SELECT NOW();                                                |
+| ADDTIME(expr1,expr2)              | 添加时间     | SELECT ADDTIME("00:01:00", "00:00:50")                       |
+| ADDDATE(date,INTERVAL expr unit)  | 添加日期     | SELECT ADDDATE('2024-06-19',INTERVAL 2 YEAR);<br/>SELECT ADDDATE('2024-06-19',INTERVAL 2 MONTH);<br/>SELECT ADDDATE('2024-06-19',INTERVAL 2 DAY); |
+| DATE_ADD(date,INTERVAL expr unit) | 添加日期     |                                                              |
+| CURRENT_TIMESTAMP()               | 当前时间戳   | SELECT CURRENT_TIMESTAMP();                                  |
+
+## 4、日期字符串转换函数
+
+### 1）日期 转 字符串
+
+```mysql
+-- date_format(data, '%Y-%m-%d');
+
+SELECT DATE_FORMAT(NOW(), '%Y-%m-%d');
+SELECT DATE_FORMAT(NOW(), '%Y年%m月%d日');
+```
+
+### 2）字符串 转 日期
+
+```mysql
+-- str_to_date('2024年06月19日');
+
+SELECT STR_TO_DATE('2024年06月19日','%Y年%m月%d日');
+```
+
+## 5、流程函数
+
+[docs](https://www.mysqlzh.com/doc/115.html)
+
+```mysql
+-- =============== 流程函数 ================
+-- IF(expr1,expr2,expr3)	如果expr1为真，则返回expr2，否则返回expr3
+-- isnull()函数,判断是否为空
+-- isnull(字段) 如果是null,返回1 不是null返回0
+
+-- 查询学生id,姓名,成绩,以及是否及格(60及以上及格)
+select sid,sname,score,if(score >= 60,'及格','不及格') 等级 from tb_student;
+
+-- 成年人,未成年
+select sid,sname,if(age >= 18,'成年','未成年') from tb_student;
+
+-- 查询学生id,姓名,成绩,如果成绩为null,显示缺考
+select sid,sname,if(isnull(score) = 1,'缺考',score) from tb_student;
+
+-- IFNULL(expr1,expr2)	如果 expr1不是NULL,则返回expr1，否则返回expr2；
+-- 查询学生id,姓名,成绩,如果成绩为null,显示缺考
+select sid,sname,ifnull(score,'缺考') 成绩 from stu;
+
+-- CASE [value] WHEN [value1] THEN[result1]… ELSE[default] END	如果value等于value1, 返回result1,否则返回default
+select case 4 
+when 1 then '一'
+when 2 then '二'
+when 3 then '三'
+else '其他'
+end as 结果
+-- 等值判断
+select case age 
+when 20 then '弱冠'
+when 15 then '豆蔻'
+when 95 then '耄耋'
+else '其他'
+end as 结果
+from tb_student;
+
+-- 范围判断
+-- CASE WHEN [expr1] THEN [result1]… ELSE [default] END	如果expr是真, 返回result1,否则返回default
+-- 查询学生id,姓名,成绩,及等级(60以下不及格,60-70,及格,71-80,中等,81-90良好,91-100优秀)
+select sid,sname,score,case
+when score < 60 then '不及格'
+when score <= 70 then '及格'
+when score <= 80 then '中等'
+when score <= 90 then '良好'
+else '优秀'
+end as 等级
+
+from tb_student;
+```
 
 # ~~java 链接数据库~~
 
