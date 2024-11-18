@@ -4,6 +4,10 @@
 
 ![image-20241029234909142](https://not-have.github.io/file/images/image-20241029234909142.png)
 
+注：
+
+① ArkTS 采用声明式开发规范。
+
 # 一、基础结构认识
 
 注：每一个页面，也就是一个组件。
@@ -45,5 +49,49 @@ struct Style {
 
  ![image-20240810164638151](https://not-have.github.io/file/images/image-20240810164638151.png)
 
-## 2、Text
+## 2、Button
+
+```ets
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello !';
+
+  build() {
+    Column() {
+      Row() {
+        Button(this.message,  { type: ButtonType.Normal, stateEffect: true }).borderRadius({topLeft: 10, bottomRight: 10})
+        Button(this.message,  { type: ButtonType.Normal, stateEffect: false }).borderRadius(4)
+        Button(this.message,  { type: ButtonType.Circle, stateEffect: true })
+        Button(this.message,  { type: ButtonType.Capsule, stateEffect: true }).onClick(() => {
+          console.log("点击")
+        })
+      }
+    }
+  }
+}
+```
+
+![image-20241103002905181](https://not-have.github.io/file/images/image-20241103002905181.png)
+
+## 3、Image 的使用
+
+```eetc
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello !';
+
+  build() {
+      Button(){
+        Row() {
+          Text(this.message)
+          Image($rawfile('API.svg')).height(100).width(100)
+        }
+      }.width(150).height(150)
+  }
+}
+```
+
+![image-20241103004339650](https://not-have.github.io/file/images/image-20241103004339650.png)
 
