@@ -208,3 +208,12 @@ Accept Incoming Change	 接受传入的更改
 Accept Both Change		     接受两种改变
 Compare Change			      比较变化
 
+
+# 十一、删除 package-lock.json
+
+```bash
+git rm --cached package-lock.json
+
+
+```
+
