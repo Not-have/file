@@ -250,3 +250,145 @@ struct Index {
 ```
 
 ![image-20241120002005972](./images/image-20241120002005972.png)
+
+# 三、API
+
+## 1、Ability Kit（程序框架服务）
+
+[docs](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/ability-kit-V5)
+
+entry/src/main/ets/abilitystage/DemoAbilityStage01.ets
+
+```ets
+import { AbilityStage } from "@kit.AbilityKit";
+
+export class DemoAbilityStage01 extends AbilityStage {
+  onCreate(): void {
+    console.log('创建')
+  }
+  onDestroy(): void {
+    console.log('销毁')
+  }
+}
+```
+
+配置
+
+![image-20241216235152511](./images/image-20241216235152511.png)
+
+注：在真机模拟器中查看。
+
+![image-20241222014717606](./images/image-20241222014717606.png)
+
+## 2、自定义启动页
+
+entry/src/main/ets/entryability/EntryAbility.ets
+
+```ts
+import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { window } from '@kit.ArkUI';
+
+export default class EntryAbility extends UIAbility {
+
+  onWindowStageCreate(windowStage: window.WindowStage): void {
+    // Main window is created, set main page for this ability
+    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
+
+		// 设置启动页
+    windowStage.loadContent('pages/Router', (err) => {
+      if (err.code) {
+        hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
+        return;
+      }
+      hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
+    });
+  }
+}
+```
+
+## 3、数据同步
+
+[docs](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/uiability-data-sync-with-ui-V5)
+
+### 1）使用EventHub进行数据通信
+
+[使用EventHub进行数据通信](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/uiability-data-sync-with-ui-V5#使用eventhub进行数据通信)：在[基类Context](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/application-context-stage-V5)中提供了[EventHub](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-inner-application-eventhub-V5)对象，可以通过发布订阅方式来实现事件的传递。在事件传递前，订阅者需要先进行订阅，当发布者发布事件时，订阅者将接收到事件并进行相应处理。
+
+注册一个自定义事件
+
+src/main/ets/entryability/EntryAbility.ets
+
+```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { UIAbility, Context, Want, AbilityConstant } from '@kit.AbilityKit';
+
+const DOMAIN_NUMBER: number = 0xFF00;
+const TAG: string = '[EventAbility]';
+
+export default class EntryAbility extends UIAbility {
+  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    // 获取eventHub
+    let eventhub = this.context.eventHub;
+    // 执行订阅操作
+    eventhub.on('event1', this.eventFunc);
+    eventhub.on('event1', (data: string) => {
+      // 触发事件，完成相应的业务操作
+    });
+    hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onCreate');
+  }
+
+  // ...
+  eventFunc(argOne: Context, argTwo: Context): void {
+    hilog.info(DOMAIN_NUMBER, TAG, '1. ' + `${argOne}, ${argTwo}`);
+    return;
+  }
+}
+```
+
+在UI中通过[eventHub.emit()](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-inner-application-eventhub-V5#eventhubemit)方法触发该事件，在触发事件的同时，根据需要传入参数信息
+
+```ts
+import { common } from '@kit.AbilityKit';
+import { promptAction } from '@kit.ArkUI';
+
+@Entry
+@Component
+struct UiAbility {
+
+  aboutToAppear(): void {
+    console.log("aboutToAppear")
+
+  }
+  onPageShow(): void {
+    console.log("onPageShow")
+  }
+
+  private context = getContext(this) as common.UIAbilityContext;
+  //
+  eventHubFunc(): void {
+    // 带1个参数触发自定义“event1”事件
+    this.context.eventHub.emit('event1', "1");
+  }
+
+
+  build() {
+    Column() {
+      Text("list").onClick(() => {
+        promptAction.showToast({
+          message: 'EventHubFuncA'
+        });
+      })
+      Button("按钮").onClick(() => this.eventHubFunc())
+    }
+  }
+}
+```
+
+![image-20241222033558265](./images/image-20241222033558265.png)
+
+
+
+### 2）使用AppStorage/LocalStorage进行数据同步
+
+[使用AppStorage/LocalStorage进行数据同步](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/uiability-data-sync-with-ui-V5#使用appstoragelocalstorage进行数据同步)：ArkUI提供了[AppStorage](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/arkts-appstorage-V5)和[LocalStorage](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/arkts-localstorage-V5)两种应用级别的状态管理方案，可用于实现应用级别和UIAbility级别的数据同步。
