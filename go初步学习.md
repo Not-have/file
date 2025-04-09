@@ -210,26 +210,33 @@ Controller（控制器）- 控制器作用于模型和视图上。它控制数�
 demo-gin-mvc        
 ├─ conf             存放配置文件
 │  └─ app.ini       存储本地数据库信息
-├─ controllers      
+├─ controllers      控制器，可以在这个里面进行一些简单的数据操作
 │  └─ admin         
 │  │  └─ login.go   
 │  │  └─ user.go    获取数据库中的所有 user 信息
-├─ middlewares      中间层，用于判断用户权限、或者处理数据
+├─ middlewares      中间键，用于判断用户权限（用于匹配路由，及匹配完成后的一系列操作）
 │  └─ init.go       数据处理的某个模块
-├─ models           连接数据库 和 映射数据库字段（也就是从数据库拿出来后给换一个名字等）
+├─ models           连接数据库 和 映射数据库字段（也就是从数据库拿出来后给换一个名字等）、公共模块及方法
 │  ├─ core.go       连接数据库的所有配置信息
 │  └─ user.go       修改数据库返回的映射信息，并重新起名字，使用在 controllers 层下
 ├─ routers          路由文件（也就是接口地址）
-│  └─ admin.go      接口的某一个模块，推荐一个模块一个文件
-├─ static           存放静态资源，例如：upload（上传的文件）
+│  └─ admin.go      接口的某一个模块，推荐一个模块一个文件，然后去走控制器，也可加入 中间键
+├─ static           存放静态资源，例如：upload（上传的文件）、css、js、对象存储
+├─ templates        存在 html 模版，也就是前端代码，但是一般情况不用，因为现在是前后端分离
 ├─ tmp              编译后的文件，不用在意
 ├─ README.md        描述
 ├─ go.mod           是 Go 模块的核心文件，用于定义模块的元信息和依赖关系
 ├─ go.sum           Go 模块的校验和文件，用于确保依赖的完整性和安全性（推荐上传 git）
-└─ main.go          入口文件
+└─ main.go          入口文件，首先走的这里
 ```
 
 ### 2、搭建的框架
 
 [docs](https://github.com/Not-have/demo-go/tree/main/demo-gin-mvc)
+
+### 3、项目流程图
+
+ ![image-20250315224136001](./images/image-20250315224136001.png)
+
+## 四、
 
