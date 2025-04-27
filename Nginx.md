@@ -26,7 +26,7 @@ nginx.exe -s stop
 nginx.exe -s reload
 ```
 
-# 一、nginx 配置示例
+## 一、nginx 配置示例
 
 注：nginx ——> conf ——> nginx.conf
 
@@ -128,9 +128,46 @@ fetch('/data')
     })
 ```
 
+## 二、Mac 
 
+### 1、基本指令
 
+安装
 
+```bash
+brew install nginx
+```
 
+查看nginx的配置信息
 
+```bash
+brew info nginx
+```
+
+![image-20250427234842089](./images/image-20250427234842089.png)
+
+安装位置（在这存放静态文件）
+
+```bash
+/opt/homebrew/Cellar/nginx
+```
+
+配置文件位置
+
+```bash
+/opt/homebrew/etc/nginx
+```
+
+启动
+
+```bash
+# 在全局执行，看是否可以打印出来版本号
+nginx
+```
+
+暂停
+
+```bash
+nginx -s stop
+```
 
