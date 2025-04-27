@@ -1,0 +1,94 @@
+{
+    "workbench.colorTheme": "Monokai",
+    "commentTranslate.hover.string": true,
+    "commentTranslate.hover.variable": true,
+    "commentTranslate.targetLanguage": "zh-CN",
+    "commentTranslate.source": "Baidu",
+    "commentTranslate.translationAli.accessKeyId": "20210204000690101",
+    "commentTranslate.translationAli.accessKeySecret": "l64kNdKTPhXAgugTQIGQ",
+    "update.enableWindowsBackgroundUpdates": false,
+    "update.mode": "none",
+    "workbench.iconTheme": "material-icon-theme",
+    "javascript.inlayHints.enumMemberValues.enabled": true,
+    // 关闭eslint检验
+    "eslint.enable": false,
+    // 保存后，根据eslint格式化
+    "editor.codeActionsOnSave":{
+		    "source.fixAll.eslint":true
+    },
+    "files.autoSave": "onWindowChange",
+    "terminal.integrated.tabs.location": "left",
+    "terminal.integrated.tabs.hideCondition": "never",
+    "terminal.integrated.tabs.enabled": false,
+    "editor.wordWrap": "on",
+	  "backgroundCover.opacity": 0.4,
+    /*
+    下面的是 注释
+    */
+    "fileheader.configObj": {
+      "createFileTime": true,
+      "language": {
+        "languagetest": {
+          "head": "/$$",
+          "middle": "@",
+          "end": " $/"
+        }
+      },
+      "autoAdd": false,
+      "autoAddLine": 100,
+      "autoAlready": true,
+      "annotationStr": {
+        "head": "/*",
+        "middle": " * @",
+        "end": " */",
+        "use": false
+      },
+      "headInsertLine": {},
+      "beforeAnnotation": {
+        "文件后缀": "该文件后缀的头部注释之前添加某些内容"
+      },
+      "afterAnnotation": {
+        "文件后缀": "该文件后缀的头部注释之后添加某些内容"
+      },
+      "specialOptions": {
+        "特殊字段": "自定义比如LastEditTime/LastEditors"
+      },
+      "switch": {
+        "newlineAddAnnotation": true
+      },
+      "supportAutoLanguage": [],
+      "prohibitAutoAdd": [
+        "json"
+      ],
+      "prohibitItemAutoAdd": [
+        "项目的全称, 整个项目禁止自动添加头部注释, 可以使用快捷键添加"
+      ],
+      "moveCursor": true,
+      "dateFormat": "YYYY-MM-DD HH:mm:ss",
+      "atSymbol": "@",
+      "atSymbolObj": {
+        "文件后缀": "修改它的@符号"
+      },
+      "colon": ": ",
+      "colonObj": {
+        "文件后缀": "修改它的冒号"
+      },
+      "filePathColon": "/",
+      "showErrorMessage": false,
+      "wideSame": false,
+      "wideNum": 13,
+      "CheckFileChange": false,
+      "createHeader": true,
+      "useWorker": false,
+      "designAddHead": false,
+      "typeParam": true
+    },
+    "fileheader.customMade": {
+      "Author": "李勇",
+      "Date": "Do not  edit",
+      "LastEditors": "李勇",
+      "LastEditTime": "Do not  edit",
+      "Description(说明)": "",
+      "FilePath": "Do not  edit"
+    },
+}
