@@ -46,15 +46,26 @@ mkdir 文件名
 mv 原先的名字 要修改的名字
 ```
 
-## 6、安装指令
-
-```bash
-./configure
-```
-
-## 7、查看当前目录
+## 6、查看当前目录
 
 ```bash
 pwd
 ```
+
+## 7、nginx
+
+### 1）默认配置
+
+- 页面展示位置
+
+```bash
+/usr/share/nginx/html
+```
+
+- 配置文件位置
+
+```bash
+/etc/nginx
+```
+
 
