@@ -28,7 +28,7 @@ go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 go mod init 项目名称
 ```
 
-## 4、安装
+### 4、安装
 
 ```bash
 # 创建文件
@@ -37,9 +37,9 @@ mkdir your-project
 cd your-project
 
 # 初始化 Go 模块（如果还没有 go.mod 文件）
-go mod init your-project-name
+go mod init 你的项目名称
 
-# 下载并整理依赖
+# 下载并整理依赖(基本上到这步就好了)
 go mod tidy
 
 # 构建并安装可执行文件（如果有）
@@ -238,5 +238,19 @@ demo-gin-mvc
 
  ![image-20250315224136001](./images/image-20250315224136001.png)
 
-## 四、
+## 四、部分功能的实现
+
+### 1、验证码的实现
+
+[docs](https://github.com/mojocn/base64Captcha)
+
+[code](https://github.com/Not-have/demo-go/tree/main/demo-gin-mvc-verification-code)
+
+下载
+
+```bash
+go get github.com/google/go-cmp@latest
+```
+
+![image-20250524152812572](./images/image-20250524152812572.png)
 
