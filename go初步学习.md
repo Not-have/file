@@ -53,7 +53,7 @@ go install
 
 ### 1、fresh
 
-[docs](https://gin-gonic.com/zh-cn/)
+[docs](https://github.com/gravityblast/fresh/)
 
 运行
 
