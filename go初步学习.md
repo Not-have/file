@@ -22,6 +22,9 @@ vsc：下载以下的插件
 go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 ```
 
+<img width="1241" alt="image" src="https://github.com/user-attachments/assets/f0e51769-b53c-4780-b49d-b73a934cee65" />
+
+
 ### 3、初始化项目
 
 ```bash 
