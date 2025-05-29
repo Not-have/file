@@ -46,9 +46,13 @@ go mod tidy
 go install
 ```
 
+### 5、插件搜索
+
+[docs](https://pkg.go.dev/)
+
 ## 二、插件的使用
 
-### 1、fresh
+### 1、fresh 运行项目
 
 [docs](https://gin-gonic.com/zh-cn/)
 
@@ -62,9 +66,15 @@ ls $(go env GOPATH)/bin | grep fresh
 $(go env GOPATH)/bin/fresh
 ```
 
-### 2、gin
+### 2、gin 框架
 
 [docs](https://gin-gonic.com/zh-cn/)
+
+1）安装
+
+```bash
+go get -u github.com/gin-gonic/gin
+```
 
 ### 3、gorm
 
@@ -74,7 +84,7 @@ $(go env GOPATH)/bin/fresh
 
 ![image-20250302024031286](./images/image-20250302024031286.png)
 
-### 4、go-ini
+### 4、go-ini 配置文件
 
 [github](https://github.com/go-ini/ini)
 
@@ -194,6 +204,10 @@ func main() {
 
 [docs](https://github.com/gin-contrib/sessions)
 
+### 6、sessions
+
+[docs](https://github.com/gin-contrib/sessions)
+
 ## 三、gin mvc 搭建
 
 ### 1、什么是 mvc
@@ -232,7 +246,7 @@ demo-gin-mvc
 
 ### 2、搭建的框架
 
-[docs](https://github.com/Not-have/demo-go/tree/main/demo-gin-mvc)
+[code](https://github.com/Not-have/demo-go/tree/main/demo-gin-mvc)
 
 ### 3、项目流程图
 
@@ -249,8 +263,15 @@ demo-gin-mvc
 下载
 
 ```bash
-go get github.com/google/go-cmp@latest
+go get -u github.com/mojocn/base64Captcha
 ```
 
 ![image-20250524152812572](./images/image-20250524152812572.png)
 
+### 2、go 链接 redis
+
+[docs](https://github.com/redis/go-redis)
+
+### 3、md5 加密
+
+[docs](https://pkg.go.dev/crypto/md5)

@@ -60,6 +60,10 @@ C:\Program Files\MySQL\MySQL Server 8.0\bin
 
 # 三、mysql
 
+新建数据库
+
+![image-20250525022127894](./images/image-20250525022127894.png)
+
 ## 1、创建表
 
 ```mysql
