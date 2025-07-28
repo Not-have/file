@@ -908,3 +908,28 @@ public class Test02 {
 }
 ```
 
+# 九、在线服务器使用
+
+## 1、阿里云
+
+![image-20250524224401234](./images/image-20250524224401234.png)
+
+找到自己购买的在线服务器，然后点击 `远程链接`
+
+打开之后的样子
+![image-20250524224140255](./images/image-20250524224140255.png)
+
+## 2、查看数据库状态
+
+```bash
+# 查看当前状态
+service mysqld status
+
+# 重新启动
+sudo systemctl start mysqld
+
+# 再次查看
+sudo systemctl status mysqld
+```
+
+![image-20250727012857743](./images/image-20250727012857743.png)

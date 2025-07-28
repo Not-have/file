@@ -211,6 +211,8 @@ func main() {
 
 [docs](https://github.com/gin-contrib/sessions)
 
+![image-20250727185001932](./images/image-20250727185001932.png)
+
 ## 三、gin mvc 搭建
 
 ### 1、什么是 mvc
@@ -278,3 +280,38 @@ go get -u github.com/mojocn/base64Captcha
 ### 3、md5 加密
 
 [docs](https://pkg.go.dev/crypto/md5)
+
+### 4、各种打印
+
+- fmt.Print(a ...interface{}) (n int, err error)
+
+  直接打印参数，参数之间无分隔符，不自动换行。   
+
+  示例：`fmt.Print("hello", "world")` → 输出 `helloworld` 
+
+- fmt.Println(a ...interface{}) (n int, err error)
+
+  打印参数，参数之间自动添加空格，末尾自动换行。   
+
+  示例：`fmt.Println("hello", "world")` → 输出 `hello world`（换行） 
+
+- fmt.Printf(format string, a ...interface{}) (n int, err error)
+
+  格式化打印，支持格式占位符，不自动换行（需手动加 `\n`）。    
+
+  示例：`fmt.Printf("name: %s, age: %d\n", "Alice", 20)` → 输出 `name: Alice, age: 20`（换行）  
+
+  `fmt.Printf` 支持丰富的格式占位符，常用类型：
+
+| 占位符 | 含义                   | 示例                       | 输出结果            |
+| :----- | ---------------------- | -------------------------- | ------------------- |
+| %v     | 默认格式（任意类型）   | fmt.Printf("%v", 123)      | 123                 |
+| %+v    | 结构体带字段名         | fmt.Printf("%+v", user)    | {Name:Alice Age:20} |
+| %#v    | 完整语法格式（调试用） | fmt.Printf("%#v", "hello") | "hello"             |
+| %T     | 打印类型               | fmt.Printf("%T", 3.14)     | float64             |
+| %d     | 十进制整数             | fmt.Printf("%d", 0x10)     | 16                  |
+| %s     | 字符串                 | fmt.Printf("%s", "go")     | go                  |
+| %f     | 浮点数                 | fmt.Printf("%.2f", 3.1415) | 3.14（保留 2 位）   |
+| %p     | 指针地址               | fmt.Printf("%p", &x)       | 0xc0000a0010        |
+
+31-05-44
