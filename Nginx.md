@@ -205,6 +205,9 @@ mkdir Xxx
 
 # 修改文件名
 mv 原始文件名 Xxx:
+
+# 拷贝文件
+sudo mv /home/admin/nginx.conf /etc/nginx/nginx.conf
 ```
 
 修改默认网站：
@@ -228,4 +231,23 @@ ESC      # 退出插入模式
 4️⃣ 页面已经更新
 
 ![image-20250811183131476](./images/image-20250811183131476.png)
+
+### 3、修改配置
+
+```bash
+# 修改完使用这个指令验证
+sudo nginx -t
+
+# 每次修改完，都要重启
+sudo systemctl restart nginx
+```
+
+注：验证成功
+
+```bash
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+```
+
+![image-20250812000112557](./images/image-20250812000112557.png)
 
