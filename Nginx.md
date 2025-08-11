@@ -1,3 +1,5 @@
+# Nginx
+
 [下载地址](https://nginx.org/en/download.html)
 
 <font color=red>注</font>：（指令都需要在nginx的安装目录下——> cmd里面进行）
@@ -170,4 +172,60 @@ nginx
 ```bash
 nginx -s stop
 ```
+
+## 三、服务端使用
+
+### 1、文件位置
+
+| 类型         | 路径                                    | 说明                   |
+| ------------ | --------------------------------------- | ---------------------- |
+| **主程序**   | `/usr/sbin/nginx`                       | Nginx 可执行文件位置   |
+| **配置目录** | `/etc/nginx/`                           | 所有配置文件目录       |
+| **核心配置** | `/etc/nginx/nginx.conf`                 | 主配置文件             |
+| **模块目录** | `/usr/lib64/nginx/modules/`             | 动态模块位置（CentOS） |
+|              | `/usr/share/nginx/modules-available/`   | （Ubuntu）             |
+| **默认网站** | `/usr/share/nginx/html/`                | 默认网页文件位置       |
+| **日志目录** | `/var/log/nginx/`                       | 访问日志和错误日志     |
+| **服务文件** | `/usr/lib/systemd/system/nginx.service` | systemd 服务配置       |
+
+### 2、基本指令
+
+```bash
+# 查看状态
+sudo systemctl status nginx
+
+# 启动
+sudo systemctl start nginx
+
+# 通过 whereis 查找所有相关文件
+whereis nginx
+
+# 创建文件夹
+mkdir Xxx
+
+# 修改文件名
+mv 原始文件名 Xxx:
+```
+
+修改默认网站：
+
+1️⃣ cd /usr/share/nginx/html/
+
+2️⃣ vim index.html
+
+3️⃣
+
+```bash
+i        # 进入插入模式（开始编辑）
+[编辑内容]
+ESC      # 退出插入模式
+:w       # 保存文件
+:q       # 退出
+:wq!     # 强制保存并退出
+:q!      # 强制退出不保存
+```
+
+4️⃣ 页面已经更新
+
+![image-20250811183131476](./images/image-20250811183131476.png)
 
