@@ -247,7 +247,17 @@ sudo systemctl restart nginx
 ```bash
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+# 替换项目文件
+[admin@iZ2vcide9u728666sturc1Z micro-app]$ ls
+child-react-app-03  child-vue-app-02  main-app
+[admin@iZ2vcide9u728666sturc1Z micro-app]$ rm -fr main-app/
+[admin@iZ2vcide9u728666sturc1Z micro-app]$ ls
+child-react-app-03  child-vue-app-02
+[admin@iZ2vcide9u728666sturc1Z micro-app]$ sudo mv /home/admin/main-app /usr/share/nginx/html/micro-app/main-app
+[admin@iZ2vcide9u728666sturc1Z micro-app]$ 
 ```
 
 ![image-20250812000112557](./images/image-20250812000112557.png)
+
 
