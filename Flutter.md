@@ -8,6 +8,8 @@
 sudo softwareupdate --install-rosetta --agree-to-license
 ```
 
+![image-20250815000751349](./images/image-20250815000751349.png)
+
 ### 2、vsc 插件安装
 
 [Install](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter)
