@@ -14,15 +14,13 @@ Mac：https://go.dev/dl/
 
 vsc：下载以下的插件
 
-![](./images/image-20241228204236349.png)
+![image-20250815192302262](./images/image-20250815192302262.png)
 
 注：vsc 下载因网络问题，所以 需要更改下载镜像
 
 ```bash
 go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 ```
-
-<img width="1241" alt="image" src="https://github.com/user-attachments/assets/f0e51769-b53c-4780-b49d-b73a934cee65" />
 
 
 ### 3、初始化项目

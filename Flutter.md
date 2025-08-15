@@ -36,6 +36,7 @@ flutter doctor
 提示有错的处理
 
 ```bash
+# 运行和这个就可以（找到运行位置）
 sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
 
 sudo xcodebuild -runFirstLaunch
@@ -44,12 +45,14 @@ sudo xcodebuild -runFirstLaunch
 sudo xcodebuild -license 
 
 # 下载没有反应时，也许需要 ruby，下载指令为：brew install ruby
-# If you need to have ruby first in your PATH, run:
+# 使用 ruby 运行指令
 #   echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc
 
-# For compilers to find ruby you may need to set:
-#   export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
-#   export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
+# 编译依赖 Ruby 的软件 / 库
+#   echo 'export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"' >> ~/.zshrc
+#   echo 'export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"' >> ~/.zshrc
+# 配置完必须重启
+# source ~/.zshrc
 
 # brew install cocoapods 推荐使用 brew 安装 cocoapods
 sudo gem install cocoapods
