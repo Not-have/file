@@ -18,6 +18,10 @@ sudo softwareupdate --install-rosetta --agree-to-license
 
 ![image-20250722151745488](./images/image-20250722151745488.png)
 
+```bash
+/Users/liyong/flutter/flutter
+```
+
 下载完成后，配置环境变量
 
 ```bash
@@ -44,6 +48,10 @@ sudo xcodebuild -runFirstLaunch
 # 更具指令进行下一步操作
 sudo xcodebuild -license 
 
+brew install cocoapods
+
+# 下面的安装可以忽略了
+
 # 下载没有反应时，也许需要 ruby，下载指令为：brew install ruby
 # 使用 ruby 运行指令
 #   echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc
@@ -67,3 +75,9 @@ sudo gem install cocoapods
 [docs](https://codelabs.developers.google.cn/codelabs/flutter-codelab-first?hl=zh-cn#0)
 
 ![image-20250722170409489](images/image-20250722170409489.png)
+
+```bash
+# 从 Git 上拉取后，下载依赖
+flutter pub get
+```
+
