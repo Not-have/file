@@ -65,3 +65,33 @@ http://127.0.0.1:8899/
 
 [配置规则](https://wproxy.org/docs/getting-started.html#%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B)
 
+5）Vite 热更新保留配置
+
+1️⃣ vite.config.mts 中配置
+
+```js
+  server: {
+    // 代理 ws
+    hmr: {
+      host: 'localhost',
+      protocol: 'ws',
+      port: 5173,
+    }    
+  },
+```
+
+2️⃣ 修改 Whistle 规则配置
+
+注：注意端口号对应关系
+
+```
+https://test.xxx.com/ http://localhost:8087/
+
+
+# 透传 Vite HMR 的 WebSocket 请求
+wss://localhost:8087 ws://localhost:5173
+ws://localhost:8087 ws://localhost:5173
+```
+
+
+
