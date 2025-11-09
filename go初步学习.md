@@ -314,5 +314,370 @@ go get -u github.com/mojocn/base64Captcha
 
 ## 五、RBAC 权限管理
 
+定义“角色”相关的数据结构，并指定与数据库表的映射关系
 
+```go
+// 操作数据库
+package models
+
+import "time"
+
+// 角色表
+type Role struct {
+	// 角色ID， 主键，自增
+	RoleId uint `gorm:"column:role_id;primaryKey;autoIncrement" json:"role_id"`
+	// 角色名称
+	RoleName   string    `gorm:"column:role_name" json:"role_name"`
+	RoleDesc   string    `gorm:"column:role_desc" json:"role_desc"`
+	CreateTime time.Time `gorm:"column:create_time;autoCreateTime" json:"create_time"`
+}
+
+// 返回给前端的角色列表
+type RoleList struct {
+	RoleId   uint   `json:"role_id"`   // 角色ID
+	RoleName string `json:"role_name"` // 角色名称
+	RoleDesc string `json:"role_desc"` // 角色描述
+}
+
+func (Role) TableName() string {
+	// 指定表名
+	return "role"
+}
+```
+
+基础类型
+
+```go
+package controllers
+
+import "github.com/gin-gonic/gin"
+
+type Base struct{}
+
+func (con Base) success(c *gin.Context, msg string) {
+	c.JSON(200, gin.H{
+		"code": 200,
+		"msg":  msg,
+	})
+}
+
+func (con Base) fail(c *gin.Context, msg string) {
+	c.JSON(200, gin.H{
+		"code": 500,
+		"msg":  msg,
+	})
+}
+```
+
+### 1、增
+
+```go
+package controllers
+
+import (
+	"fmt"
+	"micro-server/models"
+	"net/http"
+	"strings"
+	"time"
+
+	"github.com/gin-gonic/gin"
+)
+
+type RoleController struct {
+	Base
+}
+
+func (con RoleController) RoleCreate(c *gin.Context) {
+	role_name := strings.Trim(c.PostForm("role_name"), " ")
+	role_desc := strings.Trim(c.PostForm("role_desc"), " ")
+
+	fmt.Println(role_name, role_desc)
+
+	if role_name == "" || role_desc == "" {
+		con.Base.fail(c, "参数错误")
+	}
+
+	role := models.Role{}
+
+	role.RoleName = role_name
+	role.RoleDesc = role_desc
+	role.CreateTime = time.Now()
+
+	// 来个检查，禁止重名
+	var count int64
+	models.DB.Model(&models.Role{}).Where("role_name = ?", role_name).Count(&count)
+	if count > 0 {
+		con.Base.fail(c, "角色名已存在")
+		return
+	}
+
+	// 链接数据库
+	err := models.DB.Create(&role).Error
+	if err != nil {
+		con.Base.fail(c, "创建失败")
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code": http.StatusOK,
+		"msg":  http.StatusText(http.StatusOK),
+	})
+}
+```
+
+### 2、删
+
+```go
+package controllers
+
+import (
+	"fmt"
+	"micro-server/models"
+	"net/http"
+	"strings"
+	"time"
+
+	"github.com/gin-gonic/gin"
+)
+
+type RoleController struct {
+	Base
+}
+
+func (con RoleController) RoleDelete(c *gin.Context) {
+	id := c.PostForm("id")
+
+	if id == "" {
+		con.Base.fail(c, "参数错误")
+		return
+	}
+
+	result := models.DB.Delete(&models.Role{}, id)
+
+	if result.RowsAffected == 0 {
+		con.Base.fail(c, "角色不存在")
+		return
+	}
+
+	if result.Error != nil {
+		con.Base.fail(c, "删除失败")
+		return
+	}
+
+	con.Base.success(c, "删除成功")
+}
+```
+
+### 3、改
+
+```go
+package controllers
+
+import (
+	"fmt"
+	"micro-server/models"
+	"net/http"
+	"strings"
+	"time"
+
+	"github.com/gin-gonic/gin"
+)
+
+type RoleController struct {
+	Base
+}
+
+func (con RoleController) RoleUpdate(c *gin.Context) {
+	id := c.PostForm("id")
+	role_name := strings.Trim(c.PostForm("role_name"), " ")
+	role_desc := strings.Trim(c.PostForm("role_desc"), " ")
+
+	if id == "" && (role_name == "" || role_desc == "") {
+		con.Base.fail(c, "参数错误")
+		return
+	}
+
+	// 转换
+	var roleId uint
+	_, err := fmt.Sscanf(id, "%d", &roleId)
+	if err != nil {
+		con.Base.fail(c, "无效的ID")
+		return
+	}
+	role := models.Role{RoleId: roleId}
+	models.DB.Find(&role)
+
+	if role.RoleId == 0 {
+		con.Base.fail(c, "角色不存在")
+		return
+	}
+
+	role.RoleName = role_name
+	role.RoleDesc = role_desc
+
+	err = models.DB.Save(&role).Error
+	if err != nil {
+		con.Base.fail(c, "更新失败")
+		return
+	}
+
+	con.Base.success(c, "更新成功")
+}
+```
+
+### 4、查
+
+```go
+package controllers
+
+import (
+	"fmt"
+	"micro-server/models"
+	"net/http"
+	"strings"
+	"time"
+
+	"github.com/gin-gonic/gin"
+)
+
+type RoleController struct {
+	Base
+}
+
+func (con RoleController) RoleList(c *gin.Context) {
+
+	roleList := []models.Role{}
+
+	err := models.DB.Find(&roleList).Error
+
+	var responseList []models.RoleList
+	for _, role := range roleList {
+		responseList = append(responseList, models.RoleList{
+			RoleId:   role.RoleId,
+			RoleName: role.RoleName,
+			RoleDesc: role.RoleDesc,
+		})
+	}
+
+	if err != nil {
+		con.Base.fail(c, "获取角色列表失败")
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code": http.StatusOK,
+		"msg":  http.StatusText(http.StatusOK),
+		"data": responseList,
+	})
+}
+```
+
+## 六、Redis
+
+[Redis 基础使用](./Redis.md)
+
+[go-redis](https://github.com/redis/go-redis)
+
+### 1、集成
+
+```bash
+# 下载
+go get github.com/redis/go-redis/v9
+
+```
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/redis/go-redis/v9"
+)
+
+var ctx = context.Background()
+
+func main() {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "", // no password set
+		DB:       0,  // use default DB
+	})
+
+	_, err := rdb.Ping(ctx).Result()
+
+	if err != nil {
+		fmt.Println("Failed to connect to Redis:", err)
+		return
+	} else {
+		fmt.Println("Connected to Redis successfully!")
+	}
+
+	// Set a key, 0 代表没有过期时间
+	err01 := rdb.Set(ctx, "name", "呵呵呵", 0).Err()
+
+	if err01 != nil {
+		fmt.Println("Failed to set key:", err01)
+		return
+	}
+
+	result := rdb.Get(ctx, "name").Val()
+	fmt.Println(result)
+}
+```
+
+![image-20251109192006190](./images/image-20251109192006190.png)
+
+链接成功
+
+### 2、练习
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/redis/go-redis/v9"
+)
+
+var ctx = context.Background()
+
+func main() {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "", // no password set
+		DB:       0,  // use default DB
+	})
+
+	_, err := rdb.Ping(ctx).Result()
+
+	if err != nil {
+		fmt.Println("Failed to connect to Redis:", err)
+		return
+	} else {
+		fmt.Println("Connected to Redis successfully!")
+	}
+
+	// Set a key, 0 代表没有过期时间
+	err01 := rdb.Set(ctx, "name", "呵呵呵", 0).Err()
+
+	if err01 != nil {
+		fmt.Println("Failed to set key:", err01)
+		return
+	}
+
+	result01 := rdb.Get(ctx, "name").Val()
+	fmt.Println(result01)
+
+	rdb.LPush(ctx, "list", "value1", "value2", "value3")
+
+	// 0 到 -1 代表获取所有元素
+	result02 := rdb.LRange(ctx, "list", 0, -1).Val()
+	fmt.Println(result02)
+}
+```
 
