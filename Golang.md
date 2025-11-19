@@ -16,7 +16,15 @@ vsc：下载以下的插件
 
 ![image-20250815192302262](./images/image-20250815192302262.png)
 
-注：vsc 下载因网络问题，所以 需要更改下载镜像
+调起方式
+
+```bash
+# Cmd+Shift+P（Mac）
+# 在命令面板中输入 
+Go: Install/Update Tools
+```
+
+注：vsc 下载因网络问题，所以 需要更改下载镜像（使用科学上网时不需要）
 
 ```bash
 go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
