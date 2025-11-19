@@ -1,16 +1,19 @@
-# 一、下载
+# myql
+## 一、下载
 
 [mysql](https://downloads.mysql.com/archives/installer/)
 
 [navicat](https://drive.google.com/file/d/1n1q_CI_vQ0aLJCQs3sDWh3TXgz5pAfXi/view?usp=drive_link)
 
-# 二、navicat 链接 mysql
+[mac navicat lite](https://www.navicat.com/en/download/navicat-premium-lite) 选择 1 或者 2 下载
 
-## 1、navicat 报 2059的解决
+## 二、navicat 链接 mysql
+
+### 1、navicat 报 2059的解决
 
 ![image-20231004154653759](https://not-have.github.io/file/images/image-20231004154653759.png)
 
-### 1）启动 mysql 
+#### 1）启动 mysql 
 
 ```bash
 # net start 查看所有正在运行的服务
@@ -22,7 +25,7 @@ net start MySQL80
 
  ![image-20231004155703114](https://not-have.github.io/file/images/image-20231004155703114.png)
 
-### 2）执行指令
+#### 2）执行指令
 
 ```bash
 mysql -hlocalhost -uroot -p
@@ -46,7 +49,7 @@ alter user 'root'@'localhost' identified with mysql_native_password by 'root';
 
 进行以上的操作，你就链接成功了。
 
-## 2、mysql 不是内部或外部命令
+### 2、mysql 不是内部或外部命令
 
 mysql -hlocalhost -uroot -p 报 'mysql' 不是内部或外部命令，也不是可运行的程序 或批处理文件
 
@@ -58,13 +61,13 @@ C:\Program Files\MySQL\MySQL Server 8.0\bin
 
 注：默认安装地址
 
-# 三、mysql
+## 三、mysql
 
 新建数据库
 
 ![image-20250525022127894](./images/image-20250525022127894.png)
 
-## 1、创建表
+### 1、创建表
 
 ```mysql
 create table t_book(
@@ -78,11 +81,11 @@ create table t_book(
 
 ![image-20231006215222347](https://not-have.github.io/file/images/image-20231006215222347.png)
 
-## 2、增删改查
+### 2、增删改查
 
 ![image-20231006220601208](https://not-have.github.io/file/images/image-20231006220601208.png)
 
-# 四、部分指令（DDL）
+## 四、部分指令（DDL）
 
 注：登录当前数据库之后，才可以运行 mysql 指令
 
@@ -92,7 +95,7 @@ mysql -uroot -proot
 # mysql -u用户名 -p密码
 ```
 
-## 1、查看当前数据库
+### 1、查看当前数据库
 
 ``` mysql
 show databases;
@@ -104,7 +107,7 @@ show databases;
 -- sys
 ```
 
-## 2、创建数据库
+### 2、创建数据库
 
 ```mysql
 create database test01;
@@ -113,7 +116,7 @@ create database test01;
 -- 数据库名称一版不要修改
 ```
 
-## 3、删除数据库
+### 3、删除数据库
 
 ```mysql
 drop database test01;
@@ -121,25 +124,25 @@ drop database test01;
 -- Query OK, 0 rows affected (0.01 sec)
 ```
 
-## 4、使用数据库
+### 4、使用数据库
 
 ```mysql
 use 库名;
 ```
 
-## 5、查询当前使用的数据库
+### 5、查询当前使用的数据库
 
 ```mysql
 select database();
 ```
 
-## 6、约束
+### 6、约束
 
 可以限制表的插入、更新和删除等，例如：id、日期等；
 
 主键不能重复。
 
-### 1）设置主键 `primary key`
+#### 1）设置主键 `primary key`
 
 ① 初始时设置主键
 
@@ -187,7 +190,7 @@ alter table test03 add primary key (id);
 
 ![image-20240526225055560](https://not-have.github.io/file/images/image-20240526225055560.png)
 
-### 2）自增约束 `primary key auto_increment`
+#### 2）自增约束 `primary key auto_increment`
 
 注：自增约束，主要是配合主键使用，防止主键为空、重复。
 
@@ -208,7 +211,7 @@ delete from test04 where id = 3;
 insert into test04(name) values("啦啦啦啦");
 ```
 
-### 3）唯一约束 `unique`
+#### 3）唯一约束 `unique`
 
 ```mysql
 create table test05(
@@ -222,7 +225,7 @@ insert into test05(id, name) values(1, "哈哈哈");
 insert into test05(id, name) values(2, "哈哈哈");
 ```
 
-### 4）非空约束 `not null`
+#### 4）非空约束 `not null`
 
 ```mysql
 create table test06(
@@ -240,7 +243,7 @@ insert into test06(id, name) values(1, "呵呵呵");
 insert into test06(id, name) values(1, "呵呵呵");
 ```
 
-### 5）默认值 
+#### 5）默认值 
 
 ```mysql
 create table test07(
@@ -254,7 +257,7 @@ insert into test06(id) values(1);
 insert into test06(id, sex) values(1, "男");
 ```
 
-### 6）外键约束
+#### 6）外键约束
 
 注：多表之间的一种关联关系的一种限制。
 
@@ -301,7 +304,7 @@ delete from tb_goods where id = 3; -- 有引用
 
 ![image-20240527001831151](https://not-have.github.io/file/images/image-20240527001831151.png)
 
-# 五、查询
+## 五、查询
 
 基础数据创建：
 
@@ -333,7 +336,7 @@ INSERT INTO tb_search VALUES (10, "张十一", 15, "男", 75, 1, 20);
 INSERT INTO tb_search VALUES (11, "张十二", 19, "女", 23, 1, 19);
 ```
 
-## 1、基本查询
+### 1、基本查询
 
 ```mysql
 -- 基础查询
@@ -347,7 +350,7 @@ SELECT * FROM tb_search;
 SELECT id,name FROM tb_search;
 ```
 
-## 2、条件查询
+### 2、条件查询
 
 ```mysql
 SELECT 字段名1,字段名2,... FROM 表名 WHERE 字段 条件 值;
@@ -380,7 +383,7 @@ SELECT * FROM tb_search WHERE age >= 20 and age <= 30;
 SELECT * FROM tb_search WHERE age BETWEEN 20 and 30;
 ```
 
-## 3、模糊查询
+### 3、模糊查询
 
 ```mysql
 SELECT 字段名1,字段名2,... FROM 表名 WHERE 字段 like "_值%";
@@ -392,7 +395,7 @@ SELECT * FROM tb_search WHERE name like "_十%";
 -- % 匹配任意字符（没有个数限制）
 ```
 
-## 4、排序查询
+### 4、排序查询
 
 ```mysql
 SELECT 字段名1,字段名2,... FROM 表名 ORDER BY 字段 [desc|asc];
@@ -412,7 +415,7 @@ SELECT * FROM tb_search ORDER BY age, score DESC;
 SELECT * FROM tb_search WHERE score > 60 ORDER BY score DESC;
 ```
 
-## 5、聚合函数
+### 5、聚合函数
 
 注：将查询结果，聚合运算的到一个结果值。
 
@@ -436,7 +439,7 @@ SELECT * FROM tb_search WHERE score > 60 ORDER BY score DESC;
 SELECT COUNT(id) FROM tb_search; -- 当前行数
 ```
 
-## 6、分组查询
+### 6、分组查询
 
 注：只要有分组，查询结果就有几行
 
@@ -471,7 +474,7 @@ SELECT cid,SUM(score) FROM tb_search GROUP BY cid HAVING SUM(score) > 200;
 SELECT cid,SUM(score) FROM tb_search GROUP BY cid HAVING SUM(score) > 200 ORDER BY SUM(score) DESC;
 ```
 
-## 7、分页查询
+### 7、分页查询
 
 注：查询完的，限制查询条数。
 
@@ -482,11 +485,11 @@ SELECT * FROM tb_search LIMIT 2;
 SELECT * FROM tb_search LIMIT 2, 2;
 ```
 
-# 六、多表联查
+## 六、多表联查
 
-## 1、合并结果集
+### 1、合并结果集
 
-### 纵向拼接
+#### 纵向拼接
 
 注：
 
@@ -533,7 +536,7 @@ UNION
 SELECT id, name FROM tb_test02
 ```
 
-## 2、链接查询
+### 2、链接查询
 
 注：连接查询是将多张表数据链接在一起（横向）查询返回。
 
@@ -547,7 +550,7 @@ SELECT id, name FROM tb_test02
 * 外连接
 * 子查询
 
-### 1）内链接
+#### 1）内链接
 
 ```mysql
 -- 一个班级中存在多个学生，这个就是一对多
@@ -623,7 +626,7 @@ SELECT tb_student.id, tb_student.name, tb_class.cname FROM tb_student, tb_class 
 
 `只会查询符合关联条件的数据。`
 
-### 2）外连接
+#### 2）外连接
 
 ```mysql
 -- 语法(查询学生信息以及学生关联的班级信息)
@@ -681,7 +684,7 @@ SELECT * FROM tb_student s LEFT OUTER JOIN tb_class c on s.cid = c.cid;
 SELECT * FROM tb_student s RIGHT OUTER JOIN tb_class c on s.cid = c.cid;
 ```
 
-### 3）子查询（subquery）
+#### 3）子查询（subquery）
 
 注：也叫嵌套查询。
 
@@ -710,13 +713,13 @@ SELECT * FROM tb_student WHERE age < (SELECT age FROM tb_student WHERE id = 3);
 SELECT * FROM tb_student WHERE cid = (SELECT cid FROM tb_student WHERE id = 1);
 ```
 
-# 八、[MySQL](https://www.mysqlzh.com/) 函数
+## 八、[MySQL](https://www.mysqlzh.com/) 函数
 
 [docs](https://www.mysqlzh.com/doc/113.html)
 
 [docs](https://www.mysql.net.cn/doc/refman/8.0/en/functions.html)
 
- ## 1、字符串函数
+ ### 1、字符串函数
 
 | 名字                         | 描述                                                         | 示例                                                         |
 | :--------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -731,7 +734,7 @@ SELECT * FROM tb_student WHERE cid = (SELECT cid FROM tb_student WHERE id = 1);
 | REPLACE(str,from_str,to_str) | 在 str 中用 to_str 替换 from_str                             | SELECT REPLACE("hello.", ".", "!");                          |
 | LTRIM(str) <br />RTRIM(str)  | 去除前后空格                                                 | SELECT LTRIM(" hello");<br/>SELECT RTRIM("hello ");          |
 
-## 2、数学函数
+### 2、数学函数
 
 [docs](https://www.mysql.net.cn/doc/refman/8.0/en/numeric-functions.html)
 
@@ -746,7 +749,7 @@ SELECT * FROM tb_student WHERE cid = (SELECT cid FROM tb_student WHERE id = 1);
 | ROUND(X, D)   | 四舍五入, D保留小数点后几位，可以不传      | SELECT ROUND(10.633333);       |
 | RAND()        | 随机数，0 ~ 1 之间                         | SELECT RAND                    |
 
-## 3、日期函数
+### 3、日期函数
 
 [docs](https://www.mysql.net.cn/doc/refman/8.0/en/date-and-time-functions.html)
 
@@ -759,9 +762,9 @@ SELECT * FROM tb_student WHERE cid = (SELECT cid FROM tb_student WHERE id = 1);
 | DATE_ADD(date,INTERVAL expr unit) | 添加日期     |                                                              |
 | CURRENT_TIMESTAMP()               | 当前时间戳   | SELECT CURRENT_TIMESTAMP();                                  |
 
-## 4、日期字符串转换函数
+### 4、日期字符串转换函数
 
-### 1）日期 转 字符串
+#### 1）日期 转 字符串
 
 ```mysql
 -- date_format(data, '%Y-%m-%d');
@@ -770,7 +773,7 @@ SELECT DATE_FORMAT(NOW(), '%Y-%m-%d');
 SELECT DATE_FORMAT(NOW(), '%Y年%m月%d日');
 ```
 
-### 2）字符串 转 日期
+#### 2）字符串 转 日期
 
 ```mysql
 -- str_to_date('2024年06月19日');
@@ -778,7 +781,7 @@ SELECT DATE_FORMAT(NOW(), '%Y年%m月%d日');
 SELECT STR_TO_DATE('2024年06月19日','%Y年%m月%d日');
 ```
 
-## 5、流程函数
+### 5、流程函数
 
 [docs](https://www.mysqlzh.com/doc/115.html)
 
@@ -831,15 +834,15 @@ end as 等级
 from tb_student;
 ```
 
-# ~~java 链接数据库~~
+## ~~java 链接数据库~~
 
-## 1、下载 JBDC 驱动
+### 1、下载 JBDC 驱动
 
 地址：https://dev.mysql.com/downloads/connector/j/?os=26
 
 ![image-20231119220940508](https://not-have.github.io/file/images/image-20231119220940508.png)
 
-## 2、插入数据
+### 2、插入数据
 
 ```java
 package com.mysql.test01;
@@ -876,7 +879,7 @@ public class Test01 {
 }
 ```
 
-## 3、查询
+### 3、查询
 
 ```java
 package com.mysql.test01;
@@ -908,9 +911,9 @@ public class Test02 {
 }
 ```
 
-# 九、在线服务器使用
+## 九、在线服务器使用
 
-## 1、阿里云
+### 1、阿里云
 
 ![image-20250524224401234](./images/image-20250524224401234.png)
 
@@ -919,7 +922,7 @@ public class Test02 {
 打开之后的样子
 ![image-20250524224140255](./images/image-20250524224140255.png)
 
-## 2、查看数据库状态
+### 2、查看数据库状态
 
 ```bash
 # 查看当前状态
@@ -933,3 +936,42 @@ sudo systemctl status mysqld
 ```
 
 ![image-20250727012857743](./images/image-20250727012857743.png)
+
+## 十、mac 安装
+
+### 1、下载
+
+```bash
+brew install mysql
+```
+
+![image-20251119124615835](images/image-20251119124615835.png)
+
+注：在本地，永远不要设置开机自启动。
+
+### 2、启动
+
+注：可以设置不需要密码
+
+```bash
+# 临时启动
+mysql.server start
+
+# 关闭
+mysql.server stop
+
+# 需要密码启动（不推荐）
+sudo /usr/local/mysql/support-files/mysql.server star
+```
+
+![image-20251119125342721](images/image-20251119125342721.png)
+
+### 3、链接
+
+注：没有密码选项的时候
+
+![image-20251119140811333](images/image-20251119140811333.png)
+
+![image-20251119141417770](images/image-20251119141417770.png)
+
+![image-20251119141634655](images/image-20251119141634655.png)
