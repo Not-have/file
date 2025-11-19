@@ -4,12 +4,10 @@
     "update.showReleaseNotes": false,
     "telemetry.telemetryLevel": "off",
     "workbench.colorTheme": "Monokai",
-    /* css格式化 */
     "beautify.config": {
         "brace_style": "collapse,preserve-inline",
         "indent_size": 4
     },
-    // 搜索过滤
     "search.exclude": {
         "**/node_modules": true,
         "**/bower_components": true,
@@ -17,9 +15,6 @@
         "**/dist": true,
         "/lib": true
     },
-    /* eslint */
-    // "eslint.run": "onSave",
-    // 要格式化的文件类型
     "eslint.validate": [
         "typescript",
         "typescriptreact",
@@ -30,7 +25,6 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    // 在.js中，写div按下tab就可以自动补全，而不需要写<div再补全
     "emmet.includeLanguages": {
         "javascript": "javascriptreact"
     },

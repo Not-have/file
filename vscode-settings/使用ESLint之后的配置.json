@@ -10,9 +10,7 @@
     "update.mode": "none",
     "workbench.iconTheme": "material-icon-theme",
     "javascript.inlayHints.enumMemberValues.enabled": true,
-    // 关闭eslint检验
     "eslint.enable": false,
-    // 保存后，根据eslint格式化
     "editor.codeActionsOnSave":{
 		    "source.fixAll.eslint":true
     },
@@ -22,9 +20,6 @@
     "terminal.integrated.tabs.enabled": false,
     "editor.wordWrap": "on",
 	  "backgroundCover.opacity": 0.4,
-    /*
-    下面的是 注释
-    */
     "fileheader.configObj": {
       "createFileTime": true,
       "language": {
@@ -90,5 +85,5 @@
       "LastEditTime": "Do not  edit",
       "Description(说明)": "",
       "FilePath": "Do not  edit"
-    },
+    }
 }
