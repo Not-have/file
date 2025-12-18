@@ -35,7 +35,9 @@
 npm create module-federation@latest
 ```
 
-### 2、将整个项目抛出
+### 2、整个项目抛出
+
+[docs](https://module-federation.io/zh/practice/bridge/overview.html)
 
 #### 1）下载插件
 
@@ -223,4 +225,161 @@ export default App;
 ```
 
 ### 3、部分组件使用
+
+[docs](https://module-federation.io/zh/practice/frameworks/react/index.html)
+
+#### 1）子应用
+
+##### a、更新入口文件
+
+bootstrap.tsx
+
+```tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+const rootEl = document.getElementById('root');
+if (rootEl) {
+  const root = ReactDOM.createRoot(rootEl);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  );
+}
+```
+
+index.tsx
+
+```tsx
+import('./bootstrap');
+```
+
+##### b、安装插件
+
+```bash
+npm i @module-federation/enhanced
+npm i @module-federation/rsbuild-plugin --save-dev
+```
+
+##### c、新增一个按钮
+
+demo-02/src/components/button/index.tsx
+
+```tsx
+const Button = (props?: {
+  onClick?: () => void;
+  children?: React.ReactNode;
+}) => (
+  <button onClick={props?.onClick}>{props?.children}</button>
+);
+
+export default Button;
+```
+
+##### d、导出
+
+/module-federation.config.ts
+
+```ts
+import { createModuleFederationConfig } from '@module-federation/rsbuild-plugin';
+
+export default createModuleFederationConfig({
+  name: 'remote',
+  exposes: {
+    './Button': './src/components/button/index.tsx',
+  },
+  filename: 'remoteEntry.js',
+  shared: {
+    react: {
+      singleton: true,
+    },
+    'react-dom': {
+      singleton: true,
+    },
+  },
+});
+```
+
+##### e、集成到打包
+
+rsbuild.config.ts
+
+```ts
+import { defineConfig } from '@rsbuild/core';
+import { pluginReact } from '@rsbuild/plugin-react';
+
+import { pluginModuleFederation } from '@module-federation/rsbuild-plugin';
+import mfConfig from './module-federation.config';
+
+// Docs: https://rsbuild.rs/config/
+export default defineConfig({
+  server: {
+    port: 3001
+  },
+  plugins: [
+    pluginReact(), 
+    pluginModuleFederation(mfConfig)
+  ],
+});
+```
+
+#### 2）父应用
+
+##### a、下载依赖
+
+```bash
+npm install @module-federation/rsbuild-plugin
+```
+
+##### b、进程子应用模块的类型文件
+
+/src/remotes.d.ts
+
+```ts
+declare module 'remote/Button' {
+  import Button from 'remote/Button';
+  export default Button;
+}
+```
+
+##### c、导入子应用
+
+rsbuild.config.ts
+
+```ts
+// rsbuild.config.ts
+import { pluginModuleFederation } from '@module-federation/rsbuild-plugin';
+import { pluginReact } from '@rsbuild/plugin-react';
+import { defineConfig } from '@rsbuild/core';
+
+export default defineConfig({
+  plugins: [
+    pluginReact(),
+    pluginModuleFederation({
+      name: 'test-01',
+      remotes: {
+        // 避免别名前缀冲突，改成与 remote1 不相关的前缀
+        remote: 'remote@http://localhost:3001/remoteEntry.js',
+      },
+      bridge: {
+        enableBridgeRouter: true,
+      },
+    }),
+  ],
+});
+```
+
+##### d、使用
+
+```tsx
+import Button from 'remote/Button';
+
+export default function Demo02() {
+  return <div>
+    <Button>按钮</Button>
+  </div>;
+}
+```
 
