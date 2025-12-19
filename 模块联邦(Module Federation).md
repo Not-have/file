@@ -383,3 +383,78 @@ export default function Demo02() {
 }
 ```
 
+### 4、处理父子应用公用一个 UI 库时样式丢失问题
+
+[docs](https://module-federation.io/zh/configure/shared.html#singleton)
+
+#### 1）子应用
+
+rsbuild.config.ts
+
+```ts
+import { defineConfig } from '@rsbuild/core';
+import { pluginReact } from '@rsbuild/plugin-react';
+import { pluginModuleFederation } from '@module-federation/rsbuild-plugin';
+
+// Docs: https://rsbuild.rs/config/
+export default defineConfig({
+  server: {
+    port: 3002
+  },
+  plugins: [
+    pluginReact(),
+    pluginModuleFederation({
+      name: 'remote1',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './export-app': './src/export-app.tsx', // 导出应用类型远程模块
+      },
+      shared: {
+        react: { singleton: true },
+        'react-router': { singleton: true },
+        antd: { singleton: true },
+        '@ant-design/cssinjs': { singleton: true },
+      },
+      bridge: {
+        // 启用 Bridge Router 路由能力，默认为 true
+        enableBridgeRouter: true, 
+      }
+    }),
+  ],
+});
+```
+
+#### 2）父应用
+
+rsbuild.config.ts
+
+```ts
+// rsbuild.config.ts
+import { pluginModuleFederation } from '@module-federation/rsbuild-plugin';
+import { pluginReact } from '@rsbuild/plugin-react';
+import { defineConfig } from '@rsbuild/core';
+
+export default defineConfig({
+  plugins: [
+    pluginReact(),
+    pluginModuleFederation({
+      name: 'test-01',
+      remotes: {
+        remote1: 'remote1@http://localhost:3002/remoteEntry.js'
+      },
+      bridge: {
+        enableBridgeRouter: true,
+      },
+      shared: {
+        react: { singleton: true },
+        'react-router': { singleton: true },
+        antd: { singleton: true },
+        '@ant-design/cssinjs': { singleton: true },
+      },
+    })
+  ],
+});
+```
+
+<div style="color:red;">注：<br />1、保持相同依赖为单例模式；<br /> 2、一定要确保 主依赖为单例模式。</div>
+
