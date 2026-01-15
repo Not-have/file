@@ -154,9 +154,13 @@ export const baseRequest = ({
 };
 ```
 
-### 6.2 节流与并发：列表分页/搜索接口加防抖；长时间任务使用轮询或 `backgroundFetch`
+### 6.2 节流与并发
 
-### 6.3 页面数据流缓存：`onLoad` 拉首屏，`onPullDownRefresh` 触发刷新，分页处理 `no more` 状态；下拉/上拉结束后记得 `stopPullDownRefresh`
+列表分页/搜索接口加防抖；长时间任务使用轮询或 `backgroundFetch`
+
+### 6.3 页面数据流缓存
+
+`onLoad` 拉首屏，`onPullDownRefresh` 触发刷新，分页处理 `no more` 状态；下拉/上拉结束后记得 `stopPullDownRefresh`
 
 **首页请求缓存的作用**
 
@@ -271,5 +275,10 @@ export async function requestWithCache({
 - 使用微信分享 API，提供分享功能
 - 分享组件：`share` 组件，支持分享类型、分享内容、分享链接等
 - 分享事件：`bindshare`、`bindshareappmessage`、`bindsharetimeline` 等
-- 分享交互：`wx.share`、`wx.shareAppMessage`、`wx.shareTimeline` 等
+- 分享交互：`wx.shareAppMessage`、`wx.shareTimeline` 等
 - 分享样式：`wx.getShareInfo`、`wx.getShareTicket` 等
+
+### 9.3 签到
+
+- 使用微信 wx.getLocation 获取用户当前位置，提供签到功能
+- 结合地图服务，提供签到位置的展示
