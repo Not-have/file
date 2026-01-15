@@ -1,0 +1,12 @@
+{
+    // "window.zoomLevel": -1.4,
+    "pasteImage.path": "${projectRoot}/images",
+    "pasteImage.defaultName": "YMMDDHHmmss",
+    "pasteImage.basePath": "${projectRoot}",
+    "pasteImage.prefix": "/",
+    // "pasteImage.namePrefix": "${currentFileNameWithoutExt}_",
+
+    "pasteImage.insertPattern": "![${imageFileNameWithoutExt}](${imageFilePath})",
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false
+}
