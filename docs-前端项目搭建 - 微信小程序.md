@@ -282,3 +282,35 @@ export async function requestWithCache({
 
 - 使用微信 wx.getLocation 获取用户当前位置，提供签到功能
 - 结合地图服务，提供签到位置的展示
+
+### 9.4 SSE
+
+```mermaid
+flowchart TD
+  A[开始] --> B[创建请求任务]
+  B --> C[设置流式传输]
+  C --> D[处理接收到的数据]
+  D --> E[结束]
+```
+
+[文档](https://developers.weixin.qq.com/miniprogram/dev/api/network/request/RequestTask.html)
+
+```js
+const requestTask = wx.request({
+  url: 'https://your-api-url',
+  enableChunked: true,
+  success(res){
+    console.log('success：', res)
+  },
+  fail(err){
+    console.warn('fail：', err);
+  }
+});
+
+// 解析流式返回的数据
+requestTask.onChunkReceived((chunk)=>console.log('chunk', chunk))
+```
+
+### 9.5 AI 对话
+
+- 使用 [WeChat MiniProgram AI Chat](https://tdesign.tencent.com/miniprogram-chat/getting-started)
