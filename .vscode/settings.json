@@ -9,5 +9,19 @@
     "pasteImage.insertPattern": "![${imageFileNameWithoutExt}](${imageFilePath})",
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
-    "markdown.validate.enabled": true
+    "markdown.validate.enabled": true,
+
+    // Markdown 自动格式化配置
+    "editor.formatOnSave": true,
+    "[markdown]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.markdownlint": "explicit"
+        }
+    },
+    // 使用项目中的 .markdownlint.yaml 配置
+    "markdownlint.config": {
+        "extends": ".markdownlint.yaml"
+    }
 }
